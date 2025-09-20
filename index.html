@@ -15,7 +15,7 @@
       --ttb-300: #8cc2ff;
       --ttb-400: #66aeff;
       --ttb-500: #3395ff;
-      --ttb-600: #0f7df2; /* primary base */
+      --ttb-600: #0f7df2;
       --ttb-700: #0c66c7;
       --ttb-800: #0a509b;
       --ttb-900: #073a6f;
@@ -25,13 +25,8 @@
       --border: #e9edf2;
       --text: #0f172a;
       --muted: #667085;
-      --success: #16a34a;
-      --warning: #f59e0b;
-      --danger: #ef4444;
 
       --radius-lg: 16px;
-      --radius-md: 12px;
-      --radius-sm: 10px;
       --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 1px rgba(16, 24, 40, 0.04);
       --shadow-md: 0 8px 24px rgba(16,24,40,0.08);
       --focus: 0 0 0 3px rgba(15, 125, 242, 0.25);
@@ -40,7 +35,7 @@
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
-      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
       color: var(--text); background: var(--bg);
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     }
@@ -83,9 +78,9 @@
 
     .security-note { display:flex; gap:8px; align-items:center; justify-content:center; color: var(--muted); font-size: 12px; margin-top: 12px; }
 
-    /* Top App Bar / Dashboard */
+    /* Layout / table */
     .container { width:100%; max-width: 1024px; margin: 0 auto; padding: 16px; }
-    .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 16px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 12px; }
     .profile { display:flex; align-items:center; gap:12px; }
     .avatar { width:40px; height:40px; border-radius:50%; background: var(--ttb-600); color: #fff; display:grid; place-items:center; font-weight: 700; }
 
@@ -95,6 +90,13 @@
     .trow { border-top: 1px solid var(--border); padding: 12px 16px; }
     .cell { font-size: 14px; color: #111827; min-width: 0; }
     .cell.right { text-align:right; }
+
+    /* clickable headers */
+    .th-sort { cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; }
+    .th-sort::after { content: '↕'; opacity:.35; font-size:12px; }
+    .th-sort[aria-sort="descending"]::after { content:'▼'; opacity:1; }
+    .th-sort[aria-sort="ascending"]::after { content:'▲'; opacity:1; }
+    .th-sort[aria-sort="none"]::after { content:'↕'; opacity:.35; }
 
     /* badges */
     .badge { display:inline-flex; align-items:center; max-width: 100%; padding: 6px 10px; border-radius: 999px; background: var(--ttb-50); color: var(--ttb-800); font-weight:600; font-size: 12px; border: 1px solid var(--ttb-200); white-space: nowrap; }
@@ -107,12 +109,10 @@
     .approve.med { color: #f59e0b; }
     .approve.low { color: #ef4444; }
     .approve-line { display:flex; align-items:center; gap:6px; font-size:14px; }
-    .approve-details { font-size:13px; color:#475467; }
 
     .sticky-bottom { position: sticky; bottom: 16px; margin-top: 16px; }
     .btn-select { width:100%; padding: 12px 16px; border-radius: 12px; background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; font-weight:700; cursor:pointer; }
 
-    /* Screen nav */
     .screen { display:none; }
     .screen.active { display:block; }
 
@@ -146,7 +146,6 @@
 
     .actions { display:flex; gap: 12px; justify-content: flex-end; }
 
-    /* Responsive table → cards on small screens */
     @media (max-width: 760px) {
       .thead { display:none; }
       .trow { grid-template-columns: 1fr; gap: 8px; }
@@ -154,7 +153,7 @@
       .table .trow { background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #eff6ff, #f8fafc) border-box; border: 1px solid transparent; border-radius: 14px; margin: 10px; }
     }
 
-    /* === Modal to edit Sales purpose (multi-select) === */
+    /* Modal (multi-select) */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(2, 6, 23, .45); display:none; align-items:center; justify-content:center; padding:16px; z-index: 1000; }
     .modal-backdrop.open { display:flex; }
     .modal { width: 100%; max-width: 460px; background: var(--surface); border:1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-md); overflow:hidden; }
@@ -240,13 +239,13 @@
 
         <div class="table" role="table" aria-label="To Do List">
           <div class="thead" role="row">
-            <div class="cell">Customer</div>
-            <div class="cell">Gender</div>
-            <div class="cell right">Age</div>
-            <div class="cell right">Income</div>
-            <div class="cell">Sales purpose (click to edit)</div>
-            <div class="cell">Sales chance to be approved</div>
-            <div class="cell">Sales chance to win</div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="name"    aria-sort="none">Customer</div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="gender"  aria-sort="none">Gender</div>
+            <div class="cell th-sort right" role="columnheader" tabindex="0" data-key="age"     aria-sort="none">Age</div>
+            <div class="cell th-sort right" role="columnheader" tabindex="0" data-key="income"  aria-sort="none">Income</div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="offers"  aria-sort="none">Sales purpose (click to edit)</div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="approve" aria-sort="none">Sales chance to be approved</div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="win"     aria-sort="none">Sales chance to win</div>
           </div>
           <div id="lead-rows"></div>
         </div>
@@ -410,7 +409,7 @@
       }
     });
 
-    // Mock data for dashboard — offers is now an ARRAY
+    // Data — offers is an ARRAY
     const leads = [
       { name: 'Anan Chaiyakul', gender: 'M', age: 40, income: 48000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 78, approve: 'High' },
       { name: 'Pimchanok S.',  gender: 'F', age: 36, income: 62000, offers: ['Car for Cash'], win: 62, approve: 'Medium' },
@@ -425,6 +424,74 @@
       'Credit Life Insurance'
     ];
 
+    /* ===== Sorting by header click ===== */
+    const approveRank = { 'Low': 0, 'Medium': 1, 'High': 2 };
+    const sortState = { key: '', dir: '' }; // dir: 'desc' | 'asc' | ''
+
+    function valueFor(ld, key) {
+      switch (key) {
+        case 'name':   return ld.name;
+        case 'gender': return ld.gender; // 'F' / 'M'
+        case 'age':    return ld.age;
+        case 'income': return ld.income;
+        case 'offers': return (ld.offers || []).join(', ');
+        case 'approve':return approveRank[ld.approve] ?? -1;
+        case 'win':    return ld.win;
+        default:       return null;
+      }
+    }
+
+    function compareItems(a, b) {
+      const va = valueFor(a.ld, sortState.key);
+      const vb = valueFor(b.ld, sortState.key);
+
+      let cmp = 0;
+      if (typeof va === 'number' && typeof vb === 'number') {
+        cmp = va - vb;
+      } else {
+        cmp = String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: 'base' });
+      }
+      if (cmp === 0) cmp = a.i - b.i; // stable
+      return sortState.dir === 'asc' ? cmp : -cmp; // if dir is 'desc' first click uses negative
+    }
+
+    function cycleSort(key) {
+      if (sortState.key !== key) {
+        sortState.key = key;
+        sortState.dir = 'desc';        // 1st click → descending
+      } else if (sortState.dir === 'desc') {
+        sortState.dir = 'asc';         // 2nd click → ascending
+      } else if (sortState.dir === 'asc') {
+        sortState.key = '';            // 3rd click → reset
+        sortState.dir = '';
+      } else {
+        sortState.dir = 'desc';
+      }
+      updateHeaderIndicators();
+      renderLeads();
+    }
+
+    function updateHeaderIndicators() {
+      document.querySelectorAll('.th-sort').forEach(th => {
+        const key = th.dataset.key;
+        let aria = 'none';
+        if (key === sortState.key) {
+          aria = sortState.dir === 'asc' ? 'ascending' : (sortState.dir === 'desc' ? 'descending' : 'none');
+        }
+        th.setAttribute('aria-sort', aria);
+      });
+    }
+
+    function bindHeaderSorting() {
+      document.querySelectorAll('.th-sort').forEach(th => {
+        th.addEventListener('click', () => cycleSort(th.dataset.key));
+        th.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cycleSort(th.dataset.key); }
+        });
+      });
+    }
+
+    /* ===== Rendering ===== */
     function winClass(p){ if(p>=70) return 'p-high'; if(p>=40) return 'p-med'; return 'p-low'; }
     function approveClass(a){ return a==='High'?'high':(a==='Medium'?'med':'low'); }
 
@@ -432,13 +499,12 @@
       const wrap = document.createElement('div');
       wrap.className = 'offer-badges';
       wrap.setAttribute('data-index', String(index));
-      offers.forEach(txt => {
+      (offers || []).forEach(txt => {
         const b = document.createElement('span');
         b.className = 'badge';
         b.textContent = txt;
         wrap.appendChild(b);
       });
-      // clicking anywhere in the cell opens modal
       wrap.addEventListener('click', () => openOfferModal(index));
       return wrap;
     }
@@ -446,43 +512,48 @@
     function renderLeads(){
       const rows = document.getElementById('lead-rows');
       rows.innerHTML = '';
-      leads.forEach((ld, i) => {
+
+      // stable list with original indices
+      let ordered = leads.map((ld, i) => ({ ld, i }));
+      if (sortState.key && sortState.dir) {
+        ordered.sort(compareItems);
+      }
+
+      ordered.forEach(({ ld, i }) => {
         const row = document.createElement('div');
         row.className = 'trow';
         row.setAttribute('role','row');
 
-        const cellCustomer = `<div class="cell">${ld.name}</div>`;
-        const cellGender   = `<div class="cell">${ld.gender === 'M' ? '♂🧍‍♂️' : '♀🧍‍♀️'}</div>`;
-        const cellAge      = `<div class="cell right">${ld.age}</div>`;
-        const cellIncome   = `<div class="cell right">${ld.income.toLocaleString('en-US')} THB</div>`;
-
-        // create the row skeleton
-        row.innerHTML = cellCustomer + cellGender + cellAge + cellIncome +
-          `<div class="cell offer-cell" data-index="${i}"></div>
-           <div class="cell">
-             <div class="approve ${approveClass(ld.approve)}">
-               <div class="approve-line">${ld.approve==='High'?'✓':ld.approve==='Medium'?'~':'✕'} <span>${ld.approve}</span></div>
-             </div>
-           </div>
-           <div class="cell">
-             <div class="approve ${winClass(ld.win)}">
-               <div class="approve-line"><span>${ld.win}%</span></div>
-             </div>
-           </div>`;
+        row.innerHTML = `
+          <div class="cell">${ld.name}</div>
+          <div class="cell">${ld.gender === 'M' ? '♂' : '♀'}</div>
+          <div class="cell right">${ld.age}</div>
+          <div class="cell right">${ld.income.toLocaleString('en-US')} THB</div>
+          <div class="cell offer-cell" data-index="${i}"></div>
+          <div class="cell">
+            <div class="approve ${approveClass(ld.approve)}">
+              <div class="approve-line">${ld.approve==='High'?'✓':ld.approve==='Medium'?'~':'✕'} <span>${ld.approve}</span></div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="approve ${winClass(ld.win)}">
+              <div class="approve-line"><span>${ld.win}%</span></div>
+            </div>
+          </div>
+        `;
 
         rows.appendChild(row);
-        const offerCell = row.querySelector('.offer-cell');
-        offerCell.appendChild(renderOfferBadges(ld.offers, i));
+        row.querySelector('.offer-cell').appendChild(renderOfferBadges(ld.offers, i));
       });
     }
 
-    // Select Prospect → open PitchPilot Tool (new tab) + go to Objective
+    // Select Prospect
     el('btn-select-prospect').addEventListener('click', () => {
       window.open('https://example.com/pitchpilot-tool', '_blank');
       go('objective');
     });
 
-    // Screen 3: objectives add/remove chips
+    // Screen 3: chips
     const chips = new Set(['Car for Cash Loan']);
     const chipWrap = el('objective-chips');
 
@@ -525,7 +596,6 @@
       btn.addEventListener('click', () => {
         document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
         btn.setAttribute('aria-pressed','true');
-        btn.dataset.selected = 'true';
       });
     });
 
@@ -544,7 +614,7 @@
       });
     });
 
-    // Validation helpers
+    // Validation helpers (screen 3)
     function isObjectiveValid(){ return chips.size >= 1; }
     function isQ1Answered(){ return !!document.querySelector('input[name="q1"]:checked'); }
     function isPicChosen(){ return !!document.querySelector('#pic-choices .pic[aria-pressed="true"]'); }
@@ -583,7 +653,7 @@
     const offerSelectAll = el('offer-select-all');
     const offerClear = el('offer-clear');
 
-    let editingIndex = null; // row index currently editing
+    let editingIndex = null; // index in the ORIGINAL leads array
     let chosenOffers = new Set();
 
     function populateOfferOptions(currentOffers) {
@@ -605,11 +675,10 @@
     }
 
     function openOfferModal(index) {
-      editingIndex = index;
+      editingIndex = index; // original index (we render data-index with original index)
       chosenOffers = new Set(leads[index].offers || []);
       populateOfferOptions(chosenOffers);
       offerModal.classList.add('open');
-      // focus first checkbox for accessibility
       setTimeout(() => {
         const first = offerOptionsWrap.querySelector('input[type="checkbox"]');
         if (first) first.focus();
@@ -624,21 +693,19 @@
 
     offerSave.addEventListener('click', () => {
       if (editingIndex == null) return closeOfferModal();
-      // if the user cleared everything, keep empty array
       leads[editingIndex].offers = Array.from(chosenOffers);
-      // Update UI of that single cell without re-rendering all rows
-      const cell = document.querySelector(`.offer-cell[data-index="${editingIndex}"]`);
-      if (cell) {
+      // Update ONLY the affected cell (works even after sorting because data-index is original index)
+      document.querySelectorAll(`.offer-cell[data-index="${editingIndex}"]`).forEach(cell => {
         cell.innerHTML = '';
         cell.appendChild(renderOfferBadges(leads[editingIndex].offers, editingIndex));
-      }
+      });
       closeOfferModal();
     });
 
     offerCancel.addEventListener('click', closeOfferModal);
     offerClose.addEventListener('click', closeOfferModal);
     offerModal.addEventListener('click', (e) => {
-      if (e.target === offerModal) closeOfferModal(); // click on backdrop
+      if (e.target === offerModal) closeOfferModal();
     });
 
     offerSelectAll.addEventListener('click', () => {
@@ -651,26 +718,9 @@
       offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     });
 
-    /* =====================
-       DEV SMOKE TESTS
-       ===================== */
-    (function runDevTests(){
-      try {
-        console.assert(getInitials('Anong S.') === 'AS', 'Initials test 1');
-        console.assert(getInitials('pimchanok.s@ttb.com') === 'PS', 'Initials test 2');
-        const msg = buildErrorMessage(['A','B']);
-        console.assert(msg === 'Please complete:\n- A\n- B', 'Error message format');
-        console.assert(isObjectiveValid() === true, 'Default objective present');
-        console.assert(isQ1Answered() === false, 'Q1 initially unanswered');
-        console.assert(isPicChosen() === false, 'Pic initially unchosen');
-        console.assert(isDndDone() === false, 'DnD initially incomplete');
-        console.log('%cPitchPilot smoke tests passed', 'color: white; background:#0f7df2; padding:2px 6px; border-radius:4px');
-      } catch (e) {
-        console.warn('Smoke test encountered an error (non-fatal):', e);
-      }
-    })();
-
-    // Initial render
+    // Bind header sorting controls and first render
+    bindHeaderSorting();
+    updateHeaderIndicators();
     renderLeads();
   </script>
 </body>
