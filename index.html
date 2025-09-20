@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PitchPilot — Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ttb-50: #ecf5ff;
+      --ttb-100: #d9ebff;
+      --ttb-200: #b3d7ff;
+      --ttb-300: #8cc2ff;
+      --ttb-400: #66aeff;
+      --ttb-500: #3395ff;
+      --ttb-600: #0f7df2; /* primary base */
+      --ttb-700: #0c66c7;
+      --ttb-800: #0a509b;
+      --ttb-900: #073a6f;
+
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --border: #e9edf2;
+      --text: #0f172a;
+      --muted: #667085;
+      --success: #16a34a;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 10px;
+      --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 1px rgba(16, 24, 40, 0.04);
+      --shadow-md: 0 8px 24px rgba(16,24,40,0.08);
+      --focus: 0 0 0 3px rgba(15, 125, 242, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+
+    .app {
+      min-height: 100dvh; display: grid; place-items: center; padding: 24px;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #c9e3ff33, transparent 60%),
+        radial-gradient(800px 400px at 90% 10%, #b9d6ff33, transparent 60%),
+        linear-gradient(#f7f9fc, #f4f7fb);
+    }
+
+    .card {
+      width: 100%; max-width: 440px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 24px; backdrop-filter: saturate(120%) blur(6px);
+    }
+
+    .brand { display:flex; gap:12px; align-items:center; justify-content:center; margin-bottom: 12px; }
+    .brand__logo { width: 40px; height: 40px; object-fit: contain; }
+    .title { text-align:center; font-size: 22px; font-weight: 600; margin: 6px 0 16px; }
+    .caption { text-align:center; color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+
+    .field { display:flex; flex-direction:column; gap:8px; margin: 10px 0 14px; }
+    .label { font-size: 13px; color: #344054; font-weight: 600; }
+    .input {
+      display:flex; align-items:center; gap:10px; border:1px solid var(--border); border-radius: 12px; padding: 12px 14px; background: #fff;
+    }
+    .input:focus-within { box-shadow: var(--focus); border-color: #c9defa; }
+    .input input { border:0; outline:0; flex:1; font-size: 15px; }
+    .input .icon { width: 20px; height: 20px; color: #6b7280; }
+    .toggle-eye { background: transparent; border:0; cursor:pointer; color:#6b7280; }
+
+    .hint-row { display:flex; align-items:center; justify-content:space-between; margin: 6px 2px 2px; }
+    .hint-row a { color: var(--ttb-700); font-size: 13px; text-decoration: none; }
+
+    .btn-primary { width:100%; border:0; cursor:pointer; padding: 12px 16px; border-radius: 12px; color: white; font-weight: 600; font-size: 16px; box-shadow: 0 6px 16px rgba(15,125,242,0.25);
+      background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700));
+    }
+    .btn-primary:disabled { opacity: .6; cursor:not-allowed; box-shadow:none; }
+
+    .security-note { display:flex; gap:8px; align-items:center; justify-content:center; color: var(--muted); font-size: 12px; margin-top: 12px; }
+
+    /* Top App Bar / Dashboard */
+    .container { width:100%; max-width: 1024px; margin: 0 auto; padding: 16px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 16px; }
+    .profile { display:flex; align-items:center; gap:12px; }
+    .avatar { width:40px; height:40px; border-radius:50%; background: var(--ttb-600); color: #fff; display:grid; place-items:center; font-weight: 700; }
+
+    .table { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow:hidden; }
+    .thead, .trow { display:grid; grid-template-columns: 1.5fr .6fr .5fr 1.3fr 1.9fr 1.4fr 1.4fr; column-gap: 32px; align-items:center; }
+    .thead { background: #f3f6fb; color:#475467; font-weight:600; font-size: 13px; padding: 12px 16px; }
+    .trow { border-top: 1px solid var(--border); padding: 12px 16px; }
+    .cell { font-size: 14px; color: #111827; min-width: 0; }
+    .cell.right { text-align:right; }
+
+    /* badges */
+    .badge { display:inline-flex; align-items:center; max-width: 100%; padding: 6px 10px; border-radius: 999px; background: var(--ttb-50); color: var(--ttb-800); font-weight:600; font-size: 12px; border: 1px solid var(--ttb-200); white-space: nowrap; }
+    .offer-badges { display:flex; flex-wrap: wrap; gap: 8px; }
+    .offer-badges .badge { cursor:pointer; }
+    .offer-cell { cursor:pointer; }
+
+    .approve { display:flex; flex-direction:column; align-items:flex-start; font-weight: 600; }
+    .approve.high { color: #16a34a; }
+    .approve.med { color: #f59e0b; }
+    .approve.low { color: #ef4444; }
+    .approve-line { display:flex; align-items:center; gap:6px; font-size:14px; }
+    .approve-details { font-size:13px; color:#475467; }
+
+    .sticky-bottom { position: sticky; bottom: 16px; margin-top: 16px; }
+    .btn-select { width:100%; padding: 12px 16px; border-radius: 12px; background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; font-weight:700; cursor:pointer; }
+
+    /* Screen nav */
+    .screen { display:none; }
+    .screen.active { display:block; }
+
+    /* Screen 3 */
+    .section { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+    .section h3 { margin: 0 0 8px; font-size: 18px; }
+    .row { display:flex; align-items:center; gap: 12px; flex-wrap: wrap; }
+    .select, select, .text-btn { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background:#fff; font-size: 14px; }
+    .text-btn { cursor:pointer; }
+
+    .qcard { border:1px solid var(--border); border-radius: 12px; padding: 12px; display:grid; gap:8px; }
+    .qtitle { font-weight:600; }
+    .qhelper { color: var(--muted); font-size: 13px; }
+
+    .radio-group { display:flex; gap: 12px; flex-wrap: wrap; }
+    .radio { display:flex; align-items:center; gap:6px; }
+
+    .pics { display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    @media (min-width: 640px) { .pics { grid-template-columns: repeat(4, 1fr); } }
+    .pic { border:1px solid var(--border); border-radius: 12px; overflow: hidden; background:#fff; cursor:pointer; outline: none; }
+    .pic img { width:100%; height:80px; object-fit: cover; display:block; }
+    .pic span { display:block; padding:8px; font-size: 13px; }
+    .pic[aria-pressed="true"] { box-shadow: var(--focus); border-color: #c9defa; }
+
+    .dnd-area { border:2px dashed #cfd8e3; border-radius: 12px; padding: 16px; display:grid; gap: 10px; min-height: 120px; background: #fbfdff; }
+    .dnd-items { display:flex; gap: 8px; flex-wrap: wrap; }
+    .chip { padding: 6px 10px; border-radius: 999px; background:#eef2f7; font-size: 13px; cursor:grab; user-select:none; }
+    .dnd-targets { display:flex; gap: 8px; }
+    .dropzone { flex:1; min-height: 48px; border:1px dashed #cfd8e3; border-radius: 10px; display:grid; place-items:center; color:#6b7280; font-size: 13px; padding: 6px; }
+    .dropzone.filled { border-style: solid; background:#f6fbff; color:#0a509b; font-weight:600; }
+
+    .actions { display:flex; gap: 12px; justify-content: flex-end; }
+
+    /* Responsive table → cards on small screens */
+    @media (max-width: 760px) {
+      .thead { display:none; }
+      .trow { grid-template-columns: 1fr; gap: 8px; }
+      .cell.label { color:#667085; font-size:12px; }
+      .table .trow { background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #eff6ff, #f8fafc) border-box; border: 1px solid transparent; border-radius: 14px; margin: 10px; }
+    }
+
+    /* === Modal to edit Sales purpose (multi-select) === */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(2, 6, 23, .45); display:none; align-items:center; justify-content:center; padding:16px; z-index: 1000; }
+    .modal-backdrop.open { display:flex; }
+    .modal { width: 100%; max-width: 460px; background: var(--surface); border:1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-md); overflow:hidden; }
+    .modal header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:#f3f6fb; border-bottom:1px solid var(--border); }
+    .modal header h3 { margin:0; font-size:16px; }
+    .modal .content { padding: 14px 16px; display:grid; gap:12px; }
+    .modal .actions { display:flex; gap:10px; justify-content:flex-end; padding:12px 16px; border-top:1px solid var(--border); }
+    .option-list { display:grid; gap:8px; }
+    .option { display:flex; gap:10px; align-items:center; border:1px solid var(--border); border-radius: 12px; padding:10px 12px; background:#fff; }
+    .option input { width:16px; height:16px; }
+    .k { font-size:12px; color:#64748b; }
+    .btn { border:1px solid var(--border); background:#fff; border-radius:10px; padding:8px 12px; cursor:pointer; }
+    .btn.primary { background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; }
+    .btn.ghost { background:#fff; border:0; color:#0a509b; font-weight:600; }
+    .modal-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .pillbar { display:flex; gap:8px; flex-wrap:wrap; }
+    .pillbar .pill { font-size:12px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:#f8fafc; }
+  </style>
+</head>
+<body>
+  <main class="app">
+
+    <!-- Screen 1: Login -->
+    <section id="screen-login" class="screen active" aria-label="Login">
+      <div class="card" role="dialog" aria-modal="true">
+        <div class="brand" aria-label="PitchPilot logo">
+          <img src="./images/TTB_Logo.png" alt="PitchPilot logo" class="brand__logo" />
+          <div style="font-weight:700; letter-spacing:.2px">PitchPilot</div>
+        </div>
+        <h1 class="title">Sign in</h1>
+        <p class="caption">Bank-grade security. Enter your credentials to continue.</p>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label class="label" for="username">Username</label>
+            <div class="input">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input id="username" name="username" type="text" placeholder="name.surname@ttbbank.com" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="input">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input id="password" name="password" type="password" placeholder="••••••••" required />
+              <button type="button" class="toggle-eye" aria-label="Toggle password visibility" title="Show/Hide">👁️</button>
+            </div>
+          </div>
+
+          <div class="hint-row">
+            <label style="display:flex; gap:6px; align-items:center; color:#475467; font-size:13px;">
+              <input id="remember" type="checkbox" /> Remember me
+            </label>
+            <a href="#" aria-label="Forgot password">Forgot password?</a>
+          </div>
+
+          <div style="height:10px; color:#ef4444; font-size:13px;" id="login-error" role="alert"></div>
+
+          <button id="btn-login" class="btn-primary" type="submit" disabled>Login</button>
+        </form>
+
+        <div class="security-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Bank-grade encryption & device binding
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 2: Dashboard -->
+    <section id="screen-dashboard" class="screen" aria-label="Dashboard">
+      <div class="container">
+        <div class="topbar">
+          <div class="profile">
+            <div class="avatar" id="avatar">AS</div>
+            <div>
+              <div style="font-weight:700"><span id="salesperson-name">Anong S.</span></div>
+              <div style="color:var(--muted); font-size:13px">Loan Specialist • Bangkok</div>
+            </div>
+          </div>
+          <div class="brand" style="margin:0"><img src="./images/TTB_Logo.png" alt="PitchPilot logo" class="brand__logo"/><div style="font-weight:700">PitchPilot</div></div>
+        </div>
+
+        <div class="table" role="table" aria-label="To Do List">
+          <div class="thead" role="row">
+            <div class="cell">Customer</div>
+            <div class="cell">Gender</div>
+            <div class="cell right">Age</div>
+            <div class="cell right">Income</div>
+            <div class="cell">Sales purpose (click to edit)</div>
+            <div class="cell">Sales chance to be approved</div>
+            <div class="cell">Sales chance to win</div>
+          </div>
+          <div id="lead-rows"></div>
+        </div>
+
+        <div class="sticky-bottom">
+          <button class="btn-select" id="btn-select-prospect" type="button">Select Prospect</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 3: Objective & Probing -->
+    <section id="screen-objective" class="screen" aria-label="Sales Objective">
+      <div class="container">
+        <div class="section">
+          <div class="row" style="justify-content:space-between; align-items:center;">
+            <h2 style="margin:0; font-size:20px">Select Sales Objective</h2>
+            <button id="btn-back-dashboard" class="text-btn" type="button" title="Back to dashboard">← Dashboard</button>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <select id="objective-0" class="select">
+              <option selected>Car for Cash Loan</option>
+              <option>Refinance</option>
+              <option>Personal Loan</option>
+              <option>Credit Life Insurance</option>
+            </select>
+            <button id="btn-add-objective" class="text-btn" type="button">+ Add objective</button>
+          </div>
+          <div id="objective-chips" class="row" style="margin-top:8px"></div>
+        </div>
+
+        <div class="section">
+          <h3>Additional Information Needed</h3>
+          <div class="qcard">
+            <div class="qtitle">How often do you use your car?</div>
+            <div class="qhelper">This helps us tailor payment flexibility.</div>
+            <div class="radio-group" role="radiogroup" aria-label="Car usage">
+              <label class="radio"><input type="radio" name="q1" value="daily"> Daily</label>
+              <label class="radio"><input type="radio" name="q1" value="3-5"> 3–5 days/week</label>
+              <label class="radio"><input type="radio" name="q1" value="weekends"> Weekends only</label>
+            </div>
+          </div>
+
+          <div class="qcard">
+            <div class="qtitle">Preferred monthly installment range?</div>
+            <div class="qhelper">Pick an amount you’re comfortable with.</div>
+            <div class="pics" id="pic-choices">
+              <button class="pic" type="button" data-value="5000"><img alt="5k THB" src="https://images.unsplash.com/photo-1553729784-e91953dec042?q=80&w=600&auto=format&fit=crop"/><span>5,000 THB</span></button>
+              <button class="pic" type="button" data-value="8000"><img alt="8k THB" src="https://images.unsplash.com/photo-1554224155-3a589877462f?q=80&w=600&auto=format&fit=crop"/><span>8,000 THB</span></button>
+              <button class="pic" type="button" data-value="10000"><img alt="10k THB" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=600&auto=format&fit=crop"/><span>10,000 THB</span></button>
+              <button class="pic" type="button" data-value="12000"><img alt="12k THB" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=600&auto=format&fit=crop"/><span>12,000 THB</span></button>
+            </div>
+          </div>
+
+          <div class="qcard">
+            <div class="qtitle">When do you need the funds?</div>
+            <div class="qhelper">Drag the right option into the timeline zone.</div>
+            <div class="dnd-area">
+              <div class="dnd-items" id="dnd-items">
+                <div class="chip" draggable="true" data-value="week">This week</div>
+                <div class="chip" draggable="true" data-value="2weeks">Within 2 weeks</div>
+                <div class="chip" draggable="true" data-value="month">This month</div>
+              </div>
+              <div class="dnd-targets">
+                <div class="dropzone" data-slot="soon">Drop here (Soon)</div>
+                <div class="dropzone" data-slot="later">Drop here (Later)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="text-btn" type="button" id="btn-reset">Reset</button>
+          <button class="btn-select" type="button" id="btn-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 4–9 scaffolding (placeholders) -->
+    <section id="screen-stub" class="screen" aria-label="Coming soon">
+      <div class="container">
+        <div class="section">
+          <h2>Additional Screens (4–9)</h2>
+          <p>Scaffolding ready. This prototype focuses on the first 3 core screens. We can extend with: customer profile, pitch builder, document checklist, KYC upload mock, offer summary, and confirmation.</p>
+          <button class="text-btn" onclick="go('objective')">Go back</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edit Sales Purpose Modal (multi-select) -->
+    <div id="offer-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="offer-modal-title">
+      <div class="modal" role="document">
+        <header>
+          <h3 id="offer-modal-title">Edit Sales purpose</h3>
+          <button class="btn" id="offer-close" aria-label="Close">✕</button>
+        </header>
+        <div class="content">
+          <div class="modal-toolbar">
+            <div class="k">Select one or more options</div>
+            <div class="pillbar">
+              <button class="btn ghost" id="offer-select-all" type="button">Select all</button>
+              <button class="btn ghost" id="offer-clear" type="button">Clear</button>
+            </div>
+          </div>
+          <div class="option-list" id="offer-options"></div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="offer-cancel" type="button">Cancel</button>
+          <button class="btn primary" id="offer-save" type="button">Save</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    'use strict';
+    const el = (id) => document.getElementById(id);
+    const screenLogin = el('screen-login');
+    const screenDashboard = el('screen-dashboard');
+    const screenObjective = el('screen-objective');
+
+    function go(which) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      if (which === 'login') screenLogin.classList.add('active');
+      if (which === 'dashboard') screenDashboard.classList.add('active');
+      if (which === 'objective') screenObjective.classList.add('active');
+      if (which === 'stub') document.getElementById('screen-stub').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Login form interactions
+    const username = el('username');
+    const password = el('password');
+    const btnLogin  = el('btn-login');
+    const loginErr  = el('login-error');
+
+    function validateLoginFields() {
+      btnLogin.disabled = !(username.value.trim() && password.value.trim());
+    }
+    username.addEventListener('input', validateLoginFields);
+    password.addEventListener('input', validateLoginFields);
+
+    document.querySelector('.toggle-eye').addEventListener('click', () => {
+      password.type = password.type === 'password' ? 'text' : 'password';
+    });
+
+    function getInitials(str) {
+      return str.trim().split(/[\s\.@_\-]+/).filter(Boolean).slice(0,2).map(s=>s[0].toUpperCase()).join('');
+    }
+
+    el('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (username.value.trim() && password.value.trim()) {
+        loginErr.textContent = '';
+        el('salesperson-name').textContent = username.value.trim();
+        el('avatar').textContent = getInitials(username.value) || 'PP';
+        go('dashboard');
+        renderLeads();
+      } else {
+        loginErr.textContent = 'Invalid credentials';
+      }
+    });
+
+    // Mock data for dashboard — offers is now an ARRAY
+    const leads = [
+      { name: 'Anan Chaiyakul', gender: 'M', age: 40, income: 48000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 78, approve: 'High' },
+      { name: 'Pimchanok S.',  gender: 'F', age: 36, income: 62000, offers: ['Car for Cash'], win: 62, approve: 'Medium' },
+      { name: 'Somsak T.',     gender: 'M', age: 45, income: 41000, offers: ['Refinance'], win: 35, approve: 'Low' },
+      { name: 'Nattaporn K.',  gender: 'F', age: 29, income: 52000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 84, approve: 'High' },
+    ];
+
+    const OFFER_OPTIONS = [
+      'Car for Cash',
+      'Refinance',
+      'Personal Loan',
+      'Credit Life Insurance'
+    ];
+
+    function winClass(p){ if(p>=70) return 'p-high'; if(p>=40) return 'p-med'; return 'p-low'; }
+    function approveClass(a){ return a==='High'?'high':(a==='Medium'?'med':'low'); }
+
+    function renderOfferBadges(offers, index){
+      const wrap = document.createElement('div');
+      wrap.className = 'offer-badges';
+      wrap.setAttribute('data-index', String(index));
+      offers.forEach(txt => {
+        const b = document.createElement('span');
+        b.className = 'badge';
+        b.textContent = txt;
+        wrap.appendChild(b);
+      });
+      // clicking anywhere in the cell opens modal
+      wrap.addEventListener('click', () => openOfferModal(index));
+      return wrap;
+    }
+
+    function renderLeads(){
+      const rows = document.getElementById('lead-rows');
+      rows.innerHTML = '';
+      leads.forEach((ld, i) => {
+        const row = document.createElement('div');
+        row.className = 'trow';
+        row.setAttribute('role','row');
+
+        const cellCustomer = `<div class="cell">${ld.name}</div>`;
+        const cellGender   = `<div class="cell">${ld.gender === 'M' ? '♂🧍‍♂️' : '♀🧍‍♀️'}</div>`;
+        const cellAge      = `<div class="cell right">${ld.age}</div>`;
+        const cellIncome   = `<div class="cell right">${ld.income.toLocaleString('en-US')} THB</div>`;
+
+        // create the row skeleton
+        row.innerHTML = cellCustomer + cellGender + cellAge + cellIncome +
+          `<div class="cell offer-cell" data-index="${i}"></div>
+           <div class="cell">
+             <div class="approve ${approveClass(ld.approve)}">
+               <div class="approve-line">${ld.approve==='High'?'✓':ld.approve==='Medium'?'~':'✕'} <span>${ld.approve}</span></div>
+             </div>
+           </div>
+           <div class="cell">
+             <div class="approve ${winClass(ld.win)}">
+               <div class="approve-line"><span>${ld.win}%</span></div>
+             </div>
+           </div>`;
+
+        rows.appendChild(row);
+        const offerCell = row.querySelector('.offer-cell');
+        offerCell.appendChild(renderOfferBadges(ld.offers, i));
+      });
+    }
+
+    // Select Prospect → open PitchPilot Tool (new tab) + go to Objective
+    el('btn-select-prospect').addEventListener('click', () => {
+      window.open('https://example.com/pitchpilot-tool', '_blank');
+      go('objective');
+    });
+
+    // Screen 3: objectives add/remove chips
+    const chips = new Set(['Car for Cash Loan']);
+    const chipWrap = el('objective-chips');
+
+    function drawChips(){
+      chipWrap.innerHTML = '';
+      chips.forEach(ch => {
+        const b = document.createElement('button');
+        b.className = 'text-btn';
+        b.innerHTML = ch + ' ×';
+        b.title = 'Remove objective';
+        b.addEventListener('click', () => { chips.delete(ch); drawChips(); });
+        chipWrap.appendChild(b);
+      });
+    }
+    drawChips();
+
+    el('btn-add-objective').addEventListener('click', () => {
+      const sel = document.createElement('select');
+      sel.className = 'select';
+      sel.innerHTML = `
+        <option selected disabled>Choose objective…</option>
+        <option>Car for Cash Loan</option>
+        <option>Refinance</option>
+        <option>Personal Loan</option>
+        <option>Credit Life Insurance</option>`;
+      sel.addEventListener('change', () => {
+        const val = sel.value;
+        if (val && !chips.has(val) && chips.size < 3) { chips.add(val); drawChips(); }
+        sel.remove();
+      });
+      sel.style.marginTop = '8px';
+      sel.setAttribute('aria-label','Add objective');
+      document.querySelector('#screen-objective .section .row:nth-of-type(2)').after(sel);
+    });
+
+    el('btn-back-dashboard').addEventListener('click', () => go('dashboard'));
+
+    // Picture selection toggle
+    document.querySelectorAll('#pic-choices .pic').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        btn.dataset.selected = 'true';
+      });
+    });
+
+    // Drag & Drop practice
+    let dragged = null;
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('dragstart', () => { dragged = chip; });
+      chip.addEventListener('dragend', () => { dragged = null; });
+    });
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.addEventListener('dragover', (e) => e.preventDefault());
+      zone.addEventListener('drop', () => {
+        if (!dragged) return;
+        zone.textContent = dragged.textContent;
+        zone.classList.add('filled');
+      });
+    });
+
+    // Validation helpers
+    function isObjectiveValid(){ return chips.size >= 1; }
+    function isQ1Answered(){ return !!document.querySelector('input[name="q1"]:checked'); }
+    function isPicChosen(){ return !!document.querySelector('#pic-choices .pic[aria-pressed="true"]'); }
+    function isDndDone(){ return document.querySelectorAll('.dropzone.filled').length >= 1; }
+
+    function buildErrorMessage(errors) {
+      return 'Please complete:\n- ' + errors.join('\n- ');
+    }
+
+    el('btn-next').addEventListener('click', () => {
+      const errors = [];
+      if (!isObjectiveValid()) errors.push('Select at least one objective');
+      if (!isQ1Answered()) errors.push('Answer how often car is used');
+      if (!isPicChosen()) errors.push('Choose an installment range');
+      if (!isDndDone()) errors.push('Complete the drag-and-drop action');
+      if (errors.length) {
+        alert(buildErrorMessage(errors));
+        return;
+      }
+      alert('Great! Proceeding to the next step (stubbed for prototype).');
+      go('stub');
+    });
+
+    el('btn-reset').addEventListener('click', () => {
+      document.querySelectorAll('input[name="q1"]').forEach(r => r.checked = false);
+      document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
+      document.querySelectorAll('.dropzone').forEach(z => { z.textContent = 'Drop here'; z.classList.remove('filled'); });
+    });
+
+    /* ======== Offer Modal Logic (multi-select) ======== */
+    const offerModal = el('offer-modal');
+    const offerOptionsWrap = el('offer-options');
+    const offerSave = el('offer-save');
+    const offerCancel = el('offer-cancel');
+    const offerClose = el('offer-close');
+    const offerSelectAll = el('offer-select-all');
+    const offerClear = el('offer-clear');
+
+    let editingIndex = null; // row index currently editing
+    let chosenOffers = new Set();
+
+    function populateOfferOptions(currentOffers) {
+      offerOptionsWrap.innerHTML = '';
+      OFFER_OPTIONS.forEach(opt => {
+        const row = document.createElement('label');
+        row.className = 'option';
+        row.innerHTML = `
+          <input type="checkbox" value="${opt}">
+          <span>${opt}</span>
+        `;
+        const cb = row.querySelector('input');
+        cb.checked = currentOffers.has(opt);
+        row.addEventListener('change', () => {
+          cb.checked ? chosenOffers.add(opt) : chosenOffers.delete(opt);
+        });
+        offerOptionsWrap.appendChild(row);
+      });
+    }
+
+    function openOfferModal(index) {
+      editingIndex = index;
+      chosenOffers = new Set(leads[index].offers || []);
+      populateOfferOptions(chosenOffers);
+      offerModal.classList.add('open');
+      // focus first checkbox for accessibility
+      setTimeout(() => {
+        const first = offerOptionsWrap.querySelector('input[type="checkbox"]');
+        if (first) first.focus();
+      }, 0);
+    }
+
+    function closeOfferModal() {
+      offerModal.classList.remove('open');
+      editingIndex = null;
+      chosenOffers = new Set();
+    }
+
+    offerSave.addEventListener('click', () => {
+      if (editingIndex == null) return closeOfferModal();
+      // if the user cleared everything, keep empty array
+      leads[editingIndex].offers = Array.from(chosenOffers);
+      // Update UI of that single cell without re-rendering all rows
+      const cell = document.querySelector(`.offer-cell[data-index="${editingIndex}"]`);
+      if (cell) {
+        cell.innerHTML = '';
+        cell.appendChild(renderOfferBadges(leads[editingIndex].offers, editingIndex));
+      }
+      closeOfferModal();
+    });
+
+    offerCancel.addEventListener('click', closeOfferModal);
+    offerClose.addEventListener('click', closeOfferModal);
+    offerModal.addEventListener('click', (e) => {
+      if (e.target === offerModal) closeOfferModal(); // click on backdrop
+    });
+
+    offerSelectAll.addEventListener('click', () => {
+      chosenOffers = new Set(OFFER_OPTIONS);
+      offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+    });
+
+    offerClear.addEventListener('click', () => {
+      chosenOffers.clear();
+      offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    });
+
+    /* =====================
+       DEV SMOKE TESTS
+       ===================== */
+    (function runDevTests(){
+      try {
+        console.assert(getInitials('Anong S.') === 'AS', 'Initials test 1');
+        console.assert(getInitials('pimchanok.s@ttb.com') === 'PS', 'Initials test 2');
+        const msg = buildErrorMessage(['A','B']);
+        console.assert(msg === 'Please complete:\n- A\n- B', 'Error message format');
+        console.assert(isObjectiveValid() === true, 'Default objective present');
+        console.assert(isQ1Answered() === false, 'Q1 initially unanswered');
+        console.assert(isPicChosen() === false, 'Pic initially unchosen');
+        console.assert(isDndDone() === false, 'DnD initially incomplete');
+        console.log('%cPitchPilot smoke tests passed', 'color: white; background:#0f7df2; padding:2px 6px; border-radius:4px');
+      } catch (e) {
+        console.warn('Smoke test encountered an error (non-fatal):', e);
+      }
+    })();
+
+    // Initial render
+    renderLeads();
+  </script>
+</body>
+</html>
