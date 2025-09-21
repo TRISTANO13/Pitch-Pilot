@@ -232,3 +232,56 @@ body{
 
 .accordion__body { padding: 0 14px 12px; }
 .accordion__body .qcard{ margin-top:10px; }
+
+/* === Product Fit table ONLY === */
+.product-fit .thead,
+.product-fit .trow{
+  /* 4 colonnes: 1 = critères (un peu plus large), 3 = produits */
+  grid-template-columns: 1.3fr 1fr 1fr 1fr !important;
+}
+
+/* Centre les colonnes produit, garde la 1re à gauche et en gras */
+.product-fit .thead .cell:first-child,
+.product-fit .trow  .cell:first-child{
+  text-align:left;
+  font-weight:600;
+}
+.product-fit .thead .cell:not(:first-child),
+.product-fit .trow  .cell:not(:first-child){
+  text-align:center;
+}
+
+/* Si une cellule a .right par héritage, on neutralise */
+.product-fit .cell.right{ text-align:center !important; }
+
+/* Optionnel: meilleur wrapping dans les cellules */
+.product-fit .cell{ word-break:break-word; }
+
+/* === Competitor Pricing table ONLY === */
+.competitor-fit .thead,
+.competitor-fit .trow{
+  /* 4 colonnes: 1 critère + 3 banques */
+  grid-template-columns: 1.3fr 1fr 1fr 1fr !important;
+  align-items: center;
+}
+
+.competitor-fit .thead .cell:first-child,
+.competitor-fit .trow  .cell:first-child{
+  text-align: left;
+  font-weight: 600;
+}
+
+.competitor-fit .thead .cell:not(:first-child),
+.competitor-fit .trow  .cell:not(:first-child){
+  text-align: center;
+}
+
+.competitor-fit .cell.right{ text-align:center !important; }
+
+@media (max-width:760px){
+  .competitor-fit .thead,
+  .competitor-fit .trow{
+    grid-template-columns: 1fr; /* stack en mobile */
+  }
+}
+
