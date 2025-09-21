@@ -49,12 +49,14 @@
 
 ## 📂 Project Structure
 
+```text
 Pitch-Pilot/
-├── index.html # Main HTML entry point
-├── styles.css # Styles, variables, responsive layout, dark mode
-├── app.js # Core logic: navigation, login, leads, sorting, modal
-├── images/ # Branding assets (e.g., TTB_Logo.png)
-└── README.md # Project documentation
+├── index.html       # Main HTML entry point
+├── styles.css       # Styles, variables, responsive layout, dark mode
+├── app.js           # Core logic: navigation, login, leads, sorting, modal
+├── images/          # Branding assets (e.g., TTB_Logo.png)
+└── README.md        # Project documentation
+``` 
 
 ### 💡 How to Open the Project
 
