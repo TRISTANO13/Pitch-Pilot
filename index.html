@@ -139,20 +139,20 @@
     <span id="progress-lifestyle" aria-live="polite">0 answered</span>
   </summary>
 
-  <div class="accordion__body">
+<div class="accordion__body">
 <form id="form-lifestyle" novalidate>
 <!-- Q1 – multi-select (checkboxes) -->
 <div class="qcard">
-  <div class="qtitle">Q1. What do you mostly use your credit cards for? <span style="font-weight:500">(select more than one if applicable)</span></div>
-  <div class="qhelper">(This will help me understand your lifestyle and spending needs, so we can find the right solution together.)</div>
+  <div class="qtitle">Q1. โดยส่วนใหญ่คุณใช้บัตรเครดิตเพื่ออะไร? <span style="font-weight:500">(เลือกได้มากกว่าหนึ่งข้อถ้ามี)</span></div>
+  <div class="qhelper">(คำถามนี้จะช่วยให้ฉันเข้าใจไลฟ์สไตล์และความต้องการการใช้จ่ายของคุณ เพื่อหาวิธีแก้ปัญหาที่เหมาะสมร่วมกัน)</div>
   <div class="radio-group" role="group" aria-label="Card usage" id="q1-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="checkbox" name="q1" value="daily"> Daily expenses (food, fuel, bills)</label>
-    <label class="radio"><input type="checkbox" name="q1" value="installments"> Installment purchases (appliances, furniture, etc.)</label>
-    <label class="radio"><input type="checkbox" name="q1" value="travel"> Travel/transportation</label>
-    <label class="radio"><input type="checkbox" name="q1" value="shopping"> Shopping/lifestyle</label>
+    <label class="radio"><input type="checkbox" name="q1" value="daily"> ค่าใช้จ่ายประจำวัน (อาหาร, น้ำมัน, ค่าน้ำค่าไฟ)</label>
+    <label class="radio"><input type="checkbox" name="q1" value="installments"> การซื้อแบบผ่อนชำระ (เครื่องใช้ไฟฟ้า, เฟอร์นิเจอร์ ฯลฯ)</label>
+    <label class="radio"><input type="checkbox" name="q1" value="travel"> การเดินทาง/การขนส่ง</label>
+    <label class="radio"><input type="checkbox" name="q1" value="shopping"> ช้อปปิ้ง/ไลฟ์สไตล์</label>
     <label class="radio">
-      <input type="checkbox" name="q1" value="other" data-other-input="#q1-other"> Other:
-      <input type="text" id="q1-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="checkbox" name="q1" value="other" data-other-input="#q1-other"> อื่น ๆ:
+      <input type="text" id="q1-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -160,46 +160,46 @@
 
 <!-- Q2 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q2. When paying your credit card bill each month, how do you usually pay?</div>
-  <div class="qhelper">(I want to see if payments feel manageable or stressful for you, so I can recommend something practical.)</div>
+  <div class="qtitle">Q2. เวลาชำระบัตรเครดิตในแต่ละเดือน คุณมักจะชำระอย่างไร?</div>
+  <div class="qhelper">(ฉันอยากรู้ว่าการชำระเป็นเรื่องที่คุณจัดการได้ง่ายหรือเป็นภาระ เพื่อจะแนะนำสิ่งที่เหมาะสม)</div>
   <div class="radio-group" role="radiogroup" aria-label="Payment habit" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q2" value="full"> Full payment every month</label>
-    <label class="radio"><input type="radio" name="q2" value="mix"> Mix of minimum and full payment</label>
-    <label class="radio"><input type="radio" name="q2" value="minimum"> Mostly minimum payment</label>
-    <label class="radio"><input type="radio" name="q2" value="overdue"> Frequently overdue</label>
+    <label class="radio"><input type="radio" name="q2" value="full"> ชำระเต็มจำนวนทุกเดือน</label>
+    <label class="radio"><input type="radio" name="q2" value="mix"> บางเดือนชำระเต็ม บางเดือนชำระขั้นต่ำ</label>
+    <label class="radio"><input type="radio" name="q2" value="minimum"> ส่วนใหญ่ชำระขั้นต่ำ</label>
+    <label class="radio"><input type="radio" name="q2" value="overdue"> มักชำระล่าช้า</label>
   </div>
 </div>
 <br>
 
 <!-- Q3 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q3. Have you ever paid your bill late?</div>
-  <div class="qhelper">(Many people face this sometimes — I just want to understand if it happens often for you.)</div>
+  <div class="qtitle">Q3. คุณเคยชำระบัตรเครดิตล่าช้าหรือไม่?</div>
+  <div class="qhelper">(หลายคนก็เจอเหตุการณ์นี้บ้าง ฉันแค่อยากเข้าใจว่ามันเกิดขึ้นบ่อยกับคุณหรือไม่)</div>
   <div class="radio-group" role="radiogroup" aria-label="Late payment frequency" id="q3-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q3" value="never"> Never</label>
-    <label class="radio"><input type="radio" name="q3" value="occasionally"> Occasionally</label>
-    <label class="radio"><input type="radio" name="q3" value="frequent"> Frequently (3+ months per year)</label>
+    <label class="radio"><input type="radio" name="q3" value="never"> ไม่เคย</label>
+    <label class="radio"><input type="radio" name="q3" value="occasionally"> เป็นบางครั้ง</label>
+    <label class="radio"><input type="radio" name="q3" value="frequent"> บ่อยครั้ง (3 เดือนขึ้นไปต่อปี)</label>
   </div>
 </div>
 <br>
 
 <!-- Q4 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q4. What is the approximate total minimum payment across all cards each month?</div>
-  <div class="qhelper">(This helps me see how much pressure monthly payments are putting on you right now.)</div>
-  <label for="payment">Choose a payment range:</label>
+  <div class="qtitle">Q4. จำนวนเงินขั้นต่ำรวมต่อเดือนของบัตรเครดิตทั้งหมดของคุณประมาณเท่าไร?</div>
+  <div class="qhelper">(คำตอบนี้ช่วยให้ฉันเห็นว่าภาระการชำระรายเดือนกดดันคุณแค่ไหน)</div>
+  <label for="payment">โปรดเลือกช่วงการชำระ:</label>
     <select name="payment" id="payment" style="max-width:200px;">
-    <option value="0">Less than THB 10,000</option>
-    <option value="10001-20000">THB 10,000 - 20,000</option>
-    <option value="20001-30000">THB 20,000 - 30,000</option>
-    <option value="30001-40000">THB 30,000 - 40,000</option>
-    <option value="40001-50000">THB 40,000 - 50,000</option>
-    <option value="50001-60000">THB 50,000 - 60,000</option>
-    <option value="60001-70000">THB 60,000 - 70,000</option>
-    <option value="70001-80000">THB 70,000 - 80,000</option>
-    <option value="80001-90000">THB 80,000 - 90,000</option>
-    <option value="90001-100000">THB 90,000 - 100,000</option>
-    <option value="100001+">More than THB 100,000</option>
+    <option value="0">น้อยกว่า 10,000 บาท</option>
+    <option value="10001-20000">10,000 - 20,000 บาท</option>
+    <option value="20001-30000">20,000 - 30,000 บาท</option>
+    <option value="30001-40000">30,000 - 40,000 บาท</option>
+    <option value="40001-50000">40,000 - 50,000 บาท</option>
+    <option value="50001-60000">50,000 - 60,000 บาท</option>
+    <option value="60001-70000">60,000 - 70,000 บาท</option>
+    <option value="70001-80000">70,000 - 80,000 บาท</option>
+    <option value="80001-90000">80,000 - 90,000 บาท</option>
+    <option value="90001-100000">90,000 - 100,000 บาท</option>
+    <option value="100001+">มากกว่า 100,000 บาท</option>
   </select>
 </div>
 <br>
@@ -207,6 +207,7 @@
 </form> 
 </div>  
 </details>
+
 
 <details id="accord-borrow" class="accordion" closed>
   <summary>
@@ -220,17 +221,17 @@
 
 <!-- Q5 – multi-select (checkboxes) -->
 <div class="qcard">
-  <div class="qtitle">Q5. Besides credit cards, do you currently have any other loans? <span style="font-weight:500">(select more than one if applicable)</span></div>
-  <div class="qhelper">(So I can get the full picture of your commitments, could you share if you have any other loans at the moment?)</div>
+  <div class="qtitle">Q5. นอกจากบัตรเครดิตแล้ว ตอนนี้คุณมีเงินกู้อื่น ๆ หรือไม่? <span style="font-weight:500">(เลือกได้มากกว่าหนึ่งข้อถ้ามี)</span></div>
+  <div class="qhelper">(เพื่อให้ฉันเห็นภาพรวมของภาระหนี้ทั้งหมด ช่วยบอกได้ไหมว่าตอนนี้คุณมีเงินกู้อื่น ๆ อยู่หรือไม่?)</div>
   <div class="radio-group" role="group" aria-label="Other loans" id="q5-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="checkbox" name="q5" value="personal"> Personal loan</label>
-    <label class="radio"><input type="checkbox" name="q5" value="mortgage"> Mortgage/home loan</label>
-    <label class="radio"><input type="checkbox" name="q5" value="car"> Car loan / Car for Cash</label>
-    <label class="radio"><input type="checkbox" name="q5" value="cooperative"> Cooperative loan / company welfare loan</label>
-    <label class="radio"><input type="checkbox" name="q5" value="none"> None</label>
+    <label class="radio"><input type="checkbox" name="q5" value="personal"> สินเชื่อส่วนบุคคล</label>
+    <label class="radio"><input type="checkbox" name="q5" value="mortgage"> สินเชื่อบ้าน / สินเชื่อที่อยู่อาศัย</label>
+    <label class="radio"><input type="checkbox" name="q5" value="car"> สินเชื่อรถยนต์ / รถแลกเงิน</label>
+    <label class="radio"><input type="checkbox" name="q5" value="cooperative"> สินเชื่อสหกรณ์ / สวัสดิการบริษัท</label>
+    <label class="radio"><input type="checkbox" name="q5" value="none"> ไม่มี</label>
     <label class="radio">
-      <input type="checkbox" name="q5" value="other" data-other-input="#q5-other"> Other:
-      <input type="text" id="q5-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="checkbox" name="q5" value="other" data-other-input="#q5-other"> อื่น ๆ:
+      <input type="text" id="q5-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -238,80 +239,80 @@
 
 <!-- Q6 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q6. What is your approximate total monthly repayment across all debts?</div>
-  <div class="qhelper">(This will help me calculate your repayment ratio, to see what amount would feel more comfortable for you.)</div>
-  <label for="repayment">Choose a repayment range:</label>
+  <div class="qtitle">Q6. จำนวนเงินที่ต้องชำระหนี้รวมต่อเดือนของคุณประมาณเท่าไร?</div>
+  <div class="qhelper">(คำตอบนี้จะช่วยให้ฉันคำนวณอัตราส่วนการผ่อนชำระ เพื่อหาวงเงินที่เหมาะสมกับคุณ)</div>
+  <label for="repayment">โปรดเลือกช่วงการผ่อนชำระ:</label>
     <select name="repayment" id="repayment" style="max-width:200px;">
-    <option value="0">Less than THB 10,000</option>
-    <option value="10001-20000">THB 10,000 - 20,000</option>
-    <option value="20001-30000">THB 20,000 - 30,000</option>
-    <option value="30001-40000">THB 30,000 - 40,000</option>
-    <option value="40001-50000">THB 40,000 - 50,000</option>
-    <option value="50001-60000">THB 50,000 - 60,000</option>
-    <option value="60001-70000">THB 60,000 - 70,000</option>
-    <option value="70001-80000">THB 70,000 - 80,000</option>
-    <option value="80001-90000">THB 80,000 - 90,000</option>
-    <option value="90001-100000">THB 90,000 - 100,000</option>
-    <option value="100001+">More than THB 100,000</option>
+    <option value="0">น้อยกว่า 10,000 บาท</option>
+    <option value="10001-20000">10,000 - 20,000 บาท</option>
+    <option value="20001-30000">20,000 - 30,000 บาท</option>
+    <option value="30001-40000">30,000 - 40,000 บาท</option>
+    <option value="40001-50000">40,000 - 50,000 บาท</option>
+    <option value="50001-60000">50,000 - 60,000 บาท</option>
+    <option value="60001-70000">60,000 - 70,000 บาท</option>
+    <option value="70001-80000">70,000 - 80,000 บาท</option>
+    <option value="80001-90000">80,000 - 90,000 บาท</option>
+    <option value="90001-100000">90,000 - 100,000 บาท</option>
+    <option value="100001+">มากกว่า 100,000 บาท</option>
   </select>
 </div>
 <br>
 
 <!-- Q7 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q7. What is your current monthly income range?</div>
-  <div class="qhelper">(I’ll ask this gently, as it’s important for me to ensure the loan fits your affordability and stability.)</div>
-  Monthly income:
-  <input type="number" id="income" name="income" placeholder="Enter amount in THB" style="max-width:200px; padding:6px; font-size:13px;" />
+  <div class="qtitle">Q7. รายได้ต่อเดือนปัจจุบันของคุณอยู่ในช่วงใด?</div>
+  <div class="qhelper">(คำถามนี้สำคัญเพื่อให้แน่ใจว่าวงเงินกู้จะสอดคล้องกับรายได้และความมั่นคงของคุณ)</div>
+  รายได้ต่อเดือน:
+  <input type="number" id="income" name="income" placeholder="กรอกจำนวนเงินเป็นบาท" style="max-width:200px; padding:6px; font-size:13px;" />
 </div>
 <br>
 
 <!-- Q8 – single choice -->
 <div class="qcard">
   <div class="qtitle">
-    Q8. What is the approximate total credit limit?
+    Q8. วงเงินเครดิตรวมของคุณประมาณเท่าไร?
   </div>
   <div class="qhelper">
-    (This helps me understand the scale of your current credit situation, so I can tailor my advice accordingly.)
+    (ข้อมูลนี้ช่วยให้ฉันเข้าใจขนาดของภาระหนี้บัตรเครดิตทั้งหมด เพื่อให้คำแนะนำที่เหมาะสมกับคุณ)
   </div>
-  <label for="limit">Choose a limit:</label>
+  <label for="limit">โปรดเลือกช่วงวงเงิน:</label>
     <select name="limit" id="limit" style="max-width:200px;">
-    <option value="0">Less than THB 50,000</option>
-    <option value="50001-100000">THB 50,000 - 100,000</option>
-    <option value="100001-150000">THB 100,000 - 150,000</option>
-    <option value="150001-200000">THB 150,000 - 200,000</option>
-    <option value="200001-250000">THB 200,000 - 250,000</option>
-    <option value="250001-300000">THB 250,000 - 300,000</option>
-    <option value="300001-500000">THB 300,000 - 500,000</option>
-    <option value="500001+">More than THB 500,000</option>
+    <option value="0">น้อยกว่า 50,000 บาท</option>
+    <option value="50001-100000">50,000 - 100,000 บาท</option>
+    <option value="100001-150000">100,000 - 150,000 บาท</option>
+    <option value="150001-200000">150,000 - 200,000 บาท</option>
+    <option value="200001-250000">200,000 - 250,000 บาท</option>
+    <option value="250001-300000">250,000 - 300,000 บาท</option>
+    <option value="300001-500000">300,000 - 500,000 บาท</option>
+    <option value="500001+">มากกว่า 500,000 บาท</option>
   </select>
 </div>
 <br>
 
 <!-- Q9 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q9. After paying your regular living expenses (housing, utilities, family costs), what is your financial situation?</div>
-  <div class="qhelper">(This isn’t about judging — it just helps me see how much space you have left each month.)</div>
+  <div class="qtitle">Q9. หลังจากจ่ายค่าใช้จ่ายประจำ (ค่าที่พัก, ค่าสาธารณูปโภค, ค่าใช้จ่ายครอบครัว) สถานะการเงินของคุณเป็นอย่างไร?</div>
+  <div class="qhelper">(ไม่ใช่การตัดสินใจใด ๆ เพียงแต่ช่วยให้ฉันเห็นว่าคุณเหลือเงินต่อเดือนมากน้อยเพียงใด)</div>
   <div class="radio-group" role="radiogroup" aria-label="Post-expense situation" id="q9-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q9" value="savings"> Still have regular savings</label>
-    <label class="radio"><input type="radio" name="q9" value="manageable"> Manageable but no savings</label>
-    <label class="radio"><input type="radio" name="q9" value="rotate"> Shortfall, need to rotate cards</label>
-    <label class="radio"><input type="radio" name="q9" value="negative"> Negative cash flow / need to borrow more</label>
+    <label class="radio"><input type="radio" name="q9" value="savings"> ยังมีเงินเหลือออมเป็นประจำ</label>
+    <label class="radio"><input type="radio" name="q9" value="manageable"> พอจัดการได้ แต่ไม่มีเงินออม</label>
+    <label class="radio"><input type="radio" name="q9" value="rotate"> ขาดสภาพคล่อง ต้องหมุนบัตรเครดิต</label>
+    <label class="radio"><input type="radio" name="q9" value="negative"> กระแสเงินสดติดลบ / ต้องกู้เพิ่ม</label>
   </div>
 </div>
 <br>
 
 <!-- Q10 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q10. What is your main challenge in managing your debts right now?</div>
-  <div class="qhelper">(If you could share your biggest pain point, I can suggest the best way consolidation might bring you relief.)</div>
+  <div class="qtitle">Q10. ความท้าทายหลักในการจัดการหนี้ของคุณตอนนี้คืออะไร?</div>
+  <div class="qhelper">(หากคุณบอกปัญหาหลัก ฉันจะสามารถแนะนำวิธีการรวมหนี้ที่ช่วยบรรเทาคุณได้ดีที่สุด)</div>
   <div class="radio-group" role="radiogroup" aria-label="Main challenge" id="q10-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q10" value="interest"> High interest rates</label>
-    <label class="radio"><input type="radio" name="q10" value="repayment"> High monthly repayment amount</label>
-    <label class="radio"><input type="radio" name="q10" value="too-many"> Too many lenders to manage</label>
+    <label class="radio"><input type="radio" name="q10" value="interest"> ดอกเบี้ยสูง</label>
+    <label class="radio"><input type="radio" name="q10" value="repayment"> ยอดผ่อนชำระต่อเดือนสูง</label>
+    <label class="radio"><input type="radio" name="q10" value="too-many"> เจ้าหนี้หลายรายเกินไป</label>
     <label class="radio">
-      <input type="radio" name="q10" value="other" data-other-input="#q10-other"> Other:
-      <input type="text" id="q10-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q10" value="other" data-other-input="#q10-other"> อื่น ๆ:
+      <input type="text" id="q10-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -320,6 +321,7 @@
 </form> 
 </div>  
 </details>
+
 
 <details id="accord-qualification" class="accordion" closed>
   <summary>
@@ -332,54 +334,53 @@
 
 <!-- Q11 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q11. Do you currently have stable monthly income transferred to your account?</div>
-  <div class="qhelper">(I’m asking to ensure your application can go smoothly, as banks prefer to see stable income flow.)</div>
+  <div class="qtitle">Q11. ตอนนี้คุณมีรายได้ประจำที่โอนเข้าบัญชีทุกเดือนหรือไม่?</div>
+  <div class="qhelper">(ฉันถามเพื่อให้แน่ใจว่าการสมัครของคุณจะดำเนินไปอย่างราบรื่น เพราะธนาคารต้องการเห็นรายได้ที่มั่นคง)</div>
   <div class="radio-group" role="radiogroup" aria-label="Income type" id="q11-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q11" value="salary"> Yes, regular salary with payslips</label>
-    <label class="radio"><input type="radio" name="q11" value="freelancer"> Freelancer / irregular income</label>
-    <label class="radio"><input type="radio" name="q11" value="side"> Mainly from side business</label>
+    <label class="radio"><input type="radio" name="q11" value="salary"> ใช่ รายได้ประจำพร้อมสลิปเงินเดือน</label>
+    <label class="radio"><input type="radio" name="q11" value="freelancer"> ฟรีแลนซ์ / รายได้ไม่สม่ำเสมอ</label>
+    <label class="radio"><input type="radio" name="q11" value="side"> รายได้หลักจากธุรกิจเสริม</label>
   </div>
 </div>
 <br>
 
 <!-- Q12 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q12. In the last 3 years, have you had any overdue payment records with the credit bureau?</div>
-  <div class="qhelper">(Please don’t worry — I only ask this to check whether it could affect your loan approval chances.)</div>
+  <div class="qtitle">Q12. ในช่วง 3 ปีที่ผ่านมา คุณเคยมีประวัติการชำระล่าช้ากับเครดิตบูโรหรือไม่?</div>
+  <div class="qhelper">(ไม่ต้องกังวลนะครับ/ค่ะ ฉันถามเพื่อดูว่ามันอาจส่งผลต่อโอกาสอนุมัติสินเชื่อหรือไม่)</div>
   <div class="radio-group" role="radiogroup" aria-label="Credit bureau overdue" id="q12-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q12" value="never"> Never</label>
-    <label class="radio"><input type="radio" name="q12" value="1-2"> Yes, 1–2 times but already cleared</label>
-    <label class="radio"><input type="radio" name="q12" value="outstanding"> Yes, and still outstanding</label>
+    <label class="radio"><input type="radio" name="q12" value="never"> ไม่เคย</label>
+    <label class="radio"><input type="radio" name="q12" value="1-2"> เคย 1–2 ครั้ง แต่เคลียร์เรียบร้อยแล้ว</label>
+    <label class="radio"><input type="radio" name="q12" value="outstanding"> เคย และยังคงค้างอยู่</label>
   </div>
 </div>
 <br>
 
 <!-- Q13 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q13. What is your current employment type?</div>
-  <div class="qhelper">(This helps me understand your work stability and how we can present your case more strongly.)</div>
+  <div class="qtitle">Q13. ประเภทการจ้างงานปัจจุบันของคุณคืออะไร?</div>
+  <div class="qhelper">(ข้อมูลนี้ช่วยให้ฉันเข้าใจถึงความมั่นคงในการทำงาน และนำเสนอข้อมูลของคุณได้ดียิ่งขึ้น)</div>
   <div class="radio-group" role="radiogroup" aria-label="Employment type" id="q13-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q13" value="ft-gt1" data-other-input="#q13-ft-gt1"> Full-time employee (&gt; 1 year of continuous work)</label>
-    Specify how long with the current employer: <input type="text" id="q13-ft-gt1" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
-    <label class="radio"><input type="radio" name="q13" value="ft-lt1"> Full-time employee (&lt; 1 year of continuous work)</label>
-    <label class="radio"><input type="radio" name="q13" value="owner"> Business owner / self-employed</label>
+    <label class="radio"><input type="radio" name="q13" value="ft-gt1" data-other-input="#q13-ft-gt1"> พนักงานประจำ (ทำงานต่อเนื่องมากกว่า 1 ปี)</label>
+    โปรดระบุระยะเวลาที่ทำงานกับนายจ้างปัจจุบัน: <input type="text" id="q13-ft-gt1" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    <label class="radio"><input type="radio" name="q13" value="ft-lt1"> พนักงานประจำ (ทำงานต่อเนื่องน้อยกว่า 1 ปี)</label>
+    <label class="radio"><input type="radio" name="q13" value="owner"> เจ้าของกิจการ / ผู้ประกอบอาชีพอิสระ</label>
     <label class="radio">
-      <input type="radio" name="q13" value="other" data-other-input="#q13-other"> Other:
-      <input type="text" id="q13-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q13" value="other" data-other-input="#q13-other"> อื่น ๆ:
+      <input type="text" id="q13-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
 <br>
 
-
 <!-- Q14 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q14. Do you have any informal loans (outside financial institutions)?</div>
-  <div class="qhelper">(I ask this only so I can give you the most realistic plan — your answer will stay confidential.)</div>
+  <div class="qtitle">Q14. คุณมีหนี้นอกระบบ (นอกสถาบันการเงิน) หรือไม่?</div>
+  <div class="qhelper">(ฉันถามเพื่อจะได้วางแผนที่เหมาะสมและเป็นจริงที่สุด คำตอบของคุณจะถูกเก็บเป็นความลับ)</div>
   <div class="radio-group" role="radiogroup" aria-label="Informal loans" id="q14-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q14" value="no"> No</label>
-    <label class="radio"><input type="radio" name="q14" value="small"> Yes, small amount</label>
-    <label class="radio"><input type="radio" name="q14" value="significant"> Yes, significant amount</label>
+    <label class="radio"><input type="radio" name="q14" value="no"> ไม่มี</label>
+    <label class="radio"><input type="radio" name="q14" value="small"> มี แต่จำนวนเล็กน้อย</label>
+    <label class="radio"><input type="radio" name="q14" value="significant"> มี และจำนวนมาก</label>
   </div>
 </div>
 <br>
@@ -387,6 +388,7 @@
 </form> 
 </div>  
 </details>
+
 
 <details id="accord-preference" class="accordion" closed>
   <summary>
@@ -399,17 +401,17 @@
 
 <!-- Q15 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q15. When reviewing a debt consolidation offer, which aspect is most important to you?</div>
-  <div class="qhelper">(Different people value different things — I’d like to know what matters most for you, so I can design the proposal that truly fits your needs.)</div>
+  <div class="qtitle">Q15. เมื่อพิจารณาข้อเสนอการรวมหนี้ ปัจจัยใดสำคัญที่สุดสำหรับคุณ?</div>
+  <div class="qhelper">(แต่ละคนให้ความสำคัญต่างกัน — ฉันอยากรู้ว่าสิ่งใดสำคัญที่สุดสำหรับคุณ เพื่อออกแบบข้อเสนอที่ตรงกับความต้องการจริง ๆ)</div>
   <div class="radio-group" role="radiogroup" aria-label="Priority aspect" id="q15-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q15" value="max-amount"> Maximum loan size (highest approved amount possible)</label>
-    <label class="radio"><input type="radio" name="q15" value="short-tenor"> Shortest tenor (finish debt quickly, higher installment)</label>
-    <label class="radio"><input type="radio" name="q15" value="lowest-installment"> Lowest monthly installment (longer tenor, easier cash flow)</label>
-    <label class="radio"><input type="radio" name="q15" value="lowest-rate"> Lowest interest rate (minimize total cost of borrowing)</label>
-    <label class="radio"><input type="radio" name="q15" value="balance"> Balance between amount, tenor, and rate</label>
+    <label class="radio"><input type="radio" name="q15" value="max-amount"> วงเงินกู้สูงสุด (จำนวนที่อนุมัติสูงที่สุดเท่าที่เป็นไปได้)</label>
+    <label class="radio"><input type="radio" name="q15" value="short-tenor"> ระยะเวลาสั้นที่สุด (ปิดหนี้ไว แต่ค่างวดสูงขึ้น)</label>
+    <label class="radio"><input type="radio" name="q15" value="lowest-installment"> ค่างวดรายเดือนต่ำที่สุด (ระยะเวลานานขึ้น กระแสเงินสดคล่องตัวกว่า)</label>
+    <label class="radio"><input type="radio" name="q15" value="lowest-rate"> ดอกเบี้ยต่ำที่สุด (ลดต้นทุนการกู้โดยรวม)</label>
+    <label class="radio"><input type="radio" name="q15" value="balance"> สมดุลระหว่างวงเงิน ระยะเวลา และดอกเบี้ย</label>
     <label class="radio">
-      <input type="radio" name="q15" value="other" data-other-input="#q15-other"> Other:
-      <input type="text" id="q15-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q15" value="other" data-other-input="#q15-other"> อื่น ๆ:
+      <input type="text" id="q15-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -417,11 +419,11 @@
 
 <!-- Q16 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q16. What is your collateral preference for the loan?</div>
-  <div class="qhelper">(Different collateral types can affect approval chances and interest rates — I want to understand what you’re comfortable with.)</div>
+  <div class="qtitle">Q16. คุณต้องการใช้หลักประกันประเภทใดสำหรับเงินกู้?</div>
+  <div class="qhelper">(ประเภทหลักประกันที่ต่างกันอาจมีผลต่อโอกาสการอนุมัติและอัตราดอกเบี้ย — ฉันอยากเข้าใจว่าสิ่งใดที่คุณสบายใจที่สุด)</div>
   <div class="radio-group" role="radiogroup" aria-label="Collateral preference" id="q16-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q16" value="car"> Car</label>
-    <label class="radio"><input type="radio" name="q16" value="property"> Property</label>
+    <label class="radio"><input type="radio" name="q16" value="car"> รถยนต์</label>
+    <label class="radio"><input type="radio" name="q16" value="property"> อสังหาริมทรัพย์</label>
   </div>
 </div>
 <br>
@@ -429,6 +431,7 @@
 </form> 
 </div>
 </details>
+
 
     </section>
 
@@ -481,13 +484,14 @@
   <h3>Customer Core Persona</h3>
   <div class="qcard" style="line-height:1.6; font-size:14px;">
     <p>
-      “Mr. ลูกค้า-10367656 is a 45-year-old mid-level office worker earning THB 45,000 per month. 
-      He lives in Bangkok with his young daughter and carries the main responsibility for family expenses. 
-      Most of his daily spending — from groceries to fuel — goes on credit cards, and he often pays only the minimum due, 
-      leaving him with little savings each month. With three active credit cards and a personal loan to juggle, 
-      ลูกค้า-10367656 feels the pressure of multiple payment deadlines and high interest charges. 
-      What he truly needs is a way to simplify his debts into one manageable plan, reduce his monthly burden, 
-      and give him peace of mind to focus on his family.”
+      “ลูกค้า-10367656 เป็นพนักงานออฟฟิศระดับกลาง อายุ 45 ปี มีรายได้เดือนละ 45,000 บาท
+เขาอาศัยอยู่ในกรุงเทพฯ กับลูกสาววัยเด็ก และเป็นผู้รับผิดชอบหลักในค่าใช้จ่ายของครอบครัว
+ค่าใช้จ่ายประจำวันส่วนใหญ่ของเขา — ตั้งแต่ของชำไปจนถึงค่าน้ำมัน — ใช้จ่ายผ่านบัตรเครดิต และมักจะชำระเพียงยอดขั้นต่ำ
+ทำให้แทบไม่มีเงินออมในแต่ละเดือน ด้วยบัตรเครดิตที่ใช้งานอยู่ 3 ใบ และสินเชื่อส่วนบุคคลที่ต้องจัดการ
+ลูกค้า-10367656 รู้สึกกดดันจากกำหนดชำระหนี้หลายรายการและดอกเบี้ยที่สูง
+
+สิ่งที่เขาต้องการจริง ๆ คือวิธีการรวมหนี้ให้เป็นแผนเดียวที่จัดการได้ง่ายขึ้น ลดภาระรายเดือน
+และทำให้เขามีความสบายใจมากขึ้นเพื่อที่จะได้โฟกัสกับครอบครัว”
     </p>
   </div>
 </div>
@@ -497,25 +501,27 @@
     <div class="section">
       <h3>Analyzed Needs & Pains</h3>
       <ul>
-        <li>Pays minimum only on credit cards → paying THB 3,500 interest monthly</li>
-        <li>Has 3 active credit cards + 1 personal loan → managing 4 due dates monthly</li>
-        <li>Monthly repayment burden THB 25,000 = 55% of income → limited leftover cash</li>
-        <li>Wants lower monthly installment → to ease cash flow stress</li>
-        <li>Prefers shorter tenor → to be debt-free sooner</li>
-        <li>Feels pressure from multiple lenders contacting for payment</li>
-        <li>Other: —</li>
-      </ul>
+  <li>ชำระเฉพาะยอดขั้นต่ำในบัตรเครดิต → เสียดอกเบี้ยเดือนละ 3,500 บาท</li>
+  <li>มีบัตรเครดิตที่ใช้งานอยู่ 3 ใบ + สินเชื่อส่วนบุคคล 1 รายการ → ต้องจัดการกำหนดชำระ 4 รอบต่อเดือน</li>
+  <li>ภาระการผ่อนชำระรายเดือน 25,000 บาท = 55% ของรายได้ → เงินเหลือใช้ต่อเดือนจำกัด</li>
+  <li>ต้องการค่างวดรายเดือนที่ต่ำลง → เพื่อลดความตึงเครียดด้านกระแสเงินสด</li>
+  <li>ต้องการระยะเวลาผ่อนที่สั้นกว่า → เพื่อปลดหนี้ได้เร็วขึ้น</li>
+  <li>รู้สึกกดดันจากเจ้าหนี้หลายรายที่ติดต่อมาเพื่อทวงถามการชำระ</li>
+  <li>อื่น ๆ: —</li>
+</ul>
+
     </div>
 
     <!-- 4. Qualification Checklist -->
     <div class="section">
       <h3>Loan Applicant Qualification Checklist</h3>
       <ul>
-        <li>✅ Income stability: Full-time > 1 year</li>
-        <li>✅ Credit history: No overdue in 3 years</li>
-        <li>❌ DSR: 55% (above 50%) → Recommend consolidation to reduce to 42%</li>
-        <li>✅ Employment: 7 years at current company</li>
-      </ul>
+  <li>✅ ความมั่นคงของรายได้: พนักงานประจำมากกว่า 1 ปี</li>
+  <li>✅ ประวัติเครดิต: ไม่มีการชำระล่าช้าในช่วง 3 ปีที่ผ่านมา</li>
+  <li>❌ อัตราส่วนหนี้ต่อรายได้ (DSR): 55% (เกิน 50%) → แนะนำให้รวมหนี้เพื่อลดลงเหลือ 42%</li>
+  <li>✅ การจ้างงาน: ทำงานกับบริษัทปัจจุบันมาแล้ว 7 ปี</li>
+</ul>
+
       <p style="color:var(--muted); font-size:13px;">
         Tip: Provide latest 6-month bank statement to strengthen approval chance.
       </p>
@@ -526,18 +532,19 @@
     <div class="section">
       <h3>Recommended Debt Consolidation Solution</h3>
       <div class="qcard">
-        <strong>Solution:</strong> Personal Loan Consolidation, 5-year tenor, THB 300,000
+        <strong>Solution:</strong> สินเชื่อส่วนบุคคลเพื่อการรวมหนี้ ระยะเวลา 5 ปี วงเงิน 300,000 บาท
         <br><br>
         <div><strong>Pros:</strong></div>
         <ul>
-          <li>Lower monthly installment (from THB 25,000 → THB 15,000)</li>
-          <li>Only 1 payment date to track</li>
-          <li>Reduce DSR to 42% → increases approval chance</li>
-        </ul>
+  <li>ค่างวดรายเดือนลดลง (จาก 25,000 บาท → 15,000 บาท)</li>
+  <li>มีเพียงวันชำระเพียงวันเดียวให้ติดตาม</li>
+  <li>ลดอัตราส่วนหนี้ต่อรายได้ (DSR) เหลือ 42% → เพิ่มโอกาสการอนุมัติ</li>
+</ul>
+
         <div><strong>Cons:</strong></div>
         <ul>
-          <li>Longer repayment period (5 years) → more total interest cost</li>
-          <li>Cannot add new debt during tenor without affecting score</li>
+          <li>ระยะเวลาผ่อนชำระที่นานขึ้น (5 ปี) → เสียดอกเบี้ยรวมมากขึ้น</li>
+          <li>ไม่สามารถเพิ่มหนี้ใหม่ในระหว่างระยะเวลาได้โดยไม่กระทบต่อคะแนน</li>
         </ul>
       </div>
     </div>
@@ -563,86 +570,86 @@
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Fit level</strong></div>
-      <div class="cell">High</div>
-      <div class="cell">Medium</div>
-      <div class="cell">Medium</div>
+      <div class="cell"><strong>ระดับความเหมาะสม</strong></div>
+      <div class="cell">สูง</div>
+      <div class="cell">ปานกลาง</div>
+      <div class="cell">ปานกลาง</div>
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Pricing</strong></div>
-      <div class="cell">~7.5% – 8.5% p.a.</div>
-      <div class="cell">~12% – 15% p.a.</div>
-      <div class="cell">~9% – 12% p.a.</div>
+      <div class="cell"><strong>อัตราดอกเบี้ย</strong></div>
+      <div class="cell">~7.5% – 8.5% ต่อปี</div>
+      <div class="cell">~12% – 15% ต่อปี</div>
+      <div class="cell">~9% – 12% ต่อปี</div>
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Applicant qualification</strong></div>
-      <div class="cell">Thai citizen, age 20–65, income ≥ THB 20,000</div>
-      <div class="cell">Thai citizen, age 20–65, income ≥ THB 15,000</div>
-      <div class="cell">Thai citizen, age 20–65, income ≥ THB 15,000</div>
+      <div class="cell"><strong>คุณสมบัติผู้สมัคร</strong></div>
+      <div class="cell">สัญชาติไทย อายุ 20–65 ปี รายได้ ≥ 20,000 บาท</div>
+      <div class="cell">สัญชาติไทย อายุ 20–65 ปี รายได้ ≥ 15,000 บาท</div>
+      <div class="cell">สัญชาติไทย อายุ 20–65 ปี รายได้ ≥ 15,000 บาท</div>
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Loan minimum</strong></div>
-      <div class="cell">THB 100,000</div>
-      <div class="cell">THB 30,000</div>
-      <div class="cell">THB 50,000</div>
+      <div class="cell"><strong>วงเงินกู้ขั้นต่ำ</strong></div>
+      <div class="cell">100,000 บาท</div>
+      <div class="cell">30,000 บาท</div>
+      <div class="cell">50,000 บาท</div>
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Loan maximum</strong></div>
-      <div class="cell">Up to 20–30M (depending on collateral)</div>
-      <div class="cell">Up to 5M</div>
-      <div class="cell">Up to 3M</div>
+      <div class="cell"><strong>วงเงินกู้สูงสุด</strong></div>
+      <div class="cell">สูงสุด 20–30 ล้านบาท (ขึ้นอยู่กับหลักประกัน)</div>
+      <div class="cell">สูงสุด 5 ล้านบาท</div>
+      <div class="cell">สูงสุด 3 ล้านบาท</div>
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Pros</strong></div>
+      <div class="cell"><strong>ข้อดี</strong></div>
       <div class="cell">
-        • Low interest vs unsecured<br>
-        • High approval chance (secured)<br>
-        • Longer tenor possible
+        • ดอกเบี้ยต่ำเมื่อเทียบกับสินเชื่อไม่มีหลักประกัน<br>
+        • โอกาสอนุมัติสูง (มีหลักประกัน)<br>
+        • สามารถผ่อนได้ระยะยาวกว่า
       </div>
       <div class="cell">
-        • Revolving credit flexibility<br>
-        • Free mortgage fee promo
+        • ความยืดหยุ่นของวงเงินหมุนเวียน<br>
+        • โปรโมชั่นฟรีค่าจดจำนอง
       </div>
       <div class="cell">
-        • Use car as collateral<br>
-        • Faster approval than home loan
-      </div>
-    </div>
-
-    <div class="trow">
-      <div class="cell"><strong>Cons</strong></div>
-      <div class="cell">
-        • Need collateral (house)<br>
-        • Longer approval time
-      </div>
-      <div class="cell">
-        • Higher effective rate<br>
-        • Risk of debt trap
-      </div>
-      <div class="cell">
-        • Lower max amount<br>
-        • Shorter tenor
+        • ใช้รถยนต์เป็นหลักประกันได้<br>
+        • อนุมัติไวกว่าเงินกู้บ้าน
       </div>
     </div>
 
     <div class="trow">
-      <div class="cell"><strong>Fact sheet</strong></div>
+      <div class="cell"><strong>ข้อเสีย</strong></div>
       <div class="cell">
-        <a href="https://www.ttbbank.com/th/personal/loans/home-loan/cyh-debt-consolidation" target="_blank">Debt Consolidation</a><br>
+        • ต้องมีหลักประกัน (บ้าน)<br>
+        • เวลาการอนุมัตินานกว่า
+      </div>
+      <div class="cell">
+        • อัตราดอกเบี้ยที่แท้จริงสูงกว่า<br>
+        • เสี่ยงต่อการติดกับดักหนี้
+      </div>
+      <div class="cell">
+        • วงเงินสูงสุดน้อยกว่า<br>
+        • ระยะเวลาผ่อนสั้นกว่า
+      </div>
+    </div>
+
+    <div class="trow">
+      <div class="cell"><strong>ข้อมูลเพิ่มเติม</strong></div>
+      <div class="cell">
+        <a href="https://www.ttbbank.com/th/personal/loans/home-loan/cyh-debt-consolidation" target="_blank">การรวมหนี้</a><br>
         <a href="https://www.ttbbank.com/th/personal/loans/home-loan/cash-your-home" target="_blank">Cash Your Home</a>
       </div>
       <div class="cell">
         <a href="https://www.ttbbank.com/th/personal/loans/home-loan/cyh-cash-card" target="_blank">CYH Cash Card</a><br>
-        <a href="https://www.ttbbank.com/th/promotion/loan/home-loan/cyh-cashcard-free-mortgagefee" target="_blank">Promo</a>
+        <a href="https://www.ttbbank.com/th/promotion/loan/home-loan/cyh-cashcard-free-mortgagefee" target="_blank">โปรโมชั่น</a>
       </div>
       <div class="cell">
         <a href="https://www.ttbbank.com/th/personal/loans/hire-purchase/cash-your-car" target="_blank">CYC Product</a><br>
-        <a href="https://www.ttbbank.com/th/promotion/loan/hire-purchase/hire-purchase-pon-dee" target="_blank">Promo</a>
+        <a href="https://www.ttbbank.com/th/promotion/loan/hire-purchase/hire-purchase-pon-dee" target="_blank">โปรโมชั่น</a>
       </div>
     </div>
   </div>
@@ -661,118 +668,116 @@
       <div class="cell">KBank — Home Loan Top-Up</div>
     </div>
     
-
     <div class="trow">
       <div class="cell"><strong>Best product for this case</strong></div>
       <div class="cell">
-        <span class="badge badge-win">TTB — CYH (Winner)</span><br>
-        Reduces DSR most; single payment; best match for consolidation
+        <span class="badge badge-win">TTB — CYH (ผู้ชนะ)</span><br>
+        ลด DSR ได้มากที่สุด; การชำระครั้งเดียว; เหมาะที่สุดสำหรับการรวมหนี้
       </div>
       <div class="cell">
         <span class="badge badge-alt">SCB — Refinance/Cash-out</span><br>
-        Comparable secured option if promo/relationship is better
+        ตัวเลือกสินเชื่อมีหลักประกัน หากโปรโมชั่น/ความสัมพันธ์ดีกว่า
       </div>
       <div class="cell">
         <span class="badge badge-alt">KBank — Home Top-Up</span><br>
-        Good alternative if existing mortgage is with KBank
+        ทางเลือกที่ดี หากมีสินเชื่อบ้านกับกสิกรอยู่แล้ว
       </div>
     </div>
 
-
     <div class="trow">
       <div class="cell"><strong>Product type</strong></div>
-      <div class="cell">Secured home-equity (debt consolidation)</div>
-      <div class="cell">Secured home-equity (cash-out)</div>
-      <div class="cell">Secured home-equity (top-up)</div>
+      <div class="cell">สินเชื่อบ้านมีหลักประกัน (รวมหนี้)</div>
+      <div class="cell">สินเชื่อบ้านมีหลักประกัน (กู้เงินออก)</div>
+      <div class="cell">สินเชื่อบ้านมีหลักประกัน (กู้เพิ่ม)</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Rate type</strong></div>
-      <div class="cell">Floating / promo fixed (campaign-based)</div>
-      <div class="cell">Floating / promo fixed (campaign-based)</div>
-      <div class="cell">Floating / promo fixed (campaign-based)</div>
+      <div class="cell">ดอกเบี้ยลอยตัว / คงที่ตามโปรโมชั่น (ขึ้นกับแคมเปญ)</div>
+      <div class="cell">ดอกเบี้ยลอยตัว / คงที่ตามโปรโมชั่น (ขึ้นกับแคมเปญ)</div>
+      <div class="cell">ดอกเบี้ยลอยตัว / คงที่ตามโปรโมชั่น (ขึ้นกับแคมเปญ)</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Indicative pricing (p.a.)</strong></div>
       <div class="cell">~7.5% – 8.5%</div>
-      <div class="cell">Market-comparable (secured band)</div>
-      <div class="cell">Market-comparable (secured band)</div>
+      <div class="cell">ใกล้เคียงตลาด (กลุ่มสินเชื่อมีหลักประกัน)</div>
+      <div class="cell">ใกล้เคียงตลาด (กลุ่มสินเชื่อมีหลักประกัน)</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Tenor</strong></div>
-      <div class="cell">Up to 30 yrs</div>
-      <div class="cell">Up to ~30 yrs</div>
-      <div class="cell">Up to ~30 yrs</div>
+      <div class="cell">สูงสุด 30 ปี</div>
+      <div class="cell">สูงสุด ~30 ปี</div>
+      <div class="cell">สูงสุด ~30 ปี</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>LTV / Max amount</strong></div>
-      <div class="cell">Per collateral valuation / policy</div>
-      <div class="cell">Per collateral valuation / policy</div>
-      <div class="cell">Per collateral valuation / policy</div>
+      <div class="cell">ขึ้นกับการประเมินหลักประกัน / นโยบาย</div>
+      <div class="cell">ขึ้นกับการประเมินหลักประกัน / นโยบาย</div>
+      <div class="cell">ขึ้นกับการประเมินหลักประกัน / นโยบาย</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Fees (high-level)</strong></div>
-      <div class="cell">Mortgage reg. & handling (promo may waive)</div>
-      <div class="cell">Mortgage reg. & handling</div>
-      <div class="cell">Mortgage reg. & handling</div>
+      <div class="cell">ค่าธรรมเนียมจดจำนองและค่าดำเนินการ (อาจยกเว้นหากมีโปรโมชั่น)</div>
+      <div class="cell">ค่าธรรมเนียมจดจำนองและค่าดำเนินการ</div>
+      <div class="cell">ค่าธรรมเนียมจดจำนองและค่าดำเนินการ</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Pros</strong></div>
       <div class="cell">
-        • Lower installment vs unsecured<br>
-        • Single payment, debt consolidation
+        • ค่างวดต่ำกว่าสินเชื่อไม่มีหลักประกัน<br>
+        • ชำระครั้งเดียว รวมหนี้ได้
       </div>
       <div class="cell">
-        • Large ticket via refinance<br>
-        • Broad availability
+        • วงเงินสูงจากการรีไฟแนนซ์<br>
+        • ใช้ได้อย่างแพร่หลาย
       </div>
       <div class="cell">
-        • Convenient top-up on existing mortgage<br>
-        • Consolidation use allowed
+        • สะดวกในการกู้เพิ่มบนสินเชื่อบ้านเดิม<br>
+        • สามารถใช้เพื่อรวมหนี้ได้
       </div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Cons</strong></div>
       <div class="cell">
-        • Collateral needed • Longer TAT<br>
-        • Mortgage fees (unless promo)
+        • ต้องมีหลักประกัน • เวลาการอนุมัตินานกว่า<br>
+        • ค่าธรรมเนียมจดจำนอง (หากไม่มีโปรโมชั่น)
       </div>
       <div class="cell">
-        • Collateral & fees • TAT similar
+        • ต้องมีหลักประกัน & มีค่าธรรมเนียม • เวลาการอนุมัติใกล้เคียงกัน
       </div>
       <div class="cell">
-        • Collateral & fees • TAT similar
+        • ต้องมีหลักประกัน & มีค่าธรรมเนียม • เวลาการอนุมัติใกล้เคียงกัน
       </div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Best-fit scenario</strong></div>
-      <div class="cell">Highest fit for ลูกค้า-10367656: reduce DSR, 1 payment</div>
-      <div class="cell">Alt. secured option (if pricing/promo suits)</div>
-      <div class="cell">Alt. secured option (if relationship at KBank)</div>
+      <div class="cell">เหมาะสมที่สุดสำหรับ ลูกค้า-10367656: ลด DSR, ชำระครั้งเดียว</div>
+      <div class="cell">ตัวเลือกสินเชื่อมีหลักประกันทางเลือก (หากราคา/โปรโมชั่นเหมาะสม)</div>
+      <div class="cell">ตัวเลือกสินเชื่อมีหลักประกันทางเลือก (หากมีสินเชื่อบ้านกับกสิกร)</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Learn more</strong></div>
       <div class="cell">
-        <a href="https://www.ttbbank.com/th/personal/loans/home-loan/cyh-debt-consolidation" target="_blank">TTB CYH — Debt Consolidation</a>
+        <a href="https://www.ttbbank.com/th/personal/loans/home-loan/cyh-debt-consolidation" target="_blank">TTB CYH — รวมหนี้</a>
       </div>
       <div class="cell">
-        <a href="#" target="_blank" rel="nofollow">SCB Home Refinance / Cash-out (site)</a>
+        <a href="#" target="_blank" rel="nofollow">SCB รีไฟแนนซ์ / กู้เงินออก (เว็บไซต์)</a>
       </div>
       <div class="cell">
-        <a href="#" target="_blank" rel="nofollow">KBank Home Loan Top-Up (site)</a>
+        <a href="#" target="_blank" rel="nofollow">KBank สินเชื่อบ้านกู้เพิ่ม (เว็บไซต์)</a>
       </div>
     </div>
-  </div>
 </div>
 </details>
+
 
 <details id="accord-promo" class="accordion" closed>
   <summary>
@@ -789,37 +794,37 @@
       <div class="cell"></div>
       <div class="cell">ttb so smart</div>
       <div class="cell">ttb Disney</div>
-      <div class="cell">Optional: Automotive promos (if car owner)</div>
+      <div class="cell">ตัวเลือก: โปรโมชั่นเกี่ยวกับรถยนต์ (ถ้ามีรถ)</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Persona signals</strong></div>
-      <div class="cell">Daily spend on cards; pays minimum often; needs cash-flow relief</div>
-      <div class="cell">Family groceries & outings; wants rewards on essentials</div>
-      <div class="cell">If he owns a car: maintenance/insurance costs</div>
+      <div class="cell">ใช้บัตรเครดิตจ่ายค่าใช้จ่ายประจำวัน; มักชำระขั้นต่ำ; ต้องการบรรเทาปัญหากระแสเงินสด</div>
+      <div class="cell">ค่าใช้จ่ายครอบครัว เช่น ของชำ & การออกไปข้างนอก; ต้องการสิทธิพิเศษจากการใช้จ่ายที่จำเป็น</div>
+      <div class="cell">หากมีรถยนต์: ค่าใช้จ่ายบำรุงรักษา/ประกันภัย</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Why it fits ลูกค้า-10367656</strong></div>
-      <div class="cell">Cash back on every spend + ability to convert larger bills to 0% installments → smoother monthly cash flow</div>
-      <div class="cell">Accelerated points on online / dining / supermarkets → turns family spending into tangible rewards</div>
-      <div class="cell">Central page for car-related campaigns (e.g., insurance installments, service discounts) — only if relevant</div>
+      <div class="cell">เงินคืนทุกการใช้จ่าย + สามารถเปลี่ยนบิลใหญ่เป็นผ่อน 0% → กระแสเงินสดรายเดือนคล่องตัวขึ้น</div>
+      <div class="cell">คะแนนสะสมพิเศษสำหรับการใช้ออนไลน์ / ร้านอาหาร / ซูเปอร์มาร์เก็ต → ทำให้ค่าใช้จ่ายครอบครัวกลายเป็นรางวัลที่จับต้องได้</div>
+      <div class="cell">หน้ารวมโปรโมชั่นเกี่ยวกับรถยนต์ (เช่น ผ่อนประกันภัย, ส่วนลดค่าบริการ) — ใช้เฉพาะเมื่อเกี่ยวข้อง</div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Promo hub</strong></div>
-      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">TTB Credit Card Promotions</a></div>
-      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">TTB Credit Card Promotions</a></div>
-      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">TTB Credit Card Promotions (Automotive)</a></div>
+      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">โปรโมชั่นบัตรเครดิต TTB</a></div>
+      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">โปรโมชั่นบัตรเครดิต TTB</a></div>
+      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">โปรโมชั่นบัตรเครดิต TTB (เกี่ยวกับรถยนต์)</a></div>
     </div>
 
     <div class="trow">
       <div class="cell"><strong>Seller one-liner (use verbatim)</strong></div>
-      <div class="cell"><em>“ลูกค้า-10367656, for your everyday spend, <strong>ttb so smart</strong> gives cash back on every payment, and you can switch big bills to <strong>0% installments</strong> to ease monthly cash flow.”</em></div>
-      <div class="cell"><em>“For groceries and outings with your daughter, <strong>ttb Disney</strong> earns <strong>accelerated points</strong> on online, dining and supermarkets—so routine spend becomes rewards.”</em></div>
-      <div class="cell"><em>“If you have a car, I’ll share TTB’s <strong>automotive promos</strong>—including <strong>0% insurance installments</strong> when campaigns are active—so you can time maintenance and save.”</em></div>
+      <div class="cell"><em>“ลูกค้า-10367656 สำหรับการใช้จ่ายประจำวันของคุณ <strong>ttb so smart</strong> ให้เงินคืนทุกการใช้ และคุณสามารถเปลี่ยนบิลใหญ่เป็นการผ่อน <strong>0%</strong> เพื่อลดภาระกระแสเงินสดรายเดือน”</em></div>
+      <div class="cell"><em>“สำหรับการซื้อของชำและการออกไปข้างนอกกับลูกสาว <strong>ttb Disney</strong> มอบ <strong>คะแนนสะสมพิเศษ</strong> ในการใช้ออนไลน์ ร้านอาหาร และซูเปอร์มาร์เก็ต — ทำให้ค่าใช้จ่ายประจำกลายเป็นรางวัล”</em></div>
+      <div class="cell"><em>“ถ้าคุณมีรถ ผม/ดิฉันจะแชร์ <strong>โปรโมชั่นเกี่ยวกับรถยนต์</strong> ของ TTB — รวมถึง <strong>ผ่อนประกันภัย 0%</strong> เมื่อแคมเปญเปิดใช้งาน — เพื่อให้คุณวางแผนการบำรุงรักษาและประหยัดได้”</em></div>
     </div>
-  </div>
+</div>
 
 </div>
 </details>
@@ -827,7 +832,7 @@
   <details id="accord-channel" class="accordion" closed>
     <summary>4. Channel fit</summary>
     <div class="section">
-      <p>ลูกค้า-10367656 is responsive to weekday morning calls and is active on the ttb touch mobile app, so in-app notifications work well. He reads both Email and LINE messages, making them reliable for summaries and links. He also visits a Bangkok branch at the start of each month, which is a good moment for appointments or document collection.</p>
+<p>ลูกค้า-10367656 สะดวกรับสายโทรศัพท์ในช่วงเช้าวันทำการ และใช้งานแอป ttb touch เป็นประจำ ดังนั้นการแจ้งเตือนผ่านแอปจึงได้ผลดี เขาอ่านทั้งอีเมลและข้อความ LINE ทำให้ทั้งสองช่องทางเชื่อถือได้สำหรับการส่งสรุปและลิงก์ นอกจากนี้เขายังไปที่สาขาในกรุงเทพฯ ต้นเดือนของทุกเดือน ซึ่งเป็นช่วงเวลาที่เหมาะสมสำหรับการนัดหมายหรือการรับส่งเอกสาร</p>
     </div>
 
   </details>
