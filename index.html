@@ -104,81 +104,53 @@
 <section id="screen-objective" class="screen" aria-label="Sales Objective">
   <div class="container">
 
-    <!-- Juste le bouton retour -->
-    <div class="row" style="justify-content:flex-start; align-items:center; margin-bottom:16px;">
-      <button id="btn-back-dashboard" class="text-btn" type="button" title="Back to dashboard">← Dashboard</button>
-    </div>
 
         
-        <div class="qcard">
-  <div class="qtitle">
-    Q1. How many credit cards do you currently have, and what is the approximate total credit limit?
-  </div>
-  <div class="qhelper">
-    (Just to understand your overall situation better, could you kindly share how many cards you are currently using?)
-  </div>
-  <div class="radio-group" role="radiogroup" aria-label="Credit cards" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
+<!-- Q1 – multi-select (checkboxes) -->
+<div class="qcard">
+  <div class="qtitle">Q1. What do you mostly use your credit cards for? <span style="font-weight:500">(select more than one if applicable)</span></div>
+  <div class="qhelper">(This will help me understand your lifestyle and spending needs, so we can find the right solution together.)</div>
+  <div class="radio-group" role="group" aria-label="Card usage" id="q1-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="checkbox" name="q1" value="daily"> Daily expenses (food, fuel, bills)</label>
+    <label class="radio"><input type="checkbox" name="q1" value="installments"> Installment purchases (appliances, furniture, etc.)</label>
+    <label class="radio"><input type="checkbox" name="q1" value="travel"> Travel/transportation</label>
+    <label class="radio"><input type="checkbox" name="q1" value="shopping"> Shopping/lifestyle</label>
     <label class="radio">
-      <input type="radio" name="q2" value="1-2"> 1–2 cards (total limit &lt; THB 100,000)
-    </label>
-    <label class="radio">
-      <input type="radio" name="q2" value="3-4"> 3–4 cards (total limit THB 100,000–300,000)
-    </label>
-    <label class="radio">
-      <input type="radio" name="q2" value="5+"> 5 or more cards (total limit &gt; THB 300,000)
-    </label>
-    <label class="radio">
-      <input type="radio" name="q2" value="other"> Other:
-      <input type="text" id="q2-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled />
+      <input type="checkbox" name="q1" value="other" data-other-input="#q1-other"> Other:
+      <input type="text" id="q1-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
 <br>
-<!-- Q2 – multi-select (checkboxes) -->
+
+<!-- Q2 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q2. What do you mostly use your credit cards for? <span style="font-weight:500">(select more than one if applicable)</span></div>
-  <div class="qhelper">(This will help me understand your lifestyle and spending needs, so we can find the right solution together.)</div>
-  <div class="radio-group" role="group" aria-label="Card usage" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="checkbox" name="q2[]" value="daily"> Daily expenses (food, fuel, bills)</label>
-    <label class="radio"><input type="checkbox" name="q2[]" value="installments"> Installment purchases (appliances, furniture, etc.)</label>
-    <label class="radio"><input type="checkbox" name="q2[]" value="travel"> Travel/transportation</label>
-    <label class="radio"><input type="checkbox" name="q2[]" value="shopping"> Shopping/lifestyle</label>
-    <label class="radio">
-      <input type="checkbox" name="q2[]" value="other" data-other-input="#q2-other"> Other:
-      <input type="text" id="q2-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
-    </label>
+  <div class="qtitle">Q2. When paying your credit card bill each month, how do you usually pay?</div>
+  <div class="qhelper">(I want to see if payments feel manageable or stressful for you, so I can recommend something practical.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Payment habit" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q2" value="full"> Full payment every month</label>
+    <label class="radio"><input type="radio" name="q2" value="mix"> Mix of minimum and full payment</label>
+    <label class="radio"><input type="radio" name="q2" value="minimum"> Mostly minimum payment</label>
+    <label class="radio"><input type="radio" name="q2" value="overdue"> Frequently overdue</label>
   </div>
 </div>
 <br>
 
 <!-- Q3 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q3. When paying your credit card bill each month, how do you usually pay?</div>
-  <div class="qhelper">(I want to see if payments feel manageable or stressful for you, so I can recommend something practical.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Payment habit" id="q3-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q3" value="full"> Full payment every month</label>
-    <label class="radio"><input type="radio" name="q3" value="mix"> Mix of minimum and full payment</label>
-    <label class="radio"><input type="radio" name="q3" value="minimum"> Mostly minimum payment</label>
-    <label class="radio"><input type="radio" name="q3" value="overdue"> Frequently overdue</label>
+  <div class="qtitle">Q3. Have you ever paid your bill late?</div>
+  <div class="qhelper">(Many people face this sometimes — I just want to understand if it happens often for you.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Late payment frequency" id="q3-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q3" value="never"> Never</label>
+    <label class="radio"><input type="radio" name="q3" value="occasionally"> Occasionally</label>
+    <label class="radio"><input type="radio" name="q3" value="frequent"> Frequently (3+ months per year)</label>
   </div>
 </div>
 <br>
 
 <!-- Q4 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q4. Have you ever paid your bill late?</div>
-  <div class="qhelper">(Many people face this sometimes — I just want to understand if it happens often for you.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Late payment frequency" id="q4-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q4" value="never"> Never</label>
-    <label class="radio"><input type="radio" name="q4" value="occasionally"> Occasionally</label>
-    <label class="radio"><input type="radio" name="q4" value="frequent"> Frequently (3+ months per year)</label>
-  </div>
-</div>
-<br>
-
-<!-- Q5 – single choice -->
-<div class="qcard">
-  <div class="qtitle">Q5. What is the approximate total minimum payment across all cards each month?</div>
+  <div class="qtitle">Q4. What is the approximate total minimum payment across all cards each month?</div>
   <div class="qhelper">(This helps me see how much pressure monthly payments are putting on you right now.)</div>
   <label for="payment">Choose a payment range:</label>
     <select name="payment" id="payment" style="max-width:200px;">
@@ -197,27 +169,27 @@
 </div>
 <br>
 
-<!-- Q6 – multi-select (checkboxes) -->
+<!-- Q5 – multi-select (checkboxes) -->
 <div class="qcard">
-  <div class="qtitle">Q6. Besides credit cards, do you currently have any other loans? <span style="font-weight:500">(select more than one if applicable)</span></div>
+  <div class="qtitle">Q5. Besides credit cards, do you currently have any other loans? <span style="font-weight:500">(select more than one if applicable)</span></div>
   <div class="qhelper">(So I can get the full picture of your commitments, could you share if you have any other loans at the moment?)</div>
-  <div class="radio-group" role="group" aria-label="Other loans" id="q6-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="checkbox" name="q6[]" value="personal"> Personal loan</label>
-    <label class="radio"><input type="checkbox" name="q6[]" value="mortgage"> Mortgage/home loan</label>
-    <label class="radio"><input type="checkbox" name="q6[]" value="car"> Car loan / Car for Cash</label>
-    <label class="radio"><input type="checkbox" name="q6[]" value="cooperative"> Cooperative loan / company welfare loan</label>
-    <label class="radio"><input type="checkbox" name="q6[]" value="none"> None</label>
+  <div class="radio-group" role="group" aria-label="Other loans" id="q5-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="checkbox" name="q5" value="personal"> Personal loan</label>
+    <label class="radio"><input type="checkbox" name="q5" value="mortgage"> Mortgage/home loan</label>
+    <label class="radio"><input type="checkbox" name="q5" value="car"> Car loan / Car for Cash</label>
+    <label class="radio"><input type="checkbox" name="q5" value="cooperative"> Cooperative loan / company welfare loan</label>
+    <label class="radio"><input type="checkbox" name="q5" value="none"> None</label>
     <label class="radio">
-      <input type="checkbox" name="q6[]" value="other" data-other-input="#q6-other"> Other:
-      <input type="text" id="q6-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="checkbox" name="q5" value="other" data-other-input="#q5-other"> Other:
+      <input type="text" id="q5-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
 <br>
 
-<!-- Q7 – single choice -->
+<!-- Q6 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q7. What is your approximate total monthly repayment across all debts?</div>
+  <div class="qtitle">Q6. What is your approximate total monthly repayment across all debts?</div>
   <div class="qhelper">(This will help me calculate your repayment ratio, to see what amount would feel more comfortable for you.)</div>
   <label for="repayment">Choose a repayment range:</label>
     <select name="repayment" id="repayment" style="max-width:200px;">
@@ -236,9 +208,9 @@
 </div>
 <br>
 
-<!-- Q8 – single choice -->
+<!-- Q7 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q8. What is your current monthly income range?</div>
+  <div class="qtitle">Q7. What is your current monthly income range?</div>
   <div class="qhelper">(I’ll ask this gently, as it’s important for me to ensure the loan fits your affordability and stability.)</div>
     <label for="salary">Choose a salary range:</label>
     <select name="salary" id="salary" style="max-width:200px;">
@@ -253,6 +225,28 @@
     <option value="80001-90000">THB 80,000 - 90,000</option>
     <option value="90001-100000">THB 90,000 - 100,000</option>
     <option value="100001+">More than THB 100,000</option>
+  </select>
+</div>
+<br>
+
+<!-- Q8 – single choice -->
+<div class="qcard">
+  <div class="qtitle">
+    Q8. What is the approximate total credit limit?
+  </div>
+  <div class="qhelper">
+    (This helps me understand the scale of your current credit situation, so I can tailor my advice accordingly.)
+  </div>
+  <label for="limit">Choose a limit:</label>
+    <select name="limit" id="limit" style="max-width:200px;">
+    <option value="0">Less than THB 50,000</option>
+    <option value="50001-100000">THB 50,000 - 100,000</option>
+    <option value="100001-150000">THB 100,000 - 150,000</option>
+    <option value="150001-200000">THB 150,000 - 200,000</option>
+    <option value="200001-250000">THB 200,000 - 250,000</option>
+    <option value="250001-300000">THB 250,000 - 300,000</option>
+    <option value="300001-500000">THB 300,000 - 500,000</option>
+    <option value="500001+">More than THB 500,000</option>
   </select>
 </div>
 <br>
