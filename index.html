@@ -261,20 +261,8 @@
 <div class="qcard">
   <div class="qtitle">Q7. What is your current monthly income range?</div>
   <div class="qhelper">(I’ll ask this gently, as it’s important for me to ensure the loan fits your affordability and stability.)</div>
-    <label for="salary">Choose a salary range:</label>
-    <select name="salary" id="salary" style="max-width:200px;">
-    <option value="0">Less than THB 10,000</option>
-    <option value="10001-20000">THB 10,000 - 20,000</option>
-    <option value="20001-30000">THB 20,000 - 30,000</option>
-    <option value="30001-40000">THB 30,000 - 40,000</option>
-    <option value="40001-50000">THB 40,000 - 50,000</option>
-    <option value="50001-60000">THB 50,000 - 60,000</option>
-    <option value="60001-70000">THB 60,000 - 70,000</option>
-    <option value="70001-80000">THB 70,000 - 80,000</option>
-    <option value="80001-90000">THB 80,000 - 90,000</option>
-    <option value="90001-100000">THB 90,000 - 100,000</option>
-    <option value="100001+">More than THB 100,000</option>
-  </select>
+  Monthly income:
+  <input type="number" id="income" name="income" placeholder="Enter amount in THB" style="max-width:200px; padding:6px; font-size:13px;" />
 </div>
 <br>
 
@@ -371,7 +359,8 @@
   <div class="qtitle">Q13. What is your current employment type?</div>
   <div class="qhelper">(This helps me understand your work stability and how we can present your case more strongly.)</div>
   <div class="radio-group" role="radiogroup" aria-label="Employment type" id="q13-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q13" value="ft-gt1"> Full-time employee (&gt; 1 year of continuous work)</label>
+    <label class="radio"><input type="radio" name="q13" value="ft-gt1" data-other-input="#q13-ft-gt1"> Full-time employee (&gt; 1 year of continuous work)</label>
+    Specify how long with the current employer: <input type="text" id="q13-ft-gt1" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     <label class="radio"><input type="radio" name="q13" value="ft-lt1"> Full-time employee (&lt; 1 year of continuous work)</label>
     <label class="radio"><input type="radio" name="q13" value="owner"> Business owner / self-employed</label>
     <label class="radio">
@@ -382,27 +371,15 @@
 </div>
 <br>
 
+
 <!-- Q14 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q14. How long have you been working with your current employer?</div>
-  <div class="qhelper">(The longer your work history, the stronger your profile looks to lenders — may I ask how long you’ve been here?)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Work tenure" id="q14-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q14" value="<1">&lt; 1 year</label>
-    <label class="radio"><input type="radio" name="q14" value="1-3"> 1 – 3 years</label>
-    <label class="radio"><input type="radio" name="q14" value="3-5"> 3 – 5 years</label>
-    <label class="radio"><input type="radio" name="q14" value=">5">&gt; 5 years</label>
-  </div>
-</div>
-<br>
-
-<!-- Q15 – single choice -->
-<div class="qcard">
-  <div class="qtitle">Q15. Do you have any informal loans (outside financial institutions)?</div>
+  <div class="qtitle">Q14. Do you have any informal loans (outside financial institutions)?</div>
   <div class="qhelper">(I ask this only so I can give you the most realistic plan — your answer will stay confidential.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Informal loans" id="q15-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q15" value="no"> No</label>
-    <label class="radio"><input type="radio" name="q15" value="small"> Yes, small amount</label>
-    <label class="radio"><input type="radio" name="q15" value="significant"> Yes, significant amount</label>
+  <div class="radio-group" role="radiogroup" aria-label="Informal loans" id="q14-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q14" value="no"> No</label>
+    <label class="radio"><input type="radio" name="q14" value="small"> Yes, small amount</label>
+    <label class="radio"><input type="radio" name="q14" value="significant"> Yes, significant amount</label>
   </div>
 </div>
 <br>
@@ -420,31 +397,31 @@
   <div class="accordion__body">
 <form id="form-preference" novalidate>
 
-<!-- Q16 – single choice + other -->
+<!-- Q15 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q16. When reviewing a debt consolidation offer, which aspect is most important to you?</div>
+  <div class="qtitle">Q15. When reviewing a debt consolidation offer, which aspect is most important to you?</div>
   <div class="qhelper">(Different people value different things — I’d like to know what matters most for you, so I can design the proposal that truly fits your needs.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Priority aspect" id="q16-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q16" value="max-amount"> Maximum loan size (highest approved amount possible)</label>
-    <label class="radio"><input type="radio" name="q16" value="short-tenor"> Shortest tenor (finish debt quickly, higher installment)</label>
-    <label class="radio"><input type="radio" name="q16" value="lowest-installment"> Lowest monthly installment (longer tenor, easier cash flow)</label>
-    <label class="radio"><input type="radio" name="q16" value="lowest-rate"> Lowest interest rate (minimize total cost of borrowing)</label>
-    <label class="radio"><input type="radio" name="q16" value="balance"> Balance between amount, tenor, and rate</label>
+  <div class="radio-group" role="radiogroup" aria-label="Priority aspect" id="q15-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q15" value="max-amount"> Maximum loan size (highest approved amount possible)</label>
+    <label class="radio"><input type="radio" name="q15" value="short-tenor"> Shortest tenor (finish debt quickly, higher installment)</label>
+    <label class="radio"><input type="radio" name="q15" value="lowest-installment"> Lowest monthly installment (longer tenor, easier cash flow)</label>
+    <label class="radio"><input type="radio" name="q15" value="lowest-rate"> Lowest interest rate (minimize total cost of borrowing)</label>
+    <label class="radio"><input type="radio" name="q15" value="balance"> Balance between amount, tenor, and rate</label>
     <label class="radio">
-      <input type="radio" name="q16" value="other" data-other-input="#q16-other"> Other:
-      <input type="text" id="q16-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q15" value="other" data-other-input="#q15-other"> Other:
+      <input type="text" id="q15-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
 <br>
 
-<!-- Q17 – single choice -->
+<!-- Q16 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q17. What is your collateral preference for the loan?</div>
+  <div class="qtitle">Q16. What is your collateral preference for the loan?</div>
   <div class="qhelper">(Different collateral types can affect approval chances and interest rates — I want to understand what you’re comfortable with.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Collateral preference" id="q17-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q17" value="car"> Car</label>
-    <label class="radio"><input type="radio" name="q17" value="property"> Property</label>
+  <div class="radio-group" role="radiogroup" aria-label="Collateral preference" id="q16-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q16" value="car"> Car</label>
+    <label class="radio"><input type="radio" name="q16" value="property"> Property</label>
   </div>
 </div>
 <br>
@@ -461,9 +438,13 @@
 
     <!-- Topbar -->
     <div class="topbar">
-      <h1 class="title">Pitching recommendations</h1>
+      <div class="brand" aria-label="PitchPilot logo">
+          <img src="./images/TTB_Logo.png" alt="PitchPilot logo" class="brand__logo" />
+          <div style="font-weight:700; letter-spacing:.2px">Pitch PRO Pilot</div>
+        </div>
       <div class="actions">
         <button class="text-btn" type="button" onclick="go('objective')">Back</button>
+        <button class="btn-select" type="button" id="btn-record">Record</button>
       </div>
     </div>
 
@@ -474,8 +455,8 @@
   <div style="display:flex; align-items:center; gap:10px;">
     <div class="avatar" id="fit-avatar">SR</div>
     <div>
-      <div style="font-weight:700" id="fit-name">Mr. Somchai Rattanakul</div>
-      <div style="color:var(--muted); font-size:13px" id="fit-extra">Age 45 • Salaryman • THB 45,000/month</div>
+      <div style="font-weight:700" id="fit-name">ลูกค้า-10367656</div>
+      <div style="color:var(--muted); font-size:13px" id="fit-extra">Age 30 • Salaryman • THB 45,000/month</div>
     </div>
   </div>
 
@@ -500,11 +481,11 @@
   <h3>Customer Core Persona</h3>
   <div class="qcard" style="line-height:1.6; font-size:14px;">
     <p>
-      “Mr. Somchai is a 45-year-old mid-level office worker earning THB 45,000 per month. 
+      “Mr. ลูกค้า-10367656 is a 45-year-old mid-level office worker earning THB 45,000 per month. 
       He lives in Bangkok with his young daughter and carries the main responsibility for family expenses. 
       Most of his daily spending — from groceries to fuel — goes on credit cards, and he often pays only the minimum due, 
       leaving him with little savings each month. With three active credit cards and a personal loan to juggle, 
-      Somchai feels the pressure of multiple payment deadlines and high interest charges. 
+      ลูกค้า-10367656 feels the pressure of multiple payment deadlines and high interest charges. 
       What he truly needs is a way to simplify his debts into one manageable plan, reduce his monthly burden, 
       and give him peace of mind to focus on his family.”
     </p>
@@ -772,7 +753,7 @@
 
     <div class="trow">
       <div class="cell"><strong>Best-fit scenario</strong></div>
-      <div class="cell">Highest fit for Somchai: reduce DSR, 1 payment</div>
+      <div class="cell">Highest fit for ลูกค้า-10367656: reduce DSR, 1 payment</div>
       <div class="cell">Alt. secured option (if pricing/promo suits)</div>
       <div class="cell">Alt. secured option (if relationship at KBank)</div>
     </div>
@@ -793,20 +774,239 @@
 </div>
 </details>
 
+<details id="accord-promo" class="accordion" closed>
+  <summary>
+    <span>3. Promo Fit</span>
+  </summary>
+
+<!-- 8. Promo Fit (tailored to ลูกค้า-10367656) -->
+<div class="section">
+  <h3>Promo Fit — Tailored to ลูกค้า-10367656</h3>
+
+  <!-- columns = card/promo, rows = signals; last col is optional if he owns a car -->
+  <div class="table promo-fit" role="table" aria-label="TTB Credit Card Promo Fit">
+    <div class="thead" role="row">
+      <div class="cell"></div>
+      <div class="cell">ttb so smart</div>
+      <div class="cell">ttb Disney</div>
+      <div class="cell">Optional: Automotive promos (if car owner)</div>
+    </div>
+
+    <div class="trow">
+      <div class="cell"><strong>Persona signals</strong></div>
+      <div class="cell">Daily spend on cards; pays minimum often; needs cash-flow relief</div>
+      <div class="cell">Family groceries & outings; wants rewards on essentials</div>
+      <div class="cell">If he owns a car: maintenance/insurance costs</div>
+    </div>
+
+    <div class="trow">
+      <div class="cell"><strong>Why it fits ลูกค้า-10367656</strong></div>
+      <div class="cell">Cash back on every spend + ability to convert larger bills to 0% installments → smoother monthly cash flow</div>
+      <div class="cell">Accelerated points on online / dining / supermarkets → turns family spending into tangible rewards</div>
+      <div class="cell">Central page for car-related campaigns (e.g., insurance installments, service discounts) — only if relevant</div>
+    </div>
+
+    <div class="trow">
+      <div class="cell"><strong>Promo hub</strong></div>
+      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">TTB Credit Card Promotions</a></div>
+      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">TTB Credit Card Promotions</a></div>
+      <div class="cell"><a href="https://www.ttbbank.com/th/promotion/credit-card" target="_blank" rel="noopener">TTB Credit Card Promotions (Automotive)</a></div>
+    </div>
+
+    <div class="trow">
+      <div class="cell"><strong>Seller one-liner (use verbatim)</strong></div>
+      <div class="cell"><em>“ลูกค้า-10367656, for your everyday spend, <strong>ttb so smart</strong> gives cash back on every payment, and you can switch big bills to <strong>0% installments</strong> to ease monthly cash flow.”</em></div>
+      <div class="cell"><em>“For groceries and outings with your daughter, <strong>ttb Disney</strong> earns <strong>accelerated points</strong> on online, dining and supermarkets—so routine spend becomes rewards.”</em></div>
+      <div class="cell"><em>“If you have a car, I’ll share TTB’s <strong>automotive promos</strong>—including <strong>0% insurance installments</strong> when campaigns are active—so you can time maintenance and save.”</em></div>
+    </div>
   </div>
 
+</div>
+</details>
+
+  <details id="accord-channel" class="accordion" closed>
+    <summary>4. Channel fit</summary>
+    <div class="section">
+      <p>ลูกค้า-10367656 is responsive to weekday morning calls and is active on the ttb touch mobile app, so in-app notifications work well. He reads both Email and LINE messages, making them reliable for summaries and links. He also visits a Bangkok branch at the start of each month, which is a good moment for appointments or document collection.</p>
+    </div>
+
+  </details>
+
+<details id="accord-pitch" class="accordion" closed>
+  <summary>5. Scripting fit</summary>
+  <div class="section">
+
+    <!-- 9. Sales Talk Track (Final Section) -->
+<div class="section" id="sales-talk-track">
+  <h3>Personalized Sales Talk Track — คุณลูกค้า-10367656 (โครงบทสนทนา)</h3>
+  <p class="caption">ใช้ได้ทันทีในการสนทนาโทร/แชต | โทนสุภาพ ใส่ใจ เหมาะกับโปรไฟล์: อายุ 45 รายได้ 45,000 บ./เดือน ใช้บัตรเครดิตเป็นหลัก จ่ายขั้นต่ำบ่อย บัตร 3 + สินเชื่อบุคคล 1 ภาระราว 55% ต้องการผ่อนต่อเดือนน้อยลง ตอบสนองดีต่อ “โทรเช้า” + ใช้ ttb touch + อ่าน Email/LINE</p>
+  <br>
+  <!-- 1) Greeting & Opening -->
+  <div class="qcard">
+    <h4>1) Greeting & Opening (Warm Start)</h4>
+
+    <div class="qcard">
+      <strong>สคริปต์ A — อ้างอิงพฤติกรรม + ประโยชน์ทันที</strong>
+      <p><em>ตัวอย่างพูด</em><br>
+      “สวัสดีครับคุณลูกค้า-10367656 ผม…จาก ttb โทรช่วงเช้าที่คุณสะดวกนะครับ วันนี้อยากช่วยดูภาพรวมภาระบัตร 3 ใบกับสินเชื่อที่มีอยู่ เพราะเห็นว่าค่างวดรวมต่อเดือนราว 25,000 บาท กินไปรายได้เกินครึ่ง เลยอยากชวนคุยทางเลือกที่ทำให้ยอดผ่อนเบาลง และเหลือเงินเก็บมากขึ้นครับ”</p>
+      <p><em>ทำไมเวิร์ก:</em> อ้างอิงข้อมูลจริงของลูกค้า ทำให้รู้สึกว่าเราเตรียมมาดีและเข้าใจเขา</p>
+      <p><em>What’s in it for customer:</em> ได้ทางเลือก “ผ่อนน้อยลง เหลือเงินสดมากขึ้น” โดยไม่ต้องเล่าใหม่</p>
+    </div>
+
+    <div class="qcard">
+      <strong>สคริปต์ B — โทนอุ่นใจ + เลือกช่องทาง</strong>
+      <p><em>ตัวอย่างพูด</em><br>
+      “สวัสดีครับคุณลูกค้า-10367656 ผม…จาก ttb ครับ วันนี้ตั้งใจโทรสั้นๆ เพื่อช่วยจัดบัตรหลายใบให้เหลือจ่ายวันเดียว ลดดอกเบี้ยสูงๆ ได้ครับ สนทนา 5–7 นาทีสะดวกไหมครับ ถ้าไม่สะดวก เดี๋ยวผมสรุปสั้นๆ ส่งทาง LINE/อีเมลที่คุณใช้อยู่ได้ครับ”</p>
+      <p><em>ทำไมเวิร์ก:</em> เคารพเวลาและให้ทางเลือกช่องทางที่ลูกค้าอ่านจริง</p>
+      <p><em>What’s in it for customer:</em> ประหยัดเวลา ได้สรุปกระชับบนช่องทางคุ้นเคย</p>
+    </div>
+
+    <div class="qcard">
+      <strong>สคริปต์ C — สะท้อน Pain + ผลลัพธ์ชัด</strong>
+      <p><em>ตัวอย่างพูด</em><br>
+      “สวัสดีครับคุณลูกค้า-10367656 ผม…จาก ttb เห็นว่าคุณต้องดูแลค่าใช้จ่ายครอบครัวและจ่ายหลายกำหนด ผมอยากช่วยวางแผนให้เหลือจ่ายวันเดียว งวดต่อเดือนเบาลง และตั้งเป้าปลดหนี้เร็วขึ้นครับ ลองคุยกันสั้นๆ ได้ไหมครับ”</p>
+      <p><em>ทำไมเวิร์ก:</em> สะท้อนความกังวล + เสนอผลลัพธ์ 3 อย่างที่จับต้องได้</p>
+      <p><em>What’s in it for customer:</em> ลดความเครียด เห็นภาพทางออกที่เป็นรูปธรรม</p>
+    </div>
+  </div>
+  <br>
+
+  <!-- 2) Need Probing -->
+  <div class="qcard">
+    <h4>2) Need Probing (Consultative / SPIN)</h4>
+
+    <div class="qcard">
+      <strong>ชุดคำถาม: Lifestyle & Payment Pattern</strong>
+      <ul>
+        <li>“ตอนนี้ค่าใช้จ่ายประจำส่วนใหญ่รูดผ่านบัตรใช่ไหมครับ ใช้กับหมวดไหนบ่อยสุด (ของใช้ น้ำมัน ค่าใช้จ่ายลูก)?”</li>
+        <li>“ปกติชำระแบบขั้นต่ำ หรือผสมขั้นต่ำกับเต็มบ้างครับ? เดือนที่อึดอัดที่สุดคือช่วงไหน?”</li>
+        <li>“หลังจ่ายรวมประมาณ 25,000 บาท เหลือเก็บต่อเดือนราวเท่าไหร่ครับ?”</li>
+      </ul>
+      <p><em>ทำไมเวิร์ก:</em> คำถามปลายเปิด อิงบริบทจริง → ลูกค้าเล่าต่อได้ง่าย</p>
+      <p><em>What’s in it for customer:</em> เราจับจุดรั่วเงินสดเพื่อออกแบบแผนที่เบาขึ้น</p>
+    </div>
+
+    <div class="qcard">
+      <strong>ชุดคำถาม: Impact & Stress (Problem → Implication)</strong>
+      <ul>
+        <li>“มี 3 บัตร + 1 สินเชื่อ ต้องจำหลายวัน เคยพลาด/เกือบพลาดบ้างไหมครับ?”</li>
+        <li>“ดอกเบี้ยจากการจ่ายขั้นต่ำ เดือนละประมาณเท่าไหร่ รู้สึกอย่างไรกับจำนวนนี้?”</li>
+        <li>“ความกังวลหลักตอนนี้คือ ‘งวดแพง’ หรือ ‘หลายกำหนดชำระ’ หรือทั้งสองอย่างครับ?”</li>
+      </ul>
+      <p><em>ทำไมเวิร์ก:</em> เชื่อมปัญหากับผลกระทบด้านเงินสดและอารมณ์</p>
+      <p><em>What’s in it for customer:</em> เห็นเหตุ-ผลชัด ทำให้การตัดสินใจมีความคุ้มค่า</p>
+    </div>
+
+    <div class="qcard">
+      <strong>ชุดคำถาม: Desired Outcome & Preference</strong>
+      <ul>
+        <li>“ถ้าให้จ่ายวันเดียว คุณอยากให้งวดต่อเดือนอยู่ที่ประมาณเท่าไหร่ถึงจะสบายขึ้น?”</li>
+        <li>“ระหว่าง ‘งวดเบาลงนานขึ้น’ กับ ‘จบไวแต่งวดสูงขึ้นเล็กน้อย’ คุณโน้มเอียงทางไหนครับ?”</li>
+        <li>“สะดวกส่งเอกสารผ่าน ttb touch / Email / LINE อันไหนที่สุดครับ (หรือนัดสาขาต้นเดือน)?”</li>
+      </ul>
+      <p><em>ทำไมเวิร์ก:</em> ให้ลูกค้ากำหนดสเปกผลลัพธ์เอง → รู้สึกควบคุม</p>
+      <p><em>What’s in it for customer:</em> ได้แผนที่เข้ากับชีวิตจริงและส่งเอกสารง่าย</p>
+    </div>
+  </div>
+  <br>
+
+  <!-- 3) Effective Closing -->
+  <div class="qcard">
+    <h4>3) Effective Closing Scripts (First Call Outcomes)</h4>
+
+    <div class="qcard">
+      <strong>ลูกค้ายังไม่พร้อมเปิดใจ (ขอโอกาสติดตาม)</strong>
+      <p>“ไม่เป็นไรเลยครับคุณลูกค้า-10367656 ผมสรุปภาพรวมภาระและตัวเลือกที่ช่วยให้ยอดผ่อนเบาลง ส่งให้ทาง LINE/อีเมล แล้วขอเวลาติดตามสั้นๆ ช่วงเช้าวันธรรมดาอีกครั้งได้ไหมครับ เพื่อเลือกแบบที่เหมาะสุดจริงๆ ให้คุณครับ”</p>
+    </div>
+
+    <div class="qcard">
+      <strong>ลูกค้าดูยุ่ง/ติดธุระ</strong>
+      <p>“เข้าใจเลยครับ เดี๋ยวผมสรุป ‘ก่อน–หลังปรับแผน’ 1 หน้า ให้เห็นงวดลดลงชัดๆ แล้วส่งทาง LINE/อีเมลครับ ขออนุญาตนัดโทร 5 นาที ช่วงเช้าที่คุณสะดวกอีกครั้งนะครับ”</p>
+    </div>
+
+    <div class="qcard">
+      <strong>ลูกค้าเปิดใจแต่ต้องใช้เวลา</strong>
+      <p>“ขอบคุณมากครับ เดี๋ยวผมทำ ‘2 ตัวเลือก’ ให้เห็นทั้งงวดเบาลงกับจบไว พร้อมเช็กลิสต์เอกสาร ส่งให้วันนี้ครับ เรานัดคุยยืนยันสั้นๆ เช้าวัน… ดีไหมครับ”</p>
+    </div>
+
+    <div class="qcard">
+      <strong>ลูกค้าขอเช็กลิสต์เอกสาร</strong>
+      <p>“ได้เลยครับ ผมจะส่งเช็กลิสต์แบบสั้น (สเตทเมนต์ 6 เดือน, สลิป/หนังสือรับรอง, สำเนาบัตร, เอกสารทรัพย์ถ้ามี) ผ่าน LINE/อีเมลทันที และสามารถอัปโหลดผ่าน ttb touch ได้เลยครับ”</p>
+    </div>
+  </div>
+  <br>
+
+  <!-- 4) Objection Handling -->
+  <div class="qcard">
+    <h4>4) Objection Handling</h4>
+
+    <div class="qcard">
+      <strong>“กลัวเป็นมิจฉาชีพ”</strong>
+      <p>“ขอบพระคุณที่ระมัดระวังครับ เพื่อความสบายใจ คุณตรวจสอบชื่อผม/เบอร์อีเมลโดเมน ttb ได้ หรือโทรกลับ Call Center แล้วโอนสายหาผมก็ได้ครับ ผมจะส่งข้อมูลผ่านช่องทางทางการของธนาคารเท่านั้นครับ”</p>
+      <p><em>เหตุผล:</em> ให้วิธีตรวจสอบตัวตนผ่านช่องทางทางการ ลดความเสี่ยง</p>
+    </div>
+
+    <div class="qcard">
+      <strong>“ไม่มีเวลา”</strong>
+      <p>“เข้าใจเลยครับ ผมสรุปให้ใน 1 หน้าเท่านั้น เห็น ‘ก่อน–หลัง’ ว่าค่างวดลดลงเท่าไหร่ ส่งให้ทาง LINE/อีเมล แล้วนัดคอล 5 นาทีช่วงเช้าที่คุณสะดวกครับ”</p>
+      <p><em>เหตุผล:</em> ลดเวลาในการตัดสินใจ เหมาะกับพฤติกรรมโทรเช้า</p>
+    </div>
+
+    <div class="qcard">
+      <strong>“ไม่อยากปิดบัตร”</strong>
+      <p>“ได้ครับ ไม่จำเป็นต้องปิดทุกใบ เราจะช่วยจัดให้ ‘เหลือจ่ายวันเดียว’ ลด DSR ลงก่อน และคงบัตรหลักไว้ใช้จำเป็น พร้อมแนวทางไม่ให้วงเงินใหม่กลายเป็นภาระเพิ่มครับ”</p>
+      <p><em>เหตุผล:</em> ทางออกค่อยเป็นค่อยไป ลดแรงต้าน</p>
+    </div>
+  </div>
+  <br>
+
+  <!-- 5) Quick Toolkit -->
+  <div class="qcard">
+    <h4>5) Quick Toolkit (Cheat Sheet สำหรับเซลส์)</h4>
+
+    <div class="qcard">
+      <strong>Mini Debt Calculator (ก่อน–หลัง)</strong>
+      <ul>
+        <li>ก่อน: ผ่อนรวม ~25,000 บ./เดือน (DSR ~55%)</li>
+        <li>หลัง A: ผ่อนเบาลง ~15,000 บ./เดือน (DSR ~42%) — เงินเหลือ/เดือนเพิ่ม</li>
+        <li>หลัง B: จบไว งวดสูงขึ้นเล็กน้อย ระยะเวลาสั้นลง</li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <strong>Account Plan One-Pager</strong>
+      <p>โปรไฟล์ย่อ, เป้าหมาย (วันเดียว/งวดเบา/จบไว), ช่องทางสื่อสารที่ตอบสนอง (โทรเช้า, ttb touch, Email/LINE), ขั้นตอนถัดไป + เอกสาร</p>
+    </div>
+
+    <div class="qcard">
+      <strong>Opening Script Bank</strong>
+      <p>เก็บสคริปต์ A/B/C + เวอร์ชัน 15 วินาทีสำหรับโทรเช้า</p>
+    </div>
+
+    <div class="qcard">
+      <strong>Objection Cheat Sheet</strong>
+      <p>สรุป 3 ข้อโต้แย้งหลักพร้อมคำตอบ/วิธีตรวจสอบตัวตน</p>
+    </div>
+
+    <div class="qcard">
+      <strong>Offer One-Pager (2 ตัวเลือก)</strong>
+      <ul>
+        <li>ตัวเลือก 1: ผ่อนเบาลง — รวมหนี้/จ่ายวันเดียว งวด ~15k DSR ~42%</li>
+        <li>ตัวเลือก 2: จบไว — งวดสูงขึ้นเล็กน้อย ปิดหนี้เร็วขึ้น</li>
+        <li>เช็กลิสต์เอกสาร: สเตทเมนต์ 6 เดือน, สลิป/รับรองเงินเดือน, สำเนาบัตร, เอกสารทรัพย์ (ถ้ามี)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+</details>
+
+</div>
 </section>
 
-    <!-- Screen 4–9 scaffolding (placeholders) -->
-    <section id="screen-stub" class="screen" aria-label="Coming soon">
-      <div class="container">
-        <div class="section">
-          <h2>Additional Screens (4–9)</h2>
-          <p>Scaffolding ready. This prototype focuses on the first 3 core screens. We can extend with: customer profile, pitch builder, document checklist, KYC upload mock, offer summary, and confirmation.</p>
-          <button class="text-btn" onclick="go('objective')">Go back</button>
-        </div>
-      </div>
-    </section>
+  
 
     <!-- Edit Sales Purpose Modal (multi-select) -->
     <div id="offer-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="offer-modal-title">
@@ -831,6 +1031,32 @@
         </div>
       </div>
     </div>
+
+    <!-- Voice Overlay (Siri-like) -->
+<div id="voice-overlay" class="voice-overlay" role="status" aria-live="polite" aria-atomic="true">
+  <div class="voice-shell" role="group" aria-label="Voice recording indicator">
+    <div class="left">
+      <span class="mic" aria-hidden="true">🎤</span>
+      <div class="meta">
+        <div class="title">Listening…</div>
+        <div class="hint">Speak your pitch. Press <kbd>Esc</kbd> to stop.</div>
+      </div>
+    </div>
+
+    <div class="bars" aria-hidden="true">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <button id="voice-close" class="btn-ghost" type="button" aria-label="Stop recording">✕</button>
+  </div>
+</div>
+
 
   </main>
 

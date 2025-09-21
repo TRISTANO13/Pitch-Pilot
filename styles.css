@@ -285,3 +285,94 @@ body{
   }
 }
 
+/* === Promo Fit table ONLY (scoped) === */
+.promo-fit .thead,
+.promo-fit .trow{
+  grid-template-columns: 1.3fr 1fr 1fr 1fr !important; /* 1 criteria + 3 product columns */
+  align-items: center;
+}
+.promo-fit .thead .cell:first-child,
+.promo-fit .trow  .cell:first-child{
+  text-align:left; font-weight:600;
+}
+.promo-fit .thead .cell:not(:first-child),
+.promo-fit .trow  .cell:not(:first-child){
+  text-align:center;
+}
+.promo-fit .cell{ word-break:break-word; }
+.promo-fit .cell.right{ text-align:center !important; } /* neutralize inherited .right */
+@media (max-width:760px){
+  .promo-fit .thead, .promo-fit .trow{ grid-template-columns:1fr; }
+}
+
+
+/* ===== Voice Overlay (Siri-like) ===== */
+.voice-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 68px;
+  display: none;            /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none;     /* allow clicks to pass except shell */
+}
+.voice-overlay.active { display:flex; }
+
+.voice-overlay .voice-shell{
+  pointer-events: all;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  width:min(920px, 96vw);
+  height:52px; border-radius:12px;
+  padding:10px 12px 10px 12px;
+  background: color-mix(in oklab, var(--surface-1) 82%, transparent);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.12), inset 0 0 0 1px var(--border);
+}
+
+.voice-overlay .left{ display:flex; align-items:center; gap:10px; }
+.voice-overlay .mic{
+  font-size:18px; line-height:1; display:inline-flex; width:28px; height:28px;
+  align-items:center; justify-content:center; border-radius:999px;
+  background: rgba(16,185,129,.15);
+  border:1px solid rgba(16,185,129,.35);
+}
+.voice-overlay .meta .title{ font-weight:700; font-size:14px; }
+.voice-overlay .meta .hint{ font-size:12px; color:var(--muted); }
+
+.voice-overlay .btn-ghost{
+  background:transparent; border:none; cursor:pointer;
+  width:32px; height:32px; border-radius:8px; color:var(--text);
+}
+.voice-overlay .btn-ghost:hover{ background:var(--surface-2); }
+
+/* Bars */
+.voice-overlay .bars{
+  display:flex; align-items:flex-end; gap:6px; height:28px;
+}
+.voice-overlay .bar{
+  width:6px; height:12px; border-radius:6px;
+  background: linear-gradient(180deg, #34d399, #10b981);
+  opacity:.9;
+  transform-origin: bottom center;
+  animation: voiceIdle 1200ms ease-in-out infinite;
+}
+
+/* slight variance */
+.voice-overlay .bar:nth-child(2){ animation-delay: .05s; }
+.voice-overlay .bar:nth-child(3){ animation-delay: .1s; }
+.voice-overlay .bar:nth-child(4){ animation-delay: .15s; }
+.voice-overlay .bar:nth-child(5){ animation-delay: .2s; }
+.voice-overlay .bar:nth-child(6){ animation-delay: .25s; }
+.voice-overlay .bar:nth-child(7){ animation-delay: .3s; }
+
+@keyframes voiceIdle{
+  0%   { transform: scaleY(.5); }
+  50%  { transform: scaleY(1.4); }
+  100% { transform: scaleY(.5); }
+}
+
+/* When using real mic input, we’ll overwrite transform inline. */
+

@@ -473,3 +473,101 @@ updateAllSectionProgress();
     localStorage.setItem(key, det.open ? '1' : '0');
   });
 });
+
+
+// ===== Voice Overlay (Siri-like) =====
+(function(){
+  const btn = document.getElementById('btn-record');
+  const overlay = document.getElementById('voice-overlay');
+  const closeBtn = document.getElementById('voice-close');
+
+  if(!btn || !overlay) return;
+
+  let audioCtx = null;
+  let analyser = null;
+  let rafId = null;
+  let mediaStream = null;
+  const bars = () => Array.from(overlay.querySelectorAll('.bar'));
+
+  function activateOverlay(){
+    overlay.classList.add('active');
+  }
+  function deactivateOverlay(){
+    overlay.classList.remove('active');
+  }
+
+  async function startListening(){
+    activateOverlay();
+
+    try{
+      // Web Audio setup
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+
+      const src = audioCtx.createMediaStreamSource(mediaStream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.85;
+
+      src.connect(analyser);
+
+      const data = new Uint8Array(analyser.frequencyBinCount);
+
+      const render = () => {
+        analyser.getByteFrequencyData(data);
+        // take a few buckets across the spectrum for the 7 bars
+        const seg = Math.floor(data.length / 7);
+        bars().forEach((bar, i) => {
+          let slice = data.slice(i*seg, (i+1)*seg);
+          let avg = slice.reduce((a,b)=>a+b,0) / slice.length || 0;
+          let scale = Math.max(0.35, Math.min(1.8, avg / 90)); // normalize
+          bar.style.transform = `scaleY(${scale})`;
+        });
+        rafId = requestAnimationFrame(render);
+      };
+      render();
+    }catch(err){
+      // Mic not granted or not available → keep idle animation
+      console.warn('Mic unavailable, using idle animation:', err);
+    }
+  }
+
+  function stopListening(){
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+
+    if (mediaStream){
+      mediaStream.getTracks().forEach(t => t.stop());
+      mediaStream = null;
+    }
+    if (audioCtx){
+      // Close audio context to free resources (ignore errors on some browsers)
+      try { audioCtx.close(); } catch(e){}
+      audioCtx = null;
+    }
+
+    // Reset bars back to idle (remove inline transforms)
+    bars().forEach(bar => bar.style.transform = '');
+
+    deactivateOverlay();
+  }
+
+  // Toggle by button
+  btn.addEventListener('click', () => {
+    if (!overlay.classList.contains('active')){
+      startListening();
+    } else {
+      stopListening();
+    }
+  });
+
+  // Close button + Escape
+  if (closeBtn) closeBtn.addEventListener('click', stopListening);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) stopListening();
+  });
+
+  // Safety: stop when navigating away from screen
+  window.addEventListener('hashchange', stopListening);
+  window.addEventListener('beforeunload', stopListening);
+})();
