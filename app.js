@@ -5,6 +5,7 @@ const el = (id) => document.getElementById(id);
 const screenLogin = el('screen-login');
 const screenDashboard = el('screen-dashboard');
 const screenObjective = el('screen-objective');
+const screenFit = el('screen-fit');
 
 /* ===== Theme handling ===== */
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -40,7 +41,7 @@ function go(which) {
   if (which === 'login' && screenLogin) screenLogin.classList.add('active');
   if (which === 'dashboard' && screenDashboard) screenDashboard.classList.add('active');
   if (which === 'objective' && screenObjective) screenObjective.classList.add('active');
-  if (which === 'stub') el('screen-stub')?.classList.add('active');
+  if (which === 'fit' && screenFit) screenFit.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 window.go = go; // utilisé par des attributs inline éventuels
@@ -252,6 +253,9 @@ el('btn-select-prospect')?.addEventListener('click', () => go('objective'));
 
 /* ===== Back button ===== */
 el('btn-back-dashboard')?.addEventListener('click', () => go('dashboard'));
+
+/* ===== Fit button ===== */
+el('btn-fit')?.addEventListener('click', () => go('fit'));
 
 /* ===== Generic "Other:" inputs enable/disable =====
    Active tous les inputs texte pointés par data-other-input

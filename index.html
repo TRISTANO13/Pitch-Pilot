@@ -115,7 +115,7 @@
       </div>
       <div class="actions">
           <button class="text-btn" type="button" id="btn-reset">Reset</button>
-          <button class="btn-select" type="button" id="btn-next">Next</button>
+          <button class="btn-select" type="button" id="btn-fit">Next</button>
         </div>
       </div>
     </div>
@@ -454,6 +454,117 @@
 </details>
 
     </section>
+
+<!-- Screen 4 – Fit -->
+<!-- Screen 4 – Customer Fit -->
+<section id="screen-fit" class="screen" aria-label="Customer Fit">
+  <div class="container">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <h1 class="title">Pitching recommendations</h1>
+      <div class="actions">
+        <button class="text-btn" type="button" onclick="go('objective')">Back</button>
+      </div>
+    </div>
+
+    <!-- 0. Customer Header -->
+   <div class="qcard" style="display:flex; align-items:center; justify-content:space-between; gap:20px;">
+
+  <!-- Partie gauche -->
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div class="avatar" id="fit-avatar">SR</div>
+    <div>
+      <div style="font-weight:700" id="fit-name">Mr. Somchai Rattanakul</div>
+      <div style="color:var(--muted); font-size:13px" id="fit-extra">Age 45 • Salaryman • THB 45,000/month</div>
+    </div>
+  </div>
+
+  <!-- Partie droite -->
+  <div style="display:flex; flex-direction:column; align-items:flex-end; text-align:right;">
+    <div style="font-weight:700;">Chance to win</div>
+    <div class="approve-line"><span id="fit-win">65%</span> Probability</div>
+    <small style="color:var(--muted)">Based on: DSR, bureau history, income stability, engagement</small>
+  </div>
+
+</div>
+
+    <br>
+
+    <!-- 2. Customer Core Persona -->
+
+    <details id="accord-persona" class="accordion" closed>
+      <summary>
+        <span>1. Customer fit</span>
+      </summary>
+<div class="section">
+  <h3>Customer Core Persona</h3>
+  <div class="qcard" style="line-height:1.6; font-size:14px;">
+    <p>
+      “Mr. Somchai is a 45-year-old mid-level office worker earning THB 45,000 per month. 
+      He lives in Bangkok with his young daughter and carries the main responsibility for family expenses. 
+      Most of his daily spending — from groceries to fuel — goes on credit cards, and he often pays only the minimum due, 
+      leaving him with little savings each month. With three active credit cards and a personal loan to juggle, 
+      Somchai feels the pressure of multiple payment deadlines and high interest charges. 
+      What he truly needs is a way to simplify his debts into one manageable plan, reduce his monthly burden, 
+      and give him peace of mind to focus on his family.”
+    </p>
+  </div>
+</div>
+
+
+    <!-- 3. Analyzed Needs & Pains -->
+    <div class="section">
+      <h3>Analyzed Needs & Pains</h3>
+      <ul>
+        <li>Pays minimum only on credit cards → paying THB 3,500 interest monthly</li>
+        <li>Has 3 active credit cards + 1 personal loan → managing 4 due dates monthly</li>
+        <li>Monthly repayment burden THB 25,000 = 55% of income → limited leftover cash</li>
+        <li>Wants lower monthly installment → to ease cash flow stress</li>
+        <li>Prefers shorter tenor → to be debt-free sooner</li>
+        <li>Feels pressure from multiple lenders contacting for payment</li>
+        <li>Other: —</li>
+      </ul>
+    </div>
+
+    <!-- 4. Qualification Checklist -->
+    <div class="section">
+      <h3>Loan Applicant Qualification Checklist</h3>
+      <ul>
+        <li>✅ Income stability: Full-time > 1 year</li>
+        <li>✅ Credit history: No overdue in 3 years</li>
+        <li>❌ DSR: 55% (above 50%) → Recommend consolidation to reduce to 42%</li>
+        <li>✅ Employment: 7 years at current company</li>
+      </ul>
+      <p style="color:var(--muted); font-size:13px;">
+        Tip: Provide latest 6-month bank statement to strengthen approval chance.
+      </p>
+    </div>
+
+
+    <!-- 5. Recommended Solution -->
+    <div class="section">
+      <h3>Recommended Debt Consolidation Solution</h3>
+      <div class="qcard">
+        <strong>Solution:</strong> Personal Loan Consolidation, 5-year tenor, THB 300,000
+        <br><br>
+        <div><strong>Pros:</strong></div>
+        <ul>
+          <li>Lower monthly installment (from THB 25,000 → THB 15,000)</li>
+          <li>Only 1 payment date to track</li>
+          <li>Reduce DSR to 42% → increases approval chance</li>
+        </ul>
+        <div><strong>Cons:</strong></div>
+        <ul>
+          <li>Longer repayment period (5 years) → more total interest cost</li>
+          <li>Cannot add new debt during tenor without affecting score</li>
+        </ul>
+      </div>
+    </div>
+</details>
+
+  </div>
+</section>
 
     <!-- Screen 4–9 scaffolding (placeholders) -->
     <section id="screen-stub" class="screen" aria-label="Coming soon">
