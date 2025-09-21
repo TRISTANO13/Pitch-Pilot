@@ -98,11 +98,67 @@
     .th-sort[aria-sort="ascending"]::after { content:'▲'; opacity:1; }
     .th-sort[aria-sort="none"]::after { content:'↕'; opacity:.35; }
 
-    /* badges */
+    /* (anciennes badges non utilisées)
     .badge { display:inline-flex; align-items:center; max-width: 100%; padding: 6px 10px; border-radius: 999px; background: var(--ttb-50); color: var(--ttb-800); font-weight:600; font-size: 12px; border: 1px solid var(--ttb-200); white-space: nowrap; }
     .offer-badges { display:flex; flex-wrap: wrap; gap: 8px; }
     .offer-badges .badge { cursor:pointer; }
+    */
     .offer-cell { cursor:pointer; }
+
+    /* Nouvelle bulle cliquable qui s’agrandit et empile les offres */
+    .offer-bubble {
+      display: flex;
+      align-items: flex-start;          /* la pile prend la hauteur */
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--ttb-200);
+      background: var(--ttb-50);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      height: auto;                     /* grandit selon contenu */
+    }
+    .offer-bubble:hover { background: var(--ttb-100); }
+    .offer-bubble:focus { outline: none; box-shadow: var(--focus); border-color: #c9defa; }
+
+    .offer-bubble .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;                         /* espace entre lignes */
+      flex: 1;
+      min-width: 0;
+    }
+    .offer-bubble .line {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--ttb-200);
+      color: var(--ttb-800);
+      font-weight: 600;
+      max-width: 100%;
+      white-space: normal;              /* permet le retour à la ligne */
+      word-break: break-word;
+    }
+    .offer-bubble .line.muted {
+      background: transparent;
+      border-style: dashed;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .offer-bubble .chevron {
+      font-size: 18px;
+      line-height: 1;
+      color: var(--ttb-700);
+      align-self: center;               /* centré verticalement */
+      flex-shrink: 0;
+      margin-left: 4px;
+    }
 
     .approve { display:flex; flex-direction:column; align-items:flex-start; font-weight: 600; }
     .approve.high { color: #16a34a; }
@@ -111,7 +167,7 @@
     .approve-line { display:flex; align-items:center; gap:6px; font-size:14px; }
 
     .sticky-bottom { position: sticky; bottom: 16px; margin-top: 16px; }
-    .btn-select { width:100%; padding: 12px 16px; border-radius: 12px; background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; font-weight:700; cursor:pointer; }
+    .btn-select { width:auto; padding: 12px 16px; border-radius: 12px; background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; font-weight:700; cursor:pointer; }
 
     .screen { display:none; }
     .screen.active { display:block; }
@@ -191,7 +247,7 @@
             <label class="label" for="username">Username</label>
             <div class="input">
               <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <input id="username" name="username" type="text" placeholder="name.surname@ttbbank.com" required />
+              <input id="username" name="username" type="text" placeholder="name.surname@ttbbank.com" />
             </div>
           </div>
 
@@ -199,7 +255,7 @@
             <label class="label" for="password">Password</label>
             <div class="input">
               <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input id="password" name="password" type="password" placeholder="••••••••" required />
+              <input id="password" name="password" type="password" placeholder="••••••••" />
               <button type="button" class="toggle-eye" aria-label="Toggle password visibility" title="Show/Hide">👁️</button>
             </div>
           </div>
@@ -213,7 +269,8 @@
 
           <div style="height:10px; color:#ef4444; font-size:13px;" id="login-error" role="alert"></div>
 
-          <button id="btn-login" class="btn-primary" type="submit" disabled>Login</button>
+          <!-- Bouton désormais TOUJOURS cliquable -->
+          <button id="btn-login" class="btn-primary" type="submit">Login</button>
         </form>
 
         <div class="security-note">
@@ -243,17 +300,16 @@
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="gender"  aria-sort="none">Gender</div>
             <div class="cell th-sort right" role="columnheader" tabindex="0" data-key="age"     aria-sort="none">Age</div>
             <div class="cell th-sort right" role="columnheader" tabindex="0" data-key="income"  aria-sort="none">Income</div>
-            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="offers"  aria-sort="none">Sales purpose (click to edit)</div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="offers"  aria-sort="none">Sales purpose<br>(click to edit)</div>
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="approve" aria-sort="none">Sales chance to be approved</div>
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="win"     aria-sort="none">Sales chance to win</div>
           </div>
           <div id="lead-rows"></div>
-        </div>
-
-        <div class="sticky-bottom">
+        </div>        
+      </div>
+      <div class="sticky-bottom">
           <button class="btn-select" id="btn-select-prospect" type="button">Select Prospect</button>
         </div>
-      </div>
     </section>
 
     <!-- Screen 3: Objective & Probing -->
@@ -382,14 +438,13 @@
     const btnLogin  = el('btn-login');
     const loginErr  = el('login-error');
 
-    function validateLoginFields() {
-      btnLogin.disabled = !(username.value.trim() && password.value.trim());
-    }
-    username.addEventListener('input', validateLoginFields);
-    password.addEventListener('input', validateLoginFields);
-
     document.querySelector('.toggle-eye').addEventListener('click', () => {
       password.type = password.type === 'password' ? 'text' : 'password';
+    });
+
+    document.querySelector('.hint-row a').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Website still in development');
     });
 
     function getInitials(str) {
@@ -398,18 +453,18 @@
 
     el('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      if (username.value.trim() && password.value.trim()) {
-        loginErr.textContent = '';
-        el('salesperson-name').textContent = username.value.trim();
-        el('avatar').textContent = getInitials(username.value) || 'PP';
-        go('dashboard');
-        renderLeads();
-      } else {
-        loginErr.textContent = 'Invalid credentials';
+      if (!username.value.trim() || !password.value.trim()) {
+        loginErr.textContent = 'Fill your email and your password';
+        return;
       }
+      loginErr.textContent = '';
+      el('salesperson-name').textContent = username.value.trim();
+      el('avatar').textContent = getInitials(username.value) || 'PP';
+      go('dashboard');
+      renderLeads();
     });
 
-    // Data — offers is an ARRAY
+    // Data
     const leads = [
       { name: 'Anan Chaiyakul', gender: 'M', age: 40, income: 48000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 78, approve: 'High' },
       { name: 'Pimchanok S.',  gender: 'F', age: 36, income: 62000, offers: ['Car for Cash'], win: 62, approve: 'Medium' },
@@ -426,12 +481,12 @@
 
     /* ===== Sorting by header click ===== */
     const approveRank = { 'Low': 0, 'Medium': 1, 'High': 2 };
-    const sortState = { key: '', dir: '' }; // dir: 'desc' | 'asc' | ''
+    const sortState = { key: '', dir: '' };
 
     function valueFor(ld, key) {
       switch (key) {
         case 'name':   return ld.name;
-        case 'gender': return ld.gender; // 'F' / 'M'
+        case 'gender': return ld.gender;
         case 'age':    return ld.age;
         case 'income': return ld.income;
         case 'offers': return (ld.offers || []).join(', ');
@@ -451,18 +506,18 @@
       } else {
         cmp = String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: 'base' });
       }
-      if (cmp === 0) cmp = a.i - b.i; // stable
-      return sortState.dir === 'asc' ? cmp : -cmp; // if dir is 'desc' first click uses negative
+      if (cmp === 0) cmp = a.i - b.i;
+      return sortState.dir === 'asc' ? cmp : -cmp;
     }
 
     function cycleSort(key) {
       if (sortState.key !== key) {
         sortState.key = key;
-        sortState.dir = 'desc';        // 1st click → descending
+        sortState.dir = 'desc';
       } else if (sortState.dir === 'desc') {
-        sortState.dir = 'asc';         // 2nd click → ascending
+        sortState.dir = 'asc';
       } else if (sortState.dir === 'asc') {
-        sortState.key = '';            // 3rd click → reset
+        sortState.key = '';
         sortState.dir = '';
       } else {
         sortState.dir = 'desc';
@@ -495,25 +550,46 @@
     function winClass(p){ if(p>=70) return 'p-high'; if(p>=40) return 'p-med'; return 'p-low'; }
     function approveClass(a){ return a==='High'?'high':(a==='Medium'?'med':'low'); }
 
+    // Bulle qui empile chaque offre sur sa propre ligne
     function renderOfferBadges(offers, index){
-      const wrap = document.createElement('div');
-      wrap.className = 'offer-badges';
-      wrap.setAttribute('data-index', String(index));
-      (offers || []).forEach(txt => {
-        const b = document.createElement('span');
-        b.className = 'badge';
-        b.textContent = txt;
-        wrap.appendChild(b);
-      });
-      wrap.addEventListener('click', () => openOfferModal(index));
-      return wrap;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'offer-bubble';
+      button.setAttribute('data-index', String(index));
+
+      const stack = document.createElement('div');
+      stack.className = 'stack';
+
+      if (offers && offers.length) {
+        offers.forEach(txt => {
+          const line = document.createElement('span');
+          line.className = 'line';
+          line.textContent = txt;
+          stack.appendChild(line);
+        });
+      } else {
+        const line = document.createElement('span');
+        line.className = 'line muted';
+        line.textContent = 'No offer selected';
+        stack.appendChild(line);
+      }
+
+      const chevron = document.createElement('span');
+      chevron.className = 'chevron';
+      chevron.setAttribute('aria-hidden', 'true');
+      chevron.textContent = '›';
+
+      button.appendChild(stack);
+      button.appendChild(chevron);
+
+      button.addEventListener('click', () => openOfferModal(index));
+      return button;
     }
 
     function renderLeads(){
       const rows = document.getElementById('lead-rows');
       rows.innerHTML = '';
 
-      // stable list with original indices
       let ordered = leads.map((ld, i) => ({ ld, i }));
       if (sortState.key && sortState.dir) {
         ordered.sort(compareItems);
@@ -652,7 +728,7 @@
     const offerSelectAll = el('offer-select-all');
     const offerClear = el('offer-clear');
 
-    let editingIndex = null; // index in the ORIGINAL leads array
+    let editingIndex = null;
     let chosenOffers = new Set();
 
     function populateOfferOptions(currentOffers) {
@@ -674,7 +750,7 @@
     }
 
     function openOfferModal(index) {
-      editingIndex = index; // original index (we render data-index with original index)
+      editingIndex = index;
       chosenOffers = new Set(leads[index].offers || []);
       populateOfferOptions(chosenOffers);
       offerModal.classList.add('open');
@@ -693,7 +769,6 @@
     offerSave.addEventListener('click', () => {
       if (editingIndex == null) return closeOfferModal();
       leads[editingIndex].offers = Array.from(chosenOffers);
-      // Update ONLY the affected cell (works even after sorting because data-index is original index)
       document.querySelectorAll(`.offer-cell[data-index="${editingIndex}"]`).forEach(cell => {
         cell.innerHTML = '';
         cell.appendChild(renderOfferBadges(leads[editingIndex].offers, editingIndex));
