@@ -77,19 +77,37 @@ el('login-form').addEventListener('submit', (e) => {
   renderLeads();
 });
 
-/* ===== Data ===== */
+
+/* ===== Data (generated from Excel) ===== */
 const leads = [
-  { name: 'Anan Chaiyakul', gender: 'M', age: 40, income: 48000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 78, approve: 'High' },
-  { name: 'Pimchanok S.',  gender: 'F', age: 36, income: 62000, offers: ['Car for Cash'], win: 62, approve: 'Medium' },
-  { name: 'Somsak T.',     gender: 'M', age: 45, income: 41000, offers: ['Refinance'], win: 35, approve: 'Low' },
-  { name: 'Nattaporn K.',  gender: 'F', age: 29, income: 52000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 84, approve: 'High' },
+  { name: 'ลูกค้า-10367656', gender: 'M', age: 30, income: 15000,  offers: ['Car for Cash'], win: 40, approve: 'Medium' },
+  { name: 'ลูกค้า-00405606', gender: 'M', age: 31, income: 25000,  offers: ['Car for Cash'], win: 80, approve: 'High' },
+  { name: 'ลูกค้า-02083104', gender: 'F', age: 32, income: 40000,  offers: ['Car for Cash'], win: 5,  approve: 'Low' },
+  { name: 'ลูกค้า-02305438', gender: 'F', age: 33, income: 25000,  offers: ['Car for Cash'], win: 85, approve: 'High' },
+  { name: 'ลูกค้า-02518333', gender: 'F', age: 34, income: 250000, offers: ['Car for Cash'], win: 40, approve: 'Medium' },
+  { name: 'ลูกค้า-04188369', gender: 'F', age: 35, income: 250000, offers: ['Car for Cash'], win: 45, approve: 'Medium' },
+  { name: 'ลูกค้า-04423583', gender: 'F', age: 36, income: 25000,  offers: ['Car for Cash'], win: 90, approve: 'High' },
+  { name: 'ลูกค้า-04666492', gender: 'F', age: 37, income: 40000,  offers: ['Car for Cash'], win: 20, approve: 'Low' },
+  { name: 'ลูกค้า-05350772', gender: 'F', age: 38, income: 75000,  offers: ['Car for Cash'], win: 80, approve: 'High' },
+  { name: 'ลูกค้า-05788390', gender: 'F', age: 39, income: 40000,  offers: ['Car for Cash'], win: 45, approve: 'Medium' },
+  { name: 'ลูกค้า-05810695', gender: 'M', age: 48, income: 15000,  offers: ['Car for Cash'], win: 30, approve: 'Low' },
+  { name: 'ลูกค้า-05868036', gender: 'M', age: 30, income: 150000, offers: ['Car for Cash'], win: 30, approve: 'Low' },
+  { name: 'ลูกค้า-05875799', gender: 'F', age: 31, income: 250000, offers: ['Car for Cash'], win: 60, approve: 'Medium' },
+  { name: 'ลูกค้า-05918670', gender: 'F', age: 32, income: 60000,  offers: ['Car for Cash'], win: 5,  approve: 'Low' },
+  { name: 'ลูกค้า-05962888', gender: 'F', age: 33, income: 25000,  offers: ['Car for Cash'], win: 35, approve: 'Low' },
+  { name: 'ลูกค้า-05963546', gender: 'F', age: 34, income: 75000,  offers: ['Car for Cash'], win: 10, approve: 'Low' },
+  { name: 'ลูกค้า-05965946', gender: 'F', age: 35, income: 60000,  offers: ['Car for Cash'], win: 65, approve: 'Medium' },
+  { name: 'ลูกค้า-05971108', gender: 'F', age: 36, income: 150000, offers: ['Car for Cash'], win: 95, approve: 'High' },
+  { name: 'ลูกค้า-05980093', gender: 'M', age: 37, income: 25000,  offers: ['Car for Cash'], win: 25, approve: 'Low' },
+  { name: 'ลูกค้า-05984386', gender: 'M', age: 38, income: 75000,  offers: ['Car for Cash'], win: 55, approve: 'Medium' },
+  { name: 'ลูกค้า-05985880', gender: 'M', age: 39, income: 75000,  offers: ['Car for Cash'], win: 35, approve: 'Low' },
+  { name: 'ลูกค้า-05986844', gender: 'M', age: 40, income: 25000,  offers: ['Car for Cash'], win: 25, approve: 'Low' },
+  { name: 'ลูกค้า-05990538', gender: 'F', age: 41, income: 15000,  offers: ['Car for Cash'], win: 65, approve: 'Medium' },
 ];
+
 
 const OFFER_OPTIONS = [
   'Car for Cash',
-  'Refinance',
-  'Personal Loan',
-  'Credit Life Insurance'
 ];
 
 /* ===== Sorting ===== */
