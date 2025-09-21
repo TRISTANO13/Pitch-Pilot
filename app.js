@@ -220,7 +220,12 @@ function renderLeads(){
           <button class="btn-select btn-select-row" type="button" data-index="${i}">Select Prospect</button>
         </div>
       </div>
-      <div class="cell">${ld.gender === 'M' ? '♂' : '♀'}</div>
+      <div class="cell">
+  <img src="${ld.gender === 'M' ? './images/male.png' : './images/female.svg'}" 
+       alt="${ld.gender === 'M' ? 'Male' : 'Female'}" 
+       width="50" height="50">
+</div>
+
       <div class="cell right">${ld.age}</div>
       <div class="cell right">${ld.income.toLocaleString('en-US')} THB</div>
       <div class="cell offer-cell" data-index="${i}"></div>
