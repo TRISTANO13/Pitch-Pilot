@@ -101,64 +101,15 @@
     </section>
 
     <!-- Screen 3: Objective & Probing -->
-    <section id="screen-objective" class="screen" aria-label="Sales Objective">
-      <div class="container">
-        <div class="section">
-          <div class="row" style="justify-content:space-between; align-items:center;">
-            <h2 style="margin:0; font-size:20px">Select Sales Objective</h2>
-            <button id="btn-back-dashboard" class="text-btn" type="button" title="Back to dashboard">← Dashboard</button>
-          </div>
-          <div class="row" style="margin-top:12px">
-            <select id="objective-0" class="select">
-              <option selected>Car for Cash Loan</option>
-              <option>Refinance</option>
-              <option>Personal Loan</option>
-              <option>Credit Life Insurance</option>
-            </select>
-            <button id="btn-add-objective" class="text-btn" type="button">+ Add objective</button>
-          </div>
-          <div id="objective-chips" class="row" style="margin-top:8px"></div>
-        </div>
+<section id="screen-objective" class="screen" aria-label="Sales Objective">
+  <div class="container">
 
-        <div class="section">
-          <h3>Additional Information Needed</h3>
-          <div class="qcard">
-            <div class="qtitle">How often do you use your car?</div>
-            <div class="qhelper">This helps us tailor payment flexibility.</div>
-            <div class="radio-group" role="radiogroup" aria-label="Car usage">
-              <label class="radio"><input type="radio" name="q1" value="daily"> Daily</label>
-              <label class="radio"><input type="radio" name="q1" value="3-5"> 3–5 days/week</label>
-              <label class="radio"><input type="radio" name="q1" value="weekends"> Weekends only</label>
-            </div>
-          </div>
+    <!-- Juste le bouton retour -->
+    <div class="row" style="justify-content:flex-start; align-items:center; margin-bottom:16px;">
+      <button id="btn-back-dashboard" class="text-btn" type="button" title="Back to dashboard">← Dashboard</button>
+    </div>
 
-          <div class="qcard">
-            <div class="qtitle">Preferred monthly installment range?</div>
-            <div class="qhelper">Pick an amount you’re comfortable with.</div>
-            <div class="pics" id="pic-choices">
-              <button class="pic" type="button" data-value="5000"><img alt="5k THB" src="https://images.unsplash.com/photo-1553729784-e91953dec042?q=80&w=600&auto=format&fit=crop"/><span>5,000 THB</span></button>
-              <button class="pic" type="button" data-value="8000"><img alt="8k THB" src="https://images.unsplash.com/photo-1554224155-3a589877462f?q=80&w=600&auto=format&fit=crop"/><span>8,000 THB</span></button>
-              <button class="pic" type="button" data-value="10000"><img alt="10k THB" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=600&auto=format&fit=crop"/><span>10,000 THB</span></button>
-              <button class="pic" type="button" data-value="12000"><img alt="12k THB" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=600&auto=format&fit=crop"/><span>12,000 THB</span></button>
-            </div>
-          </div>
-
-          <div class="qcard">
-            <div class="qtitle">When do you need the funds?</div>
-            <div class="qhelper">Drag the right option into the timeline zone.</div>
-            <div class="dnd-area">
-              <div class="dnd-items" id="dnd-items">
-                <div class="chip" draggable="true" data-value="week">This week</div>
-                <div class="chip" draggable="true" data-value="2weeks">Within 2 weeks</div>
-                <div class="chip" draggable="true" data-value="month">This month</div>
-              </div>
-              <div class="dnd-targets">
-                <div class="dropzone" data-slot="soon">Drop here (Soon)</div>
-                <div class="dropzone" data-slot="later">Drop here (Later)</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
         <div class="qcard">
   <div class="qtitle">
     Q1. How many credit cards do you currently have, and what is the approximate total credit limit?
@@ -229,12 +180,20 @@
 <div class="qcard">
   <div class="qtitle">Q5. What is the approximate total minimum payment across all cards each month?</div>
   <div class="qhelper">(This helps me see how much pressure monthly payments are putting on you right now.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Total minimum payment" id="q5-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q5" value="<5000">&lt; THB 5,000</label>
-    <label class="radio"><input type="radio" name="q5" value="5000-10000"> THB 5,000 – 10,000</label>
-    <label class="radio"><input type="radio" name="q5" value="10001-20000"> THB 10,001 – 20,000</label>
-    <label class="radio"><input type="radio" name="q5" value=">20000">&gt; THB 20,000</label>
-  </div>
+  <label for="payment">Choose a payment range:</label>
+    <select name="payment" id="payment" style="max-width:200px;">
+    <option value="0">Less than THB 10,000</option>
+    <option value="10001-20000">THB 10,000 - 20,000</option>
+    <option value="20001-30000">THB 20,000 - 30,000</option>
+    <option value="30001-40000">THB 30,000 - 40,000</option>
+    <option value="40001-50000">THB 40,000 - 50,000</option>
+    <option value="50001-60000">THB 50,000 - 60,000</option>
+    <option value="60001-70000">THB 60,000 - 70,000</option>
+    <option value="70001-80000">THB 70,000 - 80,000</option>
+    <option value="80001-90000">THB 80,000 - 90,000</option>
+    <option value="90001-100000">THB 90,000 - 100,000</option>
+    <option value="100001+">More than THB 100,000</option>
+  </select>
 </div>
 <br>
 
@@ -260,12 +219,20 @@
 <div class="qcard">
   <div class="qtitle">Q7. What is your approximate total monthly repayment across all debts?</div>
   <div class="qhelper">(This will help me calculate your repayment ratio, to see what amount would feel more comfortable for you.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Total monthly repayment" id="q7-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q7" value="<10000">&lt; THB 10,000</label>
-    <label class="radio"><input type="radio" name="q7" value="10001-20000"> THB 10,001 – 20,000</label>
-    <label class="radio"><input type="radio" name="q7" value="20001-30000"> THB 20,001 – 30,000</label>
-    <label class="radio"><input type="radio" name="q7" value=">30000">&gt; THB 30,000</label>
-  </div>
+  <label for="repayment">Choose a repayment range:</label>
+    <select name="repayment" id="repayment" style="max-width:200px;">
+    <option value="0">Less than THB 10,000</option>
+    <option value="10001-20000">THB 10,000 - 20,000</option>
+    <option value="20001-30000">THB 20,000 - 30,000</option>
+    <option value="30001-40000">THB 30,000 - 40,000</option>
+    <option value="40001-50000">THB 40,000 - 50,000</option>
+    <option value="50001-60000">THB 50,000 - 60,000</option>
+    <option value="60001-70000">THB 60,000 - 70,000</option>
+    <option value="70001-80000">THB 70,000 - 80,000</option>
+    <option value="80001-90000">THB 80,000 - 90,000</option>
+    <option value="90001-100000">THB 90,000 - 100,000</option>
+    <option value="100001+">More than THB 100,000</option>
+  </select>
 </div>
 <br>
 
@@ -273,12 +240,20 @@
 <div class="qcard">
   <div class="qtitle">Q8. What is your current monthly income range?</div>
   <div class="qhelper">(I’ll ask this gently, as it’s important for me to ensure the loan fits your affordability and stability.)</div>
-  <div class="radio-group" role="radiogroup" aria-label="Income range" id="q8-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q8" value="<30000">&lt; THB 30,000</label>
-    <label class="radio"><input type="radio" name="q8" value="30001-50000"> THB 30,001 – 50,000</label>
-    <label class="radio"><input type="radio" name="q8" value="50001-80000"> THB 50,001 – 80,000</label>
-    <label class="radio"><input type="radio" name="q8" value=">80000">&gt; THB 80,000</label>
-  </div>
+    <label for="salary">Choose a salary range:</label>
+    <select name="salary" id="salary" style="max-width:200px;">
+    <option value="0">Less than THB 10,000</option>
+    <option value="10001-20000">THB 10,000 - 20,000</option>
+    <option value="20001-30000">THB 20,000 - 30,000</option>
+    <option value="30001-40000">THB 30,000 - 40,000</option>
+    <option value="40001-50000">THB 40,000 - 50,000</option>
+    <option value="50001-60000">THB 50,000 - 60,000</option>
+    <option value="60001-70000">THB 60,000 - 70,000</option>
+    <option value="70001-80000">THB 70,000 - 80,000</option>
+    <option value="80001-90000">THB 80,000 - 90,000</option>
+    <option value="90001-100000">THB 90,000 - 100,000</option>
+    <option value="100001+">More than THB 100,000</option>
+  </select>
 </div>
 <br>
 

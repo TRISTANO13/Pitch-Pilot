@@ -1,5 +1,6 @@
 'use strict';
 
+/* ===== Helpers & screens ===== */
 const el = (id) => document.getElementById(id);
 const screenLogin = el('screen-login');
 const screenDashboard = el('screen-dashboard');
@@ -36,24 +37,25 @@ if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
 /* ===== Navigation ===== */
 function go(which) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  if (which === 'login') screenLogin.classList.add('active');
-  if (which === 'dashboard') screenDashboard.classList.add('active');
-  if (which === 'objective') screenObjective.classList.add('active');
-  if (which === 'stub') document.getElementById('screen-stub').classList.add('active');
+  if (which === 'login' && screenLogin) screenLogin.classList.add('active');
+  if (which === 'dashboard' && screenDashboard) screenDashboard.classList.add('active');
+  if (which === 'objective' && screenObjective) screenObjective.classList.add('active');
+  if (which === 'stub') el('screen-stub')?.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-window.go = go; // used by the stub button
+window.go = go; // utilisé par des attributs inline éventuels
 
 /* ===== Login form ===== */
 const username = el('username');
 const password = el('password');
 const loginErr  = el('login-error');
 
-document.querySelector('.toggle-eye').addEventListener('click', () => {
+document.querySelector('.toggle-eye')?.addEventListener('click', () => {
+  if (!password) return;
   password.type = password.type === 'password' ? 'text' : 'password';
 });
 
-document.querySelector('.hint-row a').addEventListener('click', (e) => {
+document.querySelector('.hint-row a')?.addEventListener('click', (e) => {
   e.preventDefault();
   alert('Website still in development');
 });
@@ -106,7 +108,6 @@ function valueFor(ld, key) {
     default:       return null;
   }
 }
-
 function compareItems(a, b) {
   const va = valueFor(a.ld, sortState.key);
   const vb = valueFor(b.ld, sortState.key);
@@ -116,7 +117,6 @@ function compareItems(a, b) {
   if (cmp === 0) cmp = a.i - b.i;
   return sortState.dir === 'asc' ? cmp : -cmp;
 }
-
 function cycleSort(key) {
   if (sortState.key !== key) {
     sortState.key = key; sortState.dir = 'desc';
@@ -126,21 +126,19 @@ function cycleSort(key) {
   updateHeaderIndicators();
   renderLeads();
 }
-
 function updateHeaderIndicators() {
   document.querySelectorAll('.th-sort').forEach(th => {
-    const key = th.dataset.key;
+    const key = th.getAttribute('data-key');
     let aria = 'none';
     if (key === sortState.key) aria = sortState.dir === 'asc' ? 'ascending' : (sortState.dir === 'desc' ? 'descending' : 'none');
     th.setAttribute('aria-sort', aria);
   });
 }
-
 function bindHeaderSorting() {
   document.querySelectorAll('.th-sort').forEach(th => {
-    th.addEventListener('click', () => cycleSort(th.dataset.key));
+    th.addEventListener('click', () => cycleSort(th.getAttribute('data-key')));
     th.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cycleSort(th.dataset.key); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cycleSort(th.getAttribute('data-key')); }
     });
   });
 }
@@ -186,6 +184,7 @@ function renderOfferBadges(offers, index){
 
 function renderLeads(){
   const rows = document.getElementById('lead-rows');
+  if (!rows) return;
   rows.innerHTML = '';
 
   let ordered = leads.map((ld, i) => ({ ld, i }));
@@ -197,9 +196,11 @@ function renderLeads(){
     row.setAttribute('role','row');
 
     row.innerHTML = `
-      <div class="cell">${ld.name}<div class="row-actions">
-    <button class="btn-select btn-select-row" type="button" data-index="${i}">Select Prospect</button>
-  </div></div>
+      <div class="cell">${ld.name}
+        <div class="row-actions">
+          <button class="btn-select btn-select-row" type="button" data-index="${i}">Select Prospect</button>
+        </div>
+      </div>
       <div class="cell">${ld.gender === 'M' ? '♂' : '♀'}</div>
       <div class="cell right">${ld.age}</div>
       <div class="cell right">${ld.income.toLocaleString('en-US')} THB</div>
@@ -216,106 +217,59 @@ function renderLeads(){
       </div>
     `;
     rows.appendChild(row);
-    row.querySelector('.offer-cell').appendChild(renderOfferBadges(ld.offers, i));
+    row.querySelector('.offer-cell')?.appendChild(renderOfferBadges(ld.offers, i));
 
-row.querySelector('.btn-select-row').addEventListener('click', () => {
-  // Open Objective screen in a NEW TAB with the selected lead index in the URL
-  const url = new URL(window.location.href);
-  url.searchParams.set('lead', String(i));  // pass which lead was selected
-  url.hash = 'objective';                   // land on the Objective screen
-  window.open(url.toString(), '_blank', 'noopener');
-});
-
-
+    row.querySelector('.btn-select-row')?.addEventListener('click', () => {
+      // Ouvrir l'écran 3 dans un nouvel onglet avec ancre
+      const url = new URL(window.location.href);
+      url.searchParams.set('lead', String(i));
+      url.hash = 'objective';
+      window.open(url.toString(), '_blank', 'noopener');
+    });
   });
 }
 
-/* ===== Buttons ===== */
-el('btn-select-prospect').addEventListener('click', () => go('objective'));
+/* ===== Dashboard button -> Objective ===== */
+el('btn-select-prospect')?.addEventListener('click', () => go('objective'));
 
-/* ===== Screen 3 chips ===== */
-const chips = new Set(['Car for Cash Loan']);
-const chipWrap = el('objective-chips');
+/* ===== Back button ===== */
+el('btn-back-dashboard')?.addEventListener('click', () => go('dashboard'));
 
-function drawChips(){
-  chipWrap.innerHTML = '';
-  chips.forEach(ch => {
-    const b = document.createElement('button');
-    b.className = 'text-btn';
-    b.innerHTML = ch + ' ×';
-    b.title = 'Remove objective';
-    b.addEventListener('click', () => { chips.delete(ch); drawChips(); });
-    chipWrap.appendChild(b);
+/* ===== Generic "Other:" inputs enable/disable =====
+   Active tous les inputs texte pointés par data-other-input
+   quand la case/radio "Other" correspondante est cochée. */
+function bindOtherInputs() {
+  document.querySelectorAll('input[data-other-input]').forEach(ctrl => {
+    const targetSel = ctrl.getAttribute('data-other-input');
+    const target = targetSel ? document.querySelector(targetSel) : null;
+    if (!target) return;
+    const sync = () => { target.disabled = !ctrl.checked; if (ctrl.checked) target.focus(); else target.value = ''; };
+    ctrl.addEventListener('change', sync);
+    // état initial
+    sync();
   });
 }
-drawChips();
+bindOtherInputs();
 
-el('btn-add-objective').addEventListener('click', () => {
-  const sel = document.createElement('select');
-  sel.className = 'select';
-  sel.innerHTML = `
-    <option selected disabled>Choose objective…</option>
-    <option>Car for Cash Loan</option>
-    <option>Refinance</option>
-    <option>Personal Loan</option>
-    <option>Credit Life Insurance</option>`;
-  sel.addEventListener('change', () => {
-    const val = sel.value;
-    if (val && !chips.has(val) && chips.size < 3) { chips.add(val); drawChips(); }
-    sel.remove();
-  });
-  sel.style.marginTop = '8px';
-  sel.setAttribute('aria-label','Add objective');
-  document.querySelector('#screen-objective .section .row:nth-of-type(2)').after(sel);
-});
-
-el('btn-back-dashboard').addEventListener('click', () => go('dashboard'));
-
-/* ===== Pics toggle ===== */
-document.querySelectorAll('#pic-choices .pic').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
-    btn.setAttribute('aria-pressed','true');
-  });
-});
-
-/* ===== Drag & Drop ===== */
-let dragged = null;
-document.querySelectorAll('.chip').forEach(chip => {
-  chip.addEventListener('dragstart', () => { dragged = chip; });
-  chip.addEventListener('dragend', () => { dragged = null; });
-});
-document.querySelectorAll('.dropzone').forEach(zone => {
-  zone.addEventListener('dragover', (e) => e.preventDefault());
-  zone.addEventListener('drop', () => {
-    if (!dragged) return;
-    zone.textContent = dragged.textContent;
-    zone.classList.add('filled');
-  });
-});
-
-/* ===== Validation ===== */
-function isObjectiveValid(){ return chips.size >= 1; }
-function isQ1Answered(){ return !!document.querySelector('input[name="q1"]:checked'); }
-function isPicChosen(){ return !!document.querySelector('#pic-choices .pic[aria-pressed="true"]'); }
-function isDndDone(){ return document.querySelectorAll('.dropzone.filled').length >= 1; }
-function buildErrorMessage(errors){ return 'Please complete:\n- ' + errors.join('\n- '); }
-
-el('btn-next').addEventListener('click', () => {
-  const errors = [];
-  if (!isObjectiveValid()) errors.push('Select at least one objective');
-  if (!isQ1Answered()) errors.push('Answer how often car is used');
-  if (!isPicChosen()) errors.push('Choose an installment range');
-  if (!isDndDone()) errors.push('Complete the drag-and-drop action');
-  if (errors.length) { alert(buildErrorMessage(errors)); return; }
+/* ===== Next / Reset actions (validation allégée) ===== */
+// Ici on ne force plus la sélection d’un objectif, ni les anciens Q1/Pics/DnD (qui n’existent plus).
+el('btn-next')?.addEventListener('click', () => {
   alert('Great! Proceeding to the next step (stubbed for prototype).');
   go('stub');
 });
 
-el('btn-reset').addEventListener('click', () => {
-  document.querySelectorAll('input[name="q1"]').forEach(r => r.checked = false);
-  document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
-  document.querySelectorAll('.dropzone').forEach(z => { z.textContent = 'Drop here'; z.classList.remove('filled'); });
+el('btn-reset')?.addEventListener('click', () => {
+  // Reset basique pour les groupes présents dans ta page 3 actuelle
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+  // Réinitialiser les champs "Other" et les désactiver
+  document.querySelectorAll('input[data-other-input]').forEach(ctrl => {
+    const targetSel = ctrl.getAttribute('data-other-input');
+    const target = targetSel ? document.querySelector(targetSel) : null;
+    if (target) { target.value = ''; target.disabled = true; }
+  });
+  // Réinitialiser les selects
+  document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
 });
 
 /* ===== Modal logic ===== */
@@ -331,6 +285,7 @@ let editingIndex = null;
 let chosenOffers = new Set();
 
 function populateOfferOptions(currentOffers) {
+  if (!offerOptionsWrap) return;
   offerOptionsWrap.innerHTML = '';
   OFFER_OPTIONS.forEach(opt => {
     const row = document.createElement('label');
@@ -349,21 +304,23 @@ function populateOfferOptions(currentOffers) {
 }
 
 function openOfferModal(index) {
+  if (!offerModal) return;
   editingIndex = index;
   chosenOffers = new Set(leads[index].offers || []);
   populateOfferOptions(chosenOffers);
   offerModal.classList.add('open');
   setTimeout(() => {
-    const first = offerOptionsWrap.querySelector('input[type="checkbox"]');
+    const first = offerOptionsWrap?.querySelector('input[type="checkbox"]');
     if (first) first.focus();
   }, 0);
 }
 function closeOfferModal() {
+  if (!offerModal) return;
   offerModal.classList.remove('open');
   editingIndex = null;
   chosenOffers = new Set();
 }
-offerSave.addEventListener('click', () => {
+offerSave?.addEventListener('click', () => {
   if (editingIndex == null) return closeOfferModal();
   leads[editingIndex].offers = Array.from(chosenOffers);
   document.querySelectorAll(`.offer-cell[data-index="${editingIndex}"]`).forEach(cell => {
@@ -372,20 +329,20 @@ offerSave.addEventListener('click', () => {
   });
   closeOfferModal();
 });
-offerCancel.addEventListener('click', closeOfferModal);
-offerClose.addEventListener('click', closeOfferModal);
-offerModal.addEventListener('click', (e) => { if (e.target === offerModal) closeOfferModal(); });
+offerCancel?.addEventListener('click', closeOfferModal);
+offerClose?.addEventListener('click', closeOfferModal);
+offerModal?.addEventListener('click', (e) => { if (e.target === offerModal) closeOfferModal(); });
 
-offerSelectAll.addEventListener('click', () => {
+offerSelectAll?.addEventListener('click', () => {
   chosenOffers = new Set(OFFER_OPTIONS);
-  offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+  offerOptionsWrap?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
 });
-offerClear.addEventListener('click', () => {
+offerClear?.addEventListener('click', () => {
   chosenOffers.clear();
-  offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+  offerOptionsWrap?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
 });
 
-/* ===== On load ===== */
+/* ===== Header sorting & first render ===== */
 function bindHeaderSortingAll(){
   bindHeaderSorting();
   updateHeaderIndicators();
@@ -393,29 +350,10 @@ function bindHeaderSortingAll(){
 }
 bindHeaderSortingAll();
 
-// If the URL has #objective (e.g., opened from a row), show that screen on load
+/* ===== Hash handling (open Objective directly) ===== */
 (function openFromUrl(){
   if (window.location.hash === '#objective') {
-    // Optionally read which lead was selected:
     // const leadIndex = new URLSearchParams(window.location.search).get('lead');
-    // TODO: use leadIndex to prefill the prospect page if you want.
     go('objective');
   }
 })();
-
-// Enable "Other" text field only when "Other" is selected
-const q2Radios = document.querySelectorAll('input[name="q2"]');
-const q2OtherInput = document.getElementById('q2-other');
-
-q2Radios.forEach(radio => {
-  radio.addEventListener('change', () => {
-    if (radio.value === 'other' && radio.checked) {
-      q2OtherInput.disabled = false;
-      q2OtherInput.focus();
-    } else {
-      q2OtherInput.disabled = true;
-      q2OtherInput.value = '';
-    }
-  });
-});
-
