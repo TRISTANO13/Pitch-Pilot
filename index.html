@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,300 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Brand */
-      --ttb-50: #ecf5ff;
-      --ttb-100: #d9ebff;
-      --ttb-200: #b3d7ff;
-      --ttb-300: #8cc2ff;
-      --ttb-400: #66aeff;
-      --ttb-500: #3395ff;
-      --ttb-600: #0f7df2;
-      --ttb-700: #0c66c7;
-      --ttb-800: #0a509b;
-      --ttb-900: #073a6f;
-
-      /* Light theme (default) */
-      --bg: #f6f8fb;
-      --surface: #ffffff;
-      --surface-2: #f3f6fb;
-      --border: #e9edf2;
-      --text: #0f172a;
-      --muted: #667085;
-
-      --radius-lg: 16px;
-      --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 1px rgba(16, 24, 40, 0.04);
-      --shadow-md: 0 8px 24px rgba(16,24,40,0.08);
-      --focus: 0 0 0 3px rgba(15, 125, 242, 0.25);
-    }
-
-    /* Dark theme overrides */
-    [data-theme="dark"] {
-      --bg: #0b1220;
-      --surface: #0f172a;
-      --surface-2: #111a2e;
-      --border: #1f2a44;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-
-      --ttb-50: #0a1a2e;
-      --ttb-100: #0f2541;
-      --ttb-200: #15345c;
-      --ttb-300: #18447a;
-      --ttb-400: #1d55a1;
-      --ttb-500: #2467c7;
-      --ttb-600: #2e7ae7;
-      --ttb-700: #4b90f0;
-      --ttb-800: #79adff;
-      --ttb-900: #bcd6ff;
-
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-      --shadow-md: 0 8px 24px rgba(0,0,0,0.45);
-      --focus: 0 0 0 3px rgba(46, 122, 231, 0.35);
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      color: var(--text); background: var(--bg);
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      transition: background .25s ease, color .25s ease;
-    }
-
-    .app {
-      min-height: 100dvh; display: grid; place-items: center; padding: 24px;
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #c9e3ff33, transparent 60%),
-        radial-gradient(800px 400px at 90% 10%, #b9d6ff33, transparent 60%),
-        linear-gradient(var(--bg), var(--bg));
-    }
-    [data-theme="dark"] .app {
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #1b2a44aa, transparent 60%),
-        radial-gradient(800px 400px at 90% 10%, #142037aa, transparent 60%),
-        linear-gradient(var(--bg), var(--bg));
-    }
-
-    .card {
-      width: 100%; max-width: 440px; background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 24px; backdrop-filter: saturate(120%) blur(6px);
-      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
-    }
-
-    .brand { display:flex; gap:12px; align-items:center; justify-content:center; margin-bottom: 12px; }
-    .brand__logo { width: 40px; height: 40px; object-fit: contain; filter: none; }
-    [data-theme="dark"] .brand__logo { filter: brightness(1.2) contrast(0.9); }
-    .title { text-align:center; font-size: 22px; font-weight: 600; margin: 6px 0 16px; }
-    .caption { text-align:center; color: var(--muted); font-size: 13px; margin-bottom: 16px; }
-
-    .field { display:flex; flex-direction:column; gap:8px; margin: 10px 0 14px; }
-    .label { font-size: 13px; color: #344054; font-weight: 600; }
-    [data-theme="dark"] .label { color: #cbd5e1; }
-    .input {
-      display:flex; align-items:center; gap:10px; border:1px solid var(--border); border-radius: 12px; padding: 12px 14px; background: var(--surface);
-      transition: background .25s ease, border-color .25s ease;
-    }
-    .input:focus-within { box-shadow: var(--focus); border-color: #c9defa; }
-    [data-theme="dark"] .input:focus-within { border-color: #2e7ae7; }
-    .input input { border:0; outline:0; flex:1; font-size: 15px; color: var(--text); background: transparent; }
-    .input .icon { width: 20px; height: 20px; color: #6b7280; }
-    [data-theme="dark"] .input .icon { color: #94a3b8; }
-    .toggle-eye { background: transparent; border:0; cursor:pointer; color:#6b7280; }
-    [data-theme="dark"] .toggle-eye { color:#94a3b8; }
-
-    .hint-row { display:flex; align-items:center; justify-content:space-between; margin: 6px 2px 2px; }
-    .hint-row a { color: var(--ttb-700); font-size: 13px; text-decoration: none; }
-
-    .btn-primary { width:100%; border:0; cursor:pointer; padding: 12px 16px; border-radius: 12px; color: white; font-weight: 600; font-size: 16px; box-shadow: 0 6px 16px rgba(15,125,242,0.25);
-      background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700));
-      transition: filter .2s ease;
-    }
-    .btn-primary:hover { filter: brightness(1.05); }
-    .btn-primary:disabled { opacity: .6; cursor:not-allowed; box-shadow:none; }
-
-    .security-note { display:flex; gap:8px; align-items:center; justify-content:center; color: var(--muted); font-size: 12px; margin-top: 12px; }
-
-    /* Layout / table */
-    .container { width:100%; max-width: 1024px; margin: 0 auto; padding: 16px; }
-    .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 12px; }
-    .profile { display:flex; align-items:center; gap:12px; }
-    .avatar { width:40px; height:40px; border-radius:50%; background: var(--ttb-600); color: #fff; display:grid; place-items:center; font-weight: 700; }
-
-    /* Theme toggle button */
-    .theme-toggle {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      padding: 8px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      box-shadow: var(--shadow-sm);
-    }
-    .theme-toggle:hover { box-shadow: var(--shadow-md); }
-
-    .table { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow:hidden; }
-    .thead, .trow { display:grid; grid-template-columns: 1.5fr .6fr .5fr 1.3fr 1.9fr 1.4fr 1.4fr; column-gap: 32px; align-items:center; }
-    .thead { background: var(--surface-2); color:#475467; font-weight:600; font-size: 13px; padding: 12px 16px; }
-    [data-theme="dark"] .thead { color: #cbd5e1; }
-    .trow { border-top: 1px solid var(--border); padding: 12px 16px; }
-    .cell { font-size: 14px; color: var(--text); min-width: 0; transition: color .2s ease; }
-    .cell.right { text-align:right; }
-
-    /* clickable headers */
-    .th-sort { cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; color: inherit; }
-    .th-sort::after { content: '↕'; opacity:.35; font-size:12px; }
-    .th-sort[aria-sort="descending"]::after { content:'▼'; opacity:1; }
-    .th-sort[aria-sort="ascending"]::after { content:'▲'; opacity:1; }
-    .th-sort[aria-sort="none"]::after { content:'↕'; opacity:.35; }
-
-    .offer-cell { cursor:pointer; }
-
-    /* Offer bubble (grows with content, stacked lines) */
-    .offer-bubble {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: left;
-      height: auto;
-      transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
-    }
-    .offer-bubble:hover { background: color-mix(in oklab, var(--surface-2), white 4%); }
-    [data-theme="dark"] .offer-bubble:hover { background: color-mix(in oklab, var(--surface-2), #ffffff 6%); }
-    .offer-bubble:focus { outline: none; box-shadow: var(--focus); border-color: #c9defa; }
-    [data-theme="dark"] .offer-bubble:focus { border-color: #2e7ae7; }
-
-    .offer-bubble .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      flex: 1;
-      min-width: 0;
-    }
-    .offer-bubble .line {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid var(--border);
-      color: #0a509b;
-      font-weight: 600;
-      max-width: 100%;
-      white-space: normal;
-      word-break: break-word;
-    }
-    [data-theme="dark"] .offer-bubble .line {
-      background: #0c1529;
-      color: #79adff;
-      border-color: #203050;
-    }
-    .offer-bubble .line.muted {
-      background: transparent;
-      border-style: dashed;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .offer-bubble .chevron {
-      font-size: 18px;
-      line-height: 1;
-      color: var(--ttb-700);
-      align-self: center;
-      flex-shrink: 0;
-      margin-left: 4px;
-    }
-    [data-theme="dark"] .offer-bubble .chevron { color: #79adff; }
-
-    .approve { display:flex; flex-direction:column; align-items:flex-start; font-weight: 600; }
-    .approve.high { color: #16a34a; }
-    .approve.med { color: #f59e0b; }
-    .approve.low { color: #ef4444; }
-    [data-theme="dark"] .approve.high { color: #34d399; }
-    [data-theme="dark"] .approve.med  { color: #fbbf24; }
-    [data-theme="dark"] .approve.low  { color: #f87171; }
-    .approve-line { display:flex; align-items:center; gap:6px; font-size:14px; }
-
-    .sticky-bottom { position: sticky; bottom: 16px; margin-top: 16px; }
-    .btn-select { width:auto; padding: 12px 16px; border-radius: 12px; background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; font-weight:700; cursor:pointer; }
-
-    .screen { display:none; }
-    .screen.active { display:block; }
-
-    /* Screen 3 */
-    .section { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm); margin-bottom: 16px; transition: background .25s ease, border-color .25s ease; }
-    .section h3 { margin: 0 0 8px; font-size: 18px; }
-    .row { display:flex; align-items:center; gap: 12px; flex-wrap: wrap; }
-    .select, select, .text-btn { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: var(--surface); color: var(--text); font-size: 14px; transition: background .2s ease, border-color .2s ease; }
-    .text-btn { cursor:pointer; }
-
-    .qcard { border:1px solid var(--border); border-radius: 12px; padding: 12px; display:grid; gap:8px; background: var(--surface); }
-    .qtitle { font-weight:600; }
-    .qhelper { color: var(--muted); font-size: 13px; }
-
-    .radio-group { display:flex; gap: 12px; flex-wrap: wrap; }
-    .radio { display:flex; align-items:center; gap:6px; }
-
-    .pics { display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    @media (min-width: 640px) { .pics { grid-template-columns: repeat(4, 1fr); } }
-    .pic { border:1px solid var(--border); border-radius: 12px; overflow: hidden; background:#fff; cursor:pointer; outline: none; }
-    [data-theme="dark"] .pic { background:#0c1529; border-color:#203050; }
-    .pic img { width:100%; height:80px; object-fit: cover; display:block; }
-    .pic span { display:block; padding:8px; font-size: 13px; color: var(--text); }
-    .pic[aria-pressed="true"] { box-shadow: var(--focus); border-color: #c9defa; }
-    [data-theme="dark"] .pic[aria-pressed="true"] { border-color: #2e7ae7; }
-
-    .dnd-area { border:2px dashed #cfd8e3; border-radius: 12px; padding: 16px; display:grid; gap: 10px; min-height: 120px; background: #fbfdff; }
-    [data-theme="dark"] .dnd-area { border-color:#203050; background:#0c1529; color:#cbd5e1; }
-    .dnd-items { display:flex; gap: 8px; flex-wrap: wrap; }
-    .chip { padding: 6px 10px; border-radius: 999px; background:#eef2f7; font-size: 13px; cursor:grab; user-select:none; }
-    [data-theme="dark"] .chip { background:#111a2e; color:#cbd5e1; }
-    .dnd-targets { display:flex; gap: 8px; }
-    .dropzone { flex:1; min-height: 48px; border:1px dashed #cfd8e3; border-radius: 10px; display:grid; place-items:center; color:#6b7280; font-size: 13px; padding: 6px; }
-    .dropzone.filled { border-style: solid; background:#f6fbff; color:#0a509b; font-weight:600; }
-    [data-theme="dark"] .dropzone { border-color:#203050; color:#94a3b8; }
-    [data-theme="dark"] .dropzone.filled { background:#0c1529; color:#79adff; border-color:#2e7ae7; }
-
-    .actions { display:flex; gap: 12px; justify-content: flex-end; }
-
-    @media (max-width: 760px) {
-      .thead { display:none; }
-      .trow { grid-template-columns: 1fr; gap: 8px; }
-      .cell.label { color:#667085; font-size:12px; }
-      .table .trow { background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, #eff6ff, #f8fafc) border-box; border: 1px solid transparent; border-radius: 14px; margin: 10px; }
-      [data-theme="dark"] .table .trow { background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, #0c1529, #0f172a) border-box; }
-    }
-
-    /* Modal (multi-select) */
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(2, 6, 23, .45); display:none; align-items:center; justify-content:center; padding:16px; z-index: 1000; }
-    [data-theme="dark"] .modal-backdrop { background: rgba(2, 6, 23, .65); }
-    .modal-backdrop.open { display:flex; }
-    .modal { width: 100%; max-width: 460px; background: var(--surface); border:1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-md); overflow:hidden; }
-    .modal header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background: var(--surface-2); border-bottom:1px solid var(--border); }
-    .modal header h3 { margin:0; font-size:16px; color: var(--text); }
-    .modal .content { padding: 14px 16px; display:grid; gap:12px; color: var(--text); }
-    .modal .actions { display:flex; gap:10px; justify-content:flex-end; padding:12px 16px; border-top:1px solid var(--border); }
-    .option-list { display:grid; gap:8px; }
-    .option { display:flex; gap:10px; align-items:center; border:1px solid var(--border); border-radius: 12px; padding:10px 12px; background: var(--surface); color: var(--text); }
-    .option input { width:16px; height:16px; }
-    .k { font-size:12px; color:#64748b; }
-    [data-theme="dark"] .k { color:#94a3b8; }
-    .btn { border:1px solid var(--border); background: var(--surface); color: var(--text); border-radius:10px; padding:8px 12px; cursor:pointer; }
-    .btn.primary { background: linear-gradient(90deg, var(--ttb-600), var(--ttb-700)); color:#fff; border:0; }
-    .btn.ghost { background: var(--surface); border:0; color: var(--ttb-700); font-weight:600; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app">
@@ -386,11 +93,11 @@
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="win"     aria-sort="none">Sales chance to win</div>
           </div>
           <div id="lead-rows"></div>
-        </div>        
-      </div>
-      <div class="sticky-bottom">
-          <button class="btn-select" id="btn-select-prospect" type="button">Select Prospect</button>
         </div>
+      </div>
+      <div>
+        <button class="btn-select" id="btn-select-prospect" type="button">Select Prospect</button>
+      </div>
     </section>
 
     <!-- Screen 3: Objective & Probing -->
@@ -452,6 +159,242 @@
             </div>
           </div>
         </div>
+        <div class="qcard">
+  <div class="qtitle">
+    Q1. How many credit cards do you currently have, and what is the approximate total credit limit?
+  </div>
+  <div class="qhelper">
+    (Just to understand your overall situation better, could you kindly share how many cards you are currently using?)
+  </div>
+  <div class="radio-group" role="radiogroup" aria-label="Credit cards" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio">
+      <input type="radio" name="q2" value="1-2"> 1–2 cards (total limit &lt; THB 100,000)
+    </label>
+    <label class="radio">
+      <input type="radio" name="q2" value="3-4"> 3–4 cards (total limit THB 100,000–300,000)
+    </label>
+    <label class="radio">
+      <input type="radio" name="q2" value="5+"> 5 or more cards (total limit &gt; THB 300,000)
+    </label>
+    <label class="radio">
+      <input type="radio" name="q2" value="other"> Other:
+      <input type="text" id="q2-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled />
+    </label>
+  </div>
+</div>
+<br>
+<!-- Q2 – multi-select (checkboxes) -->
+<div class="qcard">
+  <div class="qtitle">Q2. What do you mostly use your credit cards for? <span style="font-weight:500">(select more than one if applicable)</span></div>
+  <div class="qhelper">(This will help me understand your lifestyle and spending needs, so we can find the right solution together.)</div>
+  <div class="radio-group" role="group" aria-label="Card usage" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="checkbox" name="q2[]" value="daily"> Daily expenses (food, fuel, bills)</label>
+    <label class="radio"><input type="checkbox" name="q2[]" value="installments"> Installment purchases (appliances, furniture, etc.)</label>
+    <label class="radio"><input type="checkbox" name="q2[]" value="travel"> Travel/transportation</label>
+    <label class="radio"><input type="checkbox" name="q2[]" value="shopping"> Shopping/lifestyle</label>
+    <label class="radio">
+      <input type="checkbox" name="q2[]" value="other" data-other-input="#q2-other"> Other:
+      <input type="text" id="q2-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    </label>
+  </div>
+</div>
+<br>
+
+<!-- Q3 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q3. When paying your credit card bill each month, how do you usually pay?</div>
+  <div class="qhelper">(I want to see if payments feel manageable or stressful for you, so I can recommend something practical.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Payment habit" id="q3-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q3" value="full"> Full payment every month</label>
+    <label class="radio"><input type="radio" name="q3" value="mix"> Mix of minimum and full payment</label>
+    <label class="radio"><input type="radio" name="q3" value="minimum"> Mostly minimum payment</label>
+    <label class="radio"><input type="radio" name="q3" value="overdue"> Frequently overdue</label>
+  </div>
+</div>
+<br>
+
+<!-- Q4 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q4. Have you ever paid your bill late?</div>
+  <div class="qhelper">(Many people face this sometimes — I just want to understand if it happens often for you.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Late payment frequency" id="q4-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q4" value="never"> Never</label>
+    <label class="radio"><input type="radio" name="q4" value="occasionally"> Occasionally</label>
+    <label class="radio"><input type="radio" name="q4" value="frequent"> Frequently (3+ months per year)</label>
+  </div>
+</div>
+<br>
+
+<!-- Q5 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q5. What is the approximate total minimum payment across all cards each month?</div>
+  <div class="qhelper">(This helps me see how much pressure monthly payments are putting on you right now.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Total minimum payment" id="q5-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q5" value="<5000">&lt; THB 5,000</label>
+    <label class="radio"><input type="radio" name="q5" value="5000-10000"> THB 5,000 – 10,000</label>
+    <label class="radio"><input type="radio" name="q5" value="10001-20000"> THB 10,001 – 20,000</label>
+    <label class="radio"><input type="radio" name="q5" value=">20000">&gt; THB 20,000</label>
+  </div>
+</div>
+<br>
+
+<!-- Q6 – multi-select (checkboxes) -->
+<div class="qcard">
+  <div class="qtitle">Q6. Besides credit cards, do you currently have any other loans? <span style="font-weight:500">(select more than one if applicable)</span></div>
+  <div class="qhelper">(So I can get the full picture of your commitments, could you share if you have any other loans at the moment?)</div>
+  <div class="radio-group" role="group" aria-label="Other loans" id="q6-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="checkbox" name="q6[]" value="personal"> Personal loan</label>
+    <label class="radio"><input type="checkbox" name="q6[]" value="mortgage"> Mortgage/home loan</label>
+    <label class="radio"><input type="checkbox" name="q6[]" value="car"> Car loan / Car for Cash</label>
+    <label class="radio"><input type="checkbox" name="q6[]" value="cooperative"> Cooperative loan / company welfare loan</label>
+    <label class="radio"><input type="checkbox" name="q6[]" value="none"> None</label>
+    <label class="radio">
+      <input type="checkbox" name="q6[]" value="other" data-other-input="#q6-other"> Other:
+      <input type="text" id="q6-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    </label>
+  </div>
+</div>
+<br>
+
+<!-- Q7 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q7. What is your approximate total monthly repayment across all debts?</div>
+  <div class="qhelper">(This will help me calculate your repayment ratio, to see what amount would feel more comfortable for you.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Total monthly repayment" id="q7-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q7" value="<10000">&lt; THB 10,000</label>
+    <label class="radio"><input type="radio" name="q7" value="10001-20000"> THB 10,001 – 20,000</label>
+    <label class="radio"><input type="radio" name="q7" value="20001-30000"> THB 20,001 – 30,000</label>
+    <label class="radio"><input type="radio" name="q7" value=">30000">&gt; THB 30,000</label>
+  </div>
+</div>
+<br>
+
+<!-- Q8 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q8. What is your current monthly income range?</div>
+  <div class="qhelper">(I’ll ask this gently, as it’s important for me to ensure the loan fits your affordability and stability.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Income range" id="q8-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q8" value="<30000">&lt; THB 30,000</label>
+    <label class="radio"><input type="radio" name="q8" value="30001-50000"> THB 30,001 – 50,000</label>
+    <label class="radio"><input type="radio" name="q8" value="50001-80000"> THB 50,001 – 80,000</label>
+    <label class="radio"><input type="radio" name="q8" value=">80000">&gt; THB 80,000</label>
+  </div>
+</div>
+<br>
+
+<!-- Q9 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q9. After paying your regular living expenses (housing, utilities, family costs), what is your financial situation?</div>
+  <div class="qhelper">(This isn’t about judging — it just helps me see how much space you have left each month.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Post-expense situation" id="q9-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q9" value="savings"> Still have regular savings</label>
+    <label class="radio"><input type="radio" name="q9" value="manageable"> Manageable but no savings</label>
+    <label class="radio"><input type="radio" name="q9" value="rotate"> Shortfall, need to rotate cards</label>
+    <label class="radio"><input type="radio" name="q9" value="negative"> Negative cash flow / need to borrow more</label>
+  </div>
+</div>
+<br>
+
+<!-- Q10 – single choice + other -->
+<div class="qcard">
+  <div class="qtitle">Q10. What is your main challenge in managing your debts right now?</div>
+  <div class="qhelper">(If you could share your biggest pain point, I can suggest the best way consolidation might bring you relief.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Main challenge" id="q10-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q10" value="interest"> High interest rates</label>
+    <label class="radio"><input type="radio" name="q10" value="repayment"> High monthly repayment amount</label>
+    <label class="radio"><input type="radio" name="q10" value="too-many"> Too many lenders to manage</label>
+    <label class="radio">
+      <input type="radio" name="q10" value="other" data-other-input="#q10-other"> Other:
+      <input type="text" id="q10-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    </label>
+  </div>
+</div>
+<br>
+
+<!-- Q11 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q11. Do you currently have stable monthly income transferred to your account?</div>
+  <div class="qhelper">(I’m asking to ensure your application can go smoothly, as banks prefer to see stable income flow.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Income type" id="q11-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q11" value="salary"> Yes, regular salary with payslips</label>
+    <label class="radio"><input type="radio" name="q11" value="freelancer"> Freelancer / irregular income</label>
+    <label class="radio"><input type="radio" name="q11" value="side"> Mainly from side business</label>
+  </div>
+</div>
+<br>
+
+<!-- Q12 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q12. In the last 3 years, have you had any overdue payment records with the credit bureau?</div>
+  <div class="qhelper">(Please don’t worry — I only ask this to check whether it could affect your loan approval chances.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Credit bureau overdue" id="q12-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q12" value="never"> Never</label>
+    <label class="radio"><input type="radio" name="q12" value="1-2"> Yes, 1–2 times but already cleared</label>
+    <label class="radio"><input type="radio" name="q12" value="outstanding"> Yes, and still outstanding</label>
+  </div>
+</div>
+<br>
+
+<!-- Q13 – single choice + other -->
+<div class="qcard">
+  <div class="qtitle">Q13. What is your current employment type?</div>
+  <div class="qhelper">(This helps me understand your work stability and how we can present your case more strongly.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Employment type" id="q13-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q13" value="ft-gt1"> Full-time employee (&gt; 1 year of continuous work)</label>
+    <label class="radio"><input type="radio" name="q13" value="ft-lt1"> Full-time employee (&lt; 1 year of continuous work)</label>
+    <label class="radio"><input type="radio" name="q13" value="owner"> Business owner / self-employed</label>
+    <label class="radio">
+      <input type="radio" name="q13" value="other" data-other-input="#q13-other"> Other:
+      <input type="text" id="q13-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    </label>
+  </div>
+</div>
+<br>
+
+<!-- Q14 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q14. How long have you been working with your current employer?</div>
+  <div class="qhelper">(The longer your work history, the stronger your profile looks to lenders — may I ask how long you’ve been here?)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Work tenure" id="q14-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q14" value="<1">&lt; 1 year</label>
+    <label class="radio"><input type="radio" name="q14" value="1-3"> 1 – 3 years</label>
+    <label class="radio"><input type="radio" name="q14" value="3-5"> 3 – 5 years</label>
+    <label class="radio"><input type="radio" name="q14" value=">5">&gt; 5 years</label>
+  </div>
+</div>
+<br>
+
+<!-- Q15 – single choice -->
+<div class="qcard">
+  <div class="qtitle">Q15. Do you have any informal loans (outside financial institutions)?</div>
+  <div class="qhelper">(I ask this only so I can give you the most realistic plan — your answer will stay confidential.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Informal loans" id="q15-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q15" value="no"> No</label>
+    <label class="radio"><input type="radio" name="q15" value="small"> Yes, small amount</label>
+    <label class="radio"><input type="radio" name="q15" value="significant"> Yes, significant amount</label>
+  </div>
+</div>
+<br>
+
+<!-- Q16 – single choice + other -->
+<div class="qcard">
+  <div class="qtitle">Q16. When reviewing a debt consolidation offer, which aspect is most important to you?</div>
+  <div class="qhelper">(Different people value different things — I’d like to know what matters most for you, so I can design the proposal that truly fits your needs.)</div>
+  <div class="radio-group" role="radiogroup" aria-label="Priority aspect" id="q16-group" style="display:flex; flex-direction:column; gap:8px;">
+    <label class="radio"><input type="radio" name="q16" value="max-amount"> Maximum loan size (highest approved amount possible)</label>
+    <label class="radio"><input type="radio" name="q16" value="short-tenor"> Shortest tenor (finish debt quickly, higher installment)</label>
+    <label class="radio"><input type="radio" name="q16" value="lowest-installment"> Lowest monthly installment (longer tenor, easier cash flow)</label>
+    <label class="radio"><input type="radio" name="q16" value="lowest-rate"> Lowest interest rate (minimize total cost of borrowing)</label>
+    <label class="radio"><input type="radio" name="q16" value="balance"> Balance between amount, tenor, and rate</label>
+    <label class="radio">
+      <input type="radio" name="q16" value="other" data-other-input="#q16-other"> Other:
+      <input type="text" id="q16-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    </label>
+  </div>
+</div>
+<br>
+
+
 
         <div class="actions">
           <button class="text-btn" type="button" id="btn-reset">Reset</button>
@@ -497,422 +440,6 @@
 
   </main>
 
-  <script>
-    'use strict';
-    const el = (id) => document.getElementById(id);
-    const screenLogin = el('screen-login');
-    const screenDashboard = el('screen-dashboard');
-    const screenObjective = el('screen-objective');
-
-    /* ===== Theme handling ===== */
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('pp-theme'); // 'light' | 'dark' | null
-
-    function applyTheme(mode) {
-      // mode: 'light' | 'dark'
-      document.documentElement.setAttribute('data-theme', mode);
-      const isDark = mode === 'dark';
-      const btn = el('theme-toggle');
-      const lab = el('theme-label');
-      const emo = el('theme-emoji');
-      if (btn) btn.setAttribute('aria-pressed', String(isDark));
-      if (lab) lab.textContent = isDark ? 'Light' : 'Dark';
-      if (emo) emo.textContent = isDark ? '☀️' : '🌙';
-    }
-
-    function initTheme() {
-      const mode = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
-      applyTheme(mode);
-    }
-
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
-      const next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-      localStorage.setItem('pp-theme', next);
-    }
-
-    initTheme();
-
-    const themeToggleBtn = el('theme-toggle');
-    if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
-
-    /* ===== Navigation ===== */
-    function go(which) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      if (which === 'login') screenLogin.classList.add('active');
-      if (which === 'dashboard') screenDashboard.classList.add('active');
-      if (which === 'objective') screenObjective.classList.add('active');
-      if (which === 'stub') document.getElementById('screen-stub').classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Login form interactions
-    const username = el('username');
-    const password = el('password');
-    const loginErr  = el('login-error');
-
-    document.querySelector('.toggle-eye').addEventListener('click', () => {
-      password.type = password.type === 'password' ? 'text' : 'password';
-    });
-
-    document.querySelector('.hint-row a').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('Website still in development');
-    });
-
-    function getInitials(str) {
-      return str.trim().split(/[\s\.@_\-]+/).filter(Boolean).slice(0,2).map(s=>s[0].toUpperCase()).join('');
-    }
-
-    el('login-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!username.value.trim() || !password.value.trim()) {
-        loginErr.textContent = 'Fill your email and your password';
-        return;
-      }
-      loginErr.textContent = '';
-      el('salesperson-name').textContent = username.value.trim();
-      el('avatar').textContent = getInitials(username.value) || 'PP';
-      go('dashboard');
-      renderLeads();
-    });
-
-    // Data
-    const leads = [
-      { name: 'Anan Chaiyakul', gender: 'M', age: 40, income: 48000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 78, approve: 'High' },
-      { name: 'Pimchanok S.',  gender: 'F', age: 36, income: 62000, offers: ['Car for Cash'], win: 62, approve: 'Medium' },
-      { name: 'Somsak T.',     gender: 'M', age: 45, income: 41000, offers: ['Refinance'], win: 35, approve: 'Low' },
-      { name: 'Nattaporn K.',  gender: 'F', age: 29, income: 52000, offers: ['Car for Cash', 'Credit Life Insurance'], win: 84, approve: 'High' },
-    ];
-
-    const OFFER_OPTIONS = [
-      'Car for Cash',
-      'Refinance',
-      'Personal Loan',
-      'Credit Life Insurance'
-    ];
-
-    /* ===== Sorting by header click ===== */
-    const approveRank = { 'Low': 0, 'Medium': 1, 'High': 2 };
-    const sortState = { key: '', dir: '' };
-
-    function valueFor(ld, key) {
-      switch (key) {
-        case 'name':   return ld.name;
-        case 'gender': return ld.gender;
-        case 'age':    return ld.age;
-        case 'income': return ld.income;
-        case 'offers': return (ld.offers || []).join(', ');
-        case 'approve':return approveRank[ld.approve] ?? -1;
-        case 'win':    return ld.win;
-        default:       return null;
-      }
-    }
-
-    function compareItems(a, b) {
-      const va = valueFor(a.ld, sortState.key);
-      const vb = valueFor(b.ld, sortState.key);
-
-      let cmp = 0;
-      if (typeof va === 'number' && typeof vb === 'number') {
-        cmp = va - vb;
-      } else {
-        cmp = String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: 'base' });
-      }
-      if (cmp === 0) cmp = a.i - b.i;
-      return sortState.dir === 'asc' ? cmp : -cmp;
-    }
-
-    function cycleSort(key) {
-      if (sortState.key !== key) {
-        sortState.key = key;
-        sortState.dir = 'desc';
-      } else if (sortState.dir === 'desc') {
-        sortState.dir = 'asc';
-      } else if (sortState.dir === 'asc') {
-        sortState.key = '';
-        sortState.dir = '';
-      } else {
-        sortState.dir = 'desc';
-      }
-      updateHeaderIndicators();
-      renderLeads();
-    }
-
-    function updateHeaderIndicators() {
-      document.querySelectorAll('.th-sort').forEach(th => {
-        const key = th.dataset.key;
-        let aria = 'none';
-        if (key === sortState.key) {
-          aria = sortState.dir === 'asc' ? 'ascending' : (sortState.dir === 'desc' ? 'descending' : 'none');
-        }
-        th.setAttribute('aria-sort', aria);
-      });
-    }
-
-    function bindHeaderSorting() {
-      document.querySelectorAll('.th-sort').forEach(th => {
-        th.addEventListener('click', () => cycleSort(th.dataset.key));
-        th.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cycleSort(th.dataset.key); }
-        });
-      });
-    }
-
-    /* ===== Rendering ===== */
-    function winClass(p){ if(p>=70) return 'p-high'; if(p>=40) return 'p-med'; return 'p-low'; }
-    function approveClass(a){ return a==='High'?'high':(a==='Medium'?'med':'low'); }
-
-    // Offer bubble (stacked lines)
-    function renderOfferBadges(offers, index){
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'offer-bubble';
-      button.setAttribute('data-index', String(index));
-
-      const stack = document.createElement('div');
-      stack.className = 'stack';
-
-      if (offers && offers.length) {
-        offers.forEach(txt => {
-          const line = document.createElement('span');
-          line.className = 'line';
-          line.textContent = txt;
-          stack.appendChild(line);
-        });
-      } else {
-        const line = document.createElement('span');
-        line.className = 'line muted';
-        line.textContent = 'No offer selected';
-        stack.appendChild(line);
-      }
-
-      const chevron = document.createElement('span');
-      chevron.className = 'chevron';
-      chevron.setAttribute('aria-hidden', 'true');
-      chevron.textContent = '›';
-
-      button.appendChild(stack);
-      button.appendChild(chevron);
-
-      button.addEventListener('click', () => openOfferModal(index));
-      return button;
-    }
-
-    function renderLeads(){
-      const rows = document.getElementById('lead-rows');
-      rows.innerHTML = '';
-
-      let ordered = leads.map((ld, i) => ({ ld, i }));
-      if (sortState.key && sortState.dir) {
-        ordered.sort(compareItems);
-      }
-
-      ordered.forEach(({ ld, i }) => {
-        const row = document.createElement('div');
-        row.className = 'trow';
-        row.setAttribute('role','row');
-
-        row.innerHTML = `
-          <div class="cell">${ld.name}</div>
-          <div class="cell">${ld.gender === 'M' ? '♂' : '♀'}</div>
-          <div class="cell right">${ld.age}</div>
-          <div class="cell right">${ld.income.toLocaleString('en-US')} THB</div>
-          <div class="cell offer-cell" data-index="${i}"></div>
-          <div class="cell">
-            <div class="approve ${approveClass(ld.approve)}">
-              <div class="approve-line">${ld.approve==='High'?'✓':ld.approve==='Medium'?'~':'✕'} <span>${ld.approve}</span></div>
-            </div>
-          </div>
-          <div class="cell">
-            <div class="approve ${winClass(ld.win)}">
-              <div class="approve-line"><span>${ld.win}%</span></div>
-            </div>
-          </div>
-        `;
-
-        rows.appendChild(row);
-        row.querySelector('.offer-cell').appendChild(renderOfferBadges(ld.offers, i));
-      });
-    }
-
-    // Select Prospect
-    el('btn-select-prospect').addEventListener('click', () => {
-      go('objective');
-    });
-
-    // Screen 3: chips
-    const chips = new Set(['Car for Cash Loan']);
-    const chipWrap = el('objective-chips');
-
-    function drawChips(){
-      chipWrap.innerHTML = '';
-      chips.forEach(ch => {
-        const b = document.createElement('button');
-        b.className = 'text-btn';
-        b.innerHTML = ch + ' ×';
-        b.title = 'Remove objective';
-        b.addEventListener('click', () => { chips.delete(ch); drawChips(); });
-        chipWrap.appendChild(b);
-      });
-    }
-    drawChips();
-
-    el('btn-add-objective').addEventListener('click', () => {
-      const sel = document.createElement('select');
-      sel.className = 'select';
-      sel.innerHTML = `
-        <option selected disabled>Choose objective…</option>
-        <option>Car for Cash Loan</option>
-        <option>Refinance</option>
-        <option>Personal Loan</option>
-        <option>Credit Life Insurance</option>`;
-      sel.addEventListener('change', () => {
-        const val = sel.value;
-        if (val && !chips.has(val) && chips.size < 3) { chips.add(val); drawChips(); }
-        sel.remove();
-      });
-      sel.style.marginTop = '8px';
-      sel.setAttribute('aria-label','Add objective');
-      document.querySelector('#screen-objective .section .row:nth-of-type(2)').after(sel);
-    });
-
-    el('btn-back-dashboard').addEventListener('click', () => go('dashboard'));
-
-    // Picture selection toggle
-    document.querySelectorAll('#pic-choices .pic').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
-        btn.setAttribute('aria-pressed','true');
-      });
-    });
-
-    // Drag & Drop practice
-    let dragged = null;
-    document.querySelectorAll('.chip').forEach(chip => {
-      chip.addEventListener('dragstart', () => { dragged = chip; });
-      chip.addEventListener('dragend', () => { dragged = null; });
-    });
-    document.querySelectorAll('.dropzone').forEach(zone => {
-      zone.addEventListener('dragover', (e) => e.preventDefault());
-      zone.addEventListener('drop', () => {
-        if (!dragged) return;
-        zone.textContent = dragged.textContent;
-        zone.classList.add('filled');
-      });
-    });
-
-    // Validation helpers (screen 3)
-    function isObjectiveValid(){ return chips.size >= 1; }
-    function isQ1Answered(){ return !!document.querySelector('input[name="q1"]:checked'); }
-    function isPicChosen(){ return !!document.querySelector('#pic-choices .pic[aria-pressed="true"]'); }
-    function isDndDone(){ return document.querySelectorAll('.dropzone.filled').length >= 1; }
-
-    function buildErrorMessage(errors) {
-      return 'Please complete:\n- ' + errors.join('\n- ');
-    }
-
-    el('btn-next').addEventListener('click', () => {
-      const errors = [];
-      if (!isObjectiveValid()) errors.push('Select at least one objective');
-      if (!isQ1Answered()) errors.push('Answer how often car is used');
-      if (!isPicChosen()) errors.push('Choose an installment range');
-      if (!isDndDone()) errors.push('Complete the drag-and-drop action');
-      if (errors.length) {
-        alert(buildErrorMessage(errors));
-        return;
-      }
-      alert('Great! Proceeding to the next step (stubbed for prototype).');
-      go('stub');
-    });
-
-    el('btn-reset').addEventListener('click', () => {
-      document.querySelectorAll('input[name="q1"]').forEach(r => r.checked = false);
-      document.querySelectorAll('#pic-choices .pic').forEach(x => x.setAttribute('aria-pressed','false'));
-      document.querySelectorAll('.dropzone').forEach(z => { z.textContent = 'Drop here'; z.classList.remove('filled'); });
-    });
-
-    /* ======== Offer Modal Logic (multi-select) ======== */
-    const offerModal = el('offer-modal');
-    const offerOptionsWrap = el('offer-options');
-    const offerSave = el('offer-save');
-    const offerCancel = el('offer-cancel');
-    const offerClose = el('offer-close');
-    const offerSelectAll = el('offer-select-all');
-    const offerClear = el('offer-clear');
-
-    let editingIndex = null;
-    let chosenOffers = new Set();
-
-    function populateOfferOptions(currentOffers) {
-      offerOptionsWrap.innerHTML = '';
-      OFFER_OPTIONS.forEach(opt => {
-        const row = document.createElement('label');
-        row.className = 'option';
-        row.innerHTML = `
-          <input type="checkbox" value="${opt}">
-          <span>${opt}</span>
-        `;
-        const cb = row.querySelector('input');
-        cb.checked = currentOffers.has(opt);
-        row.addEventListener('change', () => {
-          cb.checked ? chosenOffers.add(opt) : chosenOffers.delete(opt);
-        });
-        offerOptionsWrap.appendChild(row);
-      });
-    }
-
-    function openOfferModal(index) {
-      editingIndex = index;
-      chosenOffers = new Set(leads[index].offers || []);
-      populateOfferOptions(chosenOffers);
-      offerModal.classList.add('open');
-      setTimeout(() => {
-        const first = offerOptionsWrap.querySelector('input[type="checkbox"]');
-        if (first) first.focus();
-      }, 0);
-    }
-
-    function closeOfferModal() {
-      offerModal.classList.remove('open');
-      editingIndex = null;
-      chosenOffers = new Set();
-    }
-
-    offerSave.addEventListener('click', () => {
-      if (editingIndex == null) return closeOfferModal();
-      leads[editingIndex].offers = Array.from(chosenOffers);
-      document.querySelectorAll(`.offer-cell[data-index="${editingIndex}"]`).forEach(cell => {
-        cell.innerHTML = '';
-        cell.appendChild(renderOfferBadges(leads[editingIndex].offers, editingIndex));
-      });
-      closeOfferModal();
-    });
-
-    offerCancel.addEventListener('click', closeOfferModal);
-    offerClose.addEventListener('click', closeOfferModal);
-    offerModal.addEventListener('click', (e) => {
-      if (e.target === offerModal) closeOfferModal();
-    });
-
-    offerSelectAll.addEventListener('click', () => {
-      chosenOffers = new Set(OFFER_OPTIONS);
-      offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
-    });
-
-    offerClear.addEventListener('click', () => {
-      chosenOffers.clear();
-      offerOptionsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-    });
-
-    // Bind header sorting controls and first render
-    function bindHeaderSortingAll(){
-      bindHeaderSorting();
-      updateHeaderIndicators();
-      renderLeads();
-    }
-    bindHeaderSortingAll();
-  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
