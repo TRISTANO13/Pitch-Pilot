@@ -357,3 +357,97 @@ bindHeaderSortingAll();
     go('objective');
   }
 })();
+
+let currentLeadIndex = null;
+
+function renderSelectedProspect(i) {
+  const nameEl = el('prospect-name');
+  const avEl   = el('prospect-avatar');
+  const extra  = el('prospect-extra');
+  if (i == null || !leads[i]) {
+    if (nameEl) nameEl.textContent = 'No prospect selected';
+    if (avEl)   avEl.textContent = '?';
+    if (extra)  extra.textContent = '';
+    currentLeadIndex = null;
+    return;
+  }
+  const ld = leads[i];
+  currentLeadIndex = i;
+  if (nameEl) nameEl.textContent = ld.name;
+  if (avEl)   avEl.textContent   = getInitials(ld.name);
+  if (extra)  extra.textContent  = `${ld.gender === 'M' ? 'Male' : 'Female'} • ${ld.age} • ${ld.income.toLocaleString('en-US')} THB/month`;
+}
+
+
+(function openFromUrl(){
+  if (window.location.hash === '#objective') {
+    const idxStr = new URLSearchParams(window.location.search).get('lead');
+    const idx = idxStr != null ? Number(idxStr) : NaN;
+    if (!Number.isNaN(idx)) renderSelectedProspect(idx);
+    go('objective');
+  }
+})();
+
+// --- util: calc answered/total pour un conteneur donné
+function calcAnsweredIn(container) {
+  let total = 0, answered = 0;
+
+  // groupés par "name" (radios/checkboxes)
+  const groups = new Map();
+  container.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(inp => {
+    const name = inp.name || inp.getAttribute('name');
+    if (!name) return;
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(inp);
+  });
+  groups.forEach(arr => {
+    total += 1;
+    if (arr.some(i => i.checked)) answered += 1;
+  });
+
+  // selects (chaque select compte pour 1)
+  const selects = container.querySelectorAll('select');
+  total += selects.length;
+  selects.forEach(sel => { if (sel.selectedIndex > 0) answered += 1; });
+
+  return { answered, total };
+}
+
+// --- met à jour le badge d'une section <details>
+function updateSectionProgress(detailsId, badgeId) {
+  const details = document.getElementById(detailsId);
+  const badge = document.getElementById(badgeId);
+  if (!details || !badge) return;
+  const body = details.querySelector('.accordion__body');
+  const { answered, total } = calcAnsweredIn(body || details);
+  badge.textContent = `${answered}/${total} answered`;
+}
+
+// --- met à jour toutes les sections
+function updateAllSectionProgress() {
+  updateSectionProgress('accord-lifestyle',   'progress-lifestyle');
+  updateSectionProgress('accord-borrow',   'progress-borrow');
+  updateSectionProgress('accord-qualification',  'progress-qualification');
+  updateSectionProgress('accord-preference', 'progress-preference');
+}
+
+// --- écouter les changements du formulaire
+document.getElementById('form-lifestyle')?.addEventListener('change', updateAllSectionProgress);
+document.getElementById('form-borrow')?.addEventListener('change', updateAllSectionProgress);
+document.getElementById('form-qualification')?.addEventListener('change', updateAllSectionProgress);
+document.getElementById('form-preference')?.addEventListener('change', updateAllSectionProgress);
+
+// --- init au chargement (après que le DOM de la page 3 est rendu)
+updateAllSectionProgress();
+
+// --- mémoriser l'état open/close de chaque accordéon
+['accord-lifestyle','accord-oblig','accord-income','accord-profile'].forEach(id => {
+  const det = document.getElementById(id);
+  if (!det) return;
+  const key = `accordion-open:${id}`;
+  const saved = localStorage.getItem(key);
+  if (saved !== null) det.open = saved === '1';
+  det.addEventListener('toggle', () => {
+    localStorage.setItem(key, det.open ? '1' : '0');
+  });
+});

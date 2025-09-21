@@ -200,3 +200,35 @@ body{
 .row-actions .btn-select{
   /* on réutilise le style existant .btn-select */
 }
+
+/* Accordion */
+.accordion {
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--surface);
+  box-shadow:var(--shadow-sm);
+  margin:12px 0 16px;
+}
+
+.accordion > summary {
+  cursor:pointer;
+  list-style:none;
+  padding:12px 14px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-weight:600;
+  position:relative;
+}
+.accordion > summary::-webkit-details-marker { display:none; }
+
+.accordion > summary::after{
+  content:'▾';
+  transform:rotate(0deg);
+  transition:transform .2s ease;
+  opacity:.75;
+}
+.accordion[open] > summary::after{ transform:rotate(180deg); }
+
+#probes-progress { color:var(--muted); font-weight:500; font-size:13px; }
+
+.accordion__body { padding: 0 14px 12px; }
+.accordion__body .qcard{ margin-top:10px; }

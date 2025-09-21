@@ -88,7 +88,7 @@
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="gender"  aria-sort="none">Gender</div>
             <div class="cell th-sort right" role="columnheader" tabindex="0" data-key="age"     aria-sort="none">Age</div>
             <div class="cell th-sort right" role="columnheader" tabindex="0" data-key="income"  aria-sort="none">Income</div>
-            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="offers"  aria-sort="none">Sales purpose<br><strong>(click to edit)</strong></div>
+            <div class="cell th-sort" role="columnheader" tabindex="0" data-key="offers"  aria-sort="none">Sales purpose</div>
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="approve" aria-sort="none">Sales chance to be approved</div>
             <div class="cell th-sort" role="columnheader" tabindex="0" data-key="win"     aria-sort="none">Sales chance to win</div>
           </div>
@@ -105,7 +105,40 @@
   <div class="container">
 
 
-        
+    <div class="topbar">
+      <div style="display:flex; gap:10px; align-items:center">
+        <button id="theme-toggle-2" class="theme-toggle" type="button" aria-pressed="false" title="Toggle theme">
+          <span id="theme-emoji-2" aria-hidden="true">🌙</span>
+          <span id="theme-label-2" style="font-size:12px; color:var(--muted)">Dark</span>
+        </button>
+        <div class="brand" style="margin:0">
+          <img src="./images/TTB_Logo.png" alt="PitchPilot logo" class="brand__logo"/>
+          <div style="font-weight:700">PitchPilot</div>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="title">Sales Objective & Probing</h1>
+    <p class="caption">Understand the customer’s needs and financial situation to recommend the best debt consolidation solution.</p>
+
+        <!-- Bloc prospect sélectionné -->
+<div class="qcard" id="prospect-summary" style="display:flex; align-items:center; gap:10px;">
+  <div class="avatar" id="prospect-avatar" aria-hidden="true">?</div>
+  <div>
+    <div style="font-weight:700" id="prospect-name">No prospect selected</div>
+    <div style="color:var(--muted); font-size:13px" id="prospect-extra"></div>
+  </div>
+</div>
+<br>
+
+<details id="accord-lifestyle" class="accordion" closed>
+  <summary>
+    <span>1. Credit Card Usage Lifestyle & Payment Pattern</span>
+    <span id="progress-lifestyle" aria-live="polite">0 answered</span>
+  </summary>
+
+  <div class="accordion__body">
+<form id="form-lifestyle" novalidate>
 <!-- Q1 – multi-select (checkboxes) -->
 <div class="qcard">
   <div class="qtitle">Q1. What do you mostly use your credit cards for? <span style="font-weight:500">(select more than one if applicable)</span></div>
@@ -168,6 +201,20 @@
   </select>
 </div>
 <br>
+
+</form> 
+</div>  
+</details>
+
+<details id="accord-borrow" class="accordion" closed>
+  <summary>
+    <span>2. Borrowing Tools & Existing Commitments</span>
+    <span id="progress-borrow" aria-live="polite">0 answered</span>
+  </summary>
+
+  <div class="accordion__body">
+<form id="form-borrow" novalidate>
+
 
 <!-- Q5 – multi-select (checkboxes) -->
 <div class="qcard">
@@ -280,6 +327,19 @@
 </div>
 <br>
 
+</form> 
+</div>  
+</details>
+
+<details id="accord-qualification" class="accordion" closed>
+  <summary>
+    <span>3. Pre-Screen Qualification Questions</span>
+    <span id="progress-qualification" aria-live="polite">0 answered</span>
+  </summary>
+
+  <div class="accordion__body">
+<form id="form-qualification" novalidate>
+
 <!-- Q11 – single choice -->
 <div class="qcard">
   <div class="qtitle">Q11. Do you currently have stable monthly income transferred to your account?</div>
@@ -345,6 +405,19 @@
 </div>
 <br>
 
+</form> 
+</div>  
+</details>
+
+<details id="accord-preference" class="accordion" closed>
+  <summary>
+    <span>4. Customer Expectation for Debt Consolidation Proposal</span>
+    <span id="progress-preference" aria-live="polite">0 answered</span>
+  </summary>
+
+  <div class="accordion__body">
+<form id="form-preference" novalidate>
+
 <!-- Q16 – single choice + other -->
 <div class="qcard">
   <div class="qtitle">Q16. When reviewing a debt consolidation offer, which aspect is most important to you?</div>
@@ -372,6 +445,12 @@
     <label class="radio"><input type="radio" name="q17" value="property"> Property</label>
   </div>
 </div>
+<br>
+
+</form> 
+</div>
+</details>
+
 
 
 
