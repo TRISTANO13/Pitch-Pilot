@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "title": "Debt Consolidation – Client Intake",
+    "currency": "THB",
+    "language": "en",
+    "version": "1.0"
+  },
+  "sections": [
+    {
+      "id": "usage",
+      "title": "1. Credit Card Usage & Payments",
+      "questions": [
+        {
+          "id": "q1",
+          "title": "What do you mainly use your credit card for?",
+          "help": "Select all that apply.",
+          "type": "multi-select",
+          "options": [
+            { "value": "daily", "label": "Daily expenses (food, fuel, utilities)" },
+            { "value": "installments", "label": "Installment purchases (electronics, furniture, etc.)" },
+            { "value": "travel", "label": "Travel / Transportation" },
+            { "value": "shopping", "label": "Shopping / Lifestyle" },
+            { "value": "other", "label": "Other (please specify below)" }
+          ],
+          "answer": [],
+          "other_text": null
+        },
+        {
+          "id": "q2",
+          "title": "How do you usually pay your credit card bill each month?",
+          "help": "Manageable vs. burdensome helps tailor advice.",
+          "type": "single-choice",
+          "options": [
+            { "value": "full", "label": "Pay in full every month" },
+            { "value": "mix", "label": "Sometimes full, sometimes minimum" },
+            { "value": "minimum", "label": "Mostly minimum payment" },
+            { "value": "overdue", "label": "Often pay late" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q3",
+          "title": "Have you ever made a late credit card payment?",
+          "help": "How often late payments happen.",
+          "type": "single-choice",
+          "options": [
+            { "value": "never", "label": "Never" },
+            { "value": "occasionally", "label": "Occasionally" },
+            { "value": "frequent", "label": "Frequently (3+ times per year)" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q4",
+          "title": "Approximate total minimum monthly payment across all credit cards",
+          "help": "Choose a range.",
+          "type": "select",
+          "unit": "THB",
+          "options": [
+            { "value": "0", "label": "Less than 10,000" },
+            { "value": "10001-20000", "label": "10,000 - 20,000" },
+            { "value": "20001-30000", "label": "20,000 - 30,000" },
+            { "value": "30001-40000", "label": "30,000 - 40,000" },
+            { "value": "40001-50000", "label": "40,000 - 50,000" },
+            { "value": "50001-60000", "label": "50,000 - 60,000" },
+            { "value": "60001-70000", "label": "60,000 - 70,000" },
+            { "value": "70001-80000", "label": "70,000 - 80,000" },
+            { "value": "80001-90000", "label": "80,000 - 90,000" },
+            { "value": "90001-100000", "label": "90,000 - 100,000" },
+            { "value": "100001+", "label": "More than 100,000" }
+          ],
+          "answer": null
+        }
+      ]
+    },
+    {
+      "id": "borrow",
+      "title": "2. Borrowing Tools & Existing Commitments",
+      "questions": [
+        {
+          "id": "q5",
+          "title": "Apart from credit cards, do you currently have any other loans?",
+          "help": "Select all that apply.",
+          "type": "multi-select",
+          "options": [
+            { "value": "personal", "label": "Personal loan" },
+            { "value": "mortgage", "label": "Mortgage / Home loan" },
+            { "value": "car", "label": "Car loan / Car-for-cash" },
+            { "value": "cooperative", "label": "Cooperative / Company welfare loan" },
+            { "value": "none", "label": "None" },
+            { "value": "other", "label": "Other (please specify below)" }
+          ],
+          "answer": [],
+          "other_text": null
+        },
+        {
+          "id": "q6",
+          "title": "Approximate total monthly debt repayment",
+          "help": "Choose a range to help estimate DSR (debt service ratio).",
+          "type": "select",
+          "unit": "THB",
+          "options": [
+            { "value": "0", "label": "Less than 10,000" },
+            { "value": "10001-20000", "label": "10,000 - 20,000" },
+            { "value": "20001-30000", "label": "20,000 - 30,000" },
+            { "value": "30001-40000", "label": "30,000 - 40,000" },
+            { "value": "40001-50000", "label": "40,000 - 50,000" },
+            { "value": "50001-60000", "label": "50,000 - 60,000" },
+            { "value": "60001-70000", "label": "60,000 - 70,000" },
+            { "value": "70001-80000", "label": "70,000 - 80,000" },
+            { "value": "80001-90000", "label": "80,000 - 90,000" },
+            { "value": "90001-100000", "label": "90,000 - 100,000" },
+            { "value": "100001+", "label": "More than 100,000" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q7",
+          "title": "Current monthly income",
+          "help": "Enter a number in THB.",
+          "type": "number",
+          "unit": "THB",
+          "min": 0,
+          "answer": null
+        },
+        {
+          "id": "q8",
+          "title": "Approximate total credit limit",
+          "help": "Choose a range.",
+          "type": "select",
+          "unit": "THB",
+          "options": [
+            { "value": "0", "label": "Less than 50,000" },
+            { "value": "50001-100000", "label": "50,000 - 100,000" },
+            { "value": "100001-150000", "label": "100,000 - 150,000" },
+            { "value": "150001-200000", "label": "150,000 - 200,000" },
+            { "value": "200001-250000", "label": "200,000 - 250,000" },
+            { "value": "250001-300000", "label": "250,000 - 300,000" },
+            { "value": "300001-500000", "label": "300,000 - 500,000" },
+            { "value": "500001+", "label": "More than 500,000" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q9",
+          "title": "Post-expense monthly financial situation",
+          "help": "After housing, utilities, and family costs.",
+          "type": "single-choice",
+          "options": [
+            { "value": "savings", "label": "Still able to save regularly" },
+            { "value": "manageable", "label": "Manageable, but no savings" },
+            { "value": "rotate", "label": "Cash flow shortage, rely on credit cards" },
+            { "value": "negative", "label": "Negative cash flow / need to borrow more" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q10",
+          "title": "Main challenge in managing your debt right now",
+          "help": "Choose one. If 'Other', please specify.",
+          "type": "single-choice",
+          "options": [
+            { "value": "interest", "label": "High interest rates" },
+            { "value": "repayment", "label": "High monthly repayments" },
+            { "value": "too-many", "label": "Too many creditors" },
+            { "value": "other", "label": "Other (please specify below)" }
+          ],
+          "answer": null,
+          "other_text": null
+        }
+      ]
+    },
+    {
+      "id": "qualification",
+      "title": "3. Pre-Screen Qualification Questions",
+      "questions": [
+        {
+          "id": "q11",
+          "title": "Do you currently have a regular monthly income deposited into your account?",
+          "help": "Banks prefer stable income.",
+          "type": "single-choice",
+          "options": [
+            { "value": "salary", "label": "Yes, regular salary with payslips" },
+            { "value": "freelancer", "label": "Freelancer / irregular income" },
+            { "value": "side", "label": "Main income from side business" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q12",
+          "title": "Late payment history with the credit bureau in the past 3 years",
+          "help": "This may affect approval chances.",
+          "type": "single-choice",
+          "options": [
+            { "value": "never", "label": "Never" },
+            { "value": "1-2", "label": "1–2 times, but cleared" },
+            { "value": "outstanding", "label": "Yes, and still outstanding" }
+          ],
+          "answer": null
+        },
+        {
+          "id": "q13",
+          "title": "Current type of employment",
+          "help": "Indicates job stability.",
+          "type": "single-choice-with-followup",
+          "options": [
+            { "value": "ft-gt1", "label": "Full-time (> 1 year with current employer)" },
+            { "value": "ft-lt1", "label": "Full-time (< 1 year with current employer)" },
+            { "value": "owner", "label": "Business owner / Self-employed" },
+            { "value": "other", "label": "Other (please specify below)" }
+          ],
+          "answer": null,
+          "followups": {
+            "ft-gt1": {
+              "id": "q13_tenure",
+              "title": "How long have you been with your current employer?",
+              "type": "text",
+              "answer": null
+            },
+            "other_text": null
+          }
+        },
+        {
+          "id": "q14",
+          "title": "Do you have any informal (non-institutional) debt?",
+          "help": "Your answer remains confidential.",
+          "type": "single-choice",
+          "options": [
+            { "value": "no", "label": "No" },
+            { "value": "small", "label": "Yes, but a small amount" },
+            { "value": "significant", "label": "Yes, a significant amount" }
+          ],
+          "answer": null
+        }
+      ]
+    },
+    {
+      "id": "preference",
+      "title": "4. Customer Expectation for Debt Consolidation Proposal",
+      "questions": [
+        {
+          "id": "q15",
+          "title": "When considering a debt consolidation offer, what factor is most important to you?",
+          "help": "Pick the top priority. If 'Other', specify.",
+          "type": "single-choice",
+          "options": [
+            { "value": "max-amount", "label": "Maximum loan amount" },
+            { "value": "short-tenor", "label": "Shortest term (close debt faster, higher installments)" },
+            { "value": "lowest-installment", "label": "Lowest monthly installment (longer term)" },
+            { "value": "lowest-rate", "label": "Lowest interest rate" },
+            { "value": "balance", "label": "Balanced (amount, term, rate)" },
+            { "value": "other", "label": "Other (please specify below)" }
+          ],
+          "answer": null,
+          "other_text": null
+        },
+        {
+          "id": "q16",
+          "title": "Preferred collateral type for the loan",
+          "help": "Collateral can affect approval and rate.",
+          "type": "single-choice",
+          "options": [
+            { "value": "car", "label": "Car" },
+            { "value": "property", "label": "Property" }
+          ],
+          "answer": null
+        }
+      ]
+    }
+  ]
+}

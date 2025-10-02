@@ -7,6 +7,261 @@ const screenDashboard = el('screen-dashboard');
 const screenObjective = el('screen-objective');
 const screenFit = el('screen-fit');
 
+/* ===== Answers storage ===== */
+const ANSWERS_KEY = 'pp-answers-v1';
+
+// Charge les réponses sauvegardées (si existantes)
+let answers = {};
+try {
+  answers = JSON.parse(localStorage.getItem(ANSWERS_KEY) || '{}');
+} catch { answers = {}; }
+
+// Sauvegarder en localStorage
+function persistAnswers() {
+  localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+}
+
+// Nettoyer tout
+function clearAnswers() {
+  answers = {};
+  localStorage.removeItem(ANSWERS_KEY);
+}
+
+// Lit la valeur "other" si le contrôle pointe vers un input texte
+function readOtherIfAny(ctrl) {
+  const targetSel = ctrl.getAttribute('data-other-input');
+  if (!targetSel) return null;
+  const target = document.querySelector(targetSel);
+  return target && !target.disabled ? target.value.trim() : null;
+}
+
+/**
+ * Sérialise tous les formulaires (Q1–Q16) :
+ * - checkboxes => tableau des valeurs cochées
+ * - radios => valeur choisie (ou texte "other" si fourni)
+ * - select / input => valeur simple
+ */
+function collectAnswers() {
+  const forms = [
+    el('form-lifestyle'),
+    el('form-borrow'),
+    el('form-qualification'),
+    el('form-preference'),
+  ].filter(Boolean);
+
+  const next = {};
+
+  forms.forEach((form) => {
+    form.querySelectorAll('input, select, textarea').forEach((field) => {
+      const { name, type } = field;
+      if (!name) return;
+
+      // cases à cocher (multi)
+      if (type === 'checkbox') {
+        if (!next[name]) next[name] = [];
+        if (field.checked) {
+          if (field.value === 'other') {
+            const txt = readOtherIfAny(field);
+            if (txt) next[name].push(txt);
+          } else {
+            next[name].push(field.value);
+          }
+        }
+        return;
+      }
+
+      // radios
+      if (type === 'radio') {
+        if (field.checked) {
+          if (field.value === 'other') {
+            const txt = readOtherIfAny(field);
+            next[name] = txt || 'other';
+          } else {
+            // cas particulier Q13: "ft-gt1" déclenche une précision libre
+            if (name === 'q13' && field.value === 'ft-gt1') {
+              const extra = document.querySelector('#q13-ft-gt1')?.value?.trim() || '';
+              next[name] = { choice: field.value, detail: extra };
+            } else {
+              next[name] = field.value;
+            }
+          }
+        }
+        return;
+      }
+
+      // select / input number / texte
+      if (field.tagName === 'SELECT') {
+        next[name] = field.value;
+        return;
+      }
+      if (type === 'number' || type === 'text') {
+        // garde les champs isolés (income, autres "other" explicites si jamais utiles)
+        // on n’écrase pas s’ils sont déjà mémorisés via le radio/checkbox "other"
+        if (!next[name]) next[name] = field.value.trim();
+        return;
+      }
+    });
+  });
+
+  answers = next;
+  persistAnswers();
+}
+
+/**
+ * Recharge les formulaires depuis `answers` (pré-cochage / pré-remplissage)
+ */
+function loadAnswersIntoForms() {
+  const forms = [
+    el('form-lifestyle'),
+    el('form-borrow'),
+    el('form-qualification'),
+    el('form-preference'),
+  ].filter(Boolean);
+
+  forms.forEach((form) => {
+    form.querySelectorAll('input, select, textarea').forEach((field) => {
+      const { name, type, value } = field;
+      if (!name) return;
+      const saved = answers[name];
+
+      // checkboxes
+      if (type === 'checkbox') {
+        if (Array.isArray(saved)) {
+          if (value === 'other') {
+            // on essaie d’associer le texte "other" si présent
+            const targetSel = field.getAttribute('data-other-input');
+            if (targetSel) {
+              const target = document.querySelector(targetSel);
+              if (target) {
+                // Si 'saved' contient un texte qui ne fait pas partie des valeurs standards, on le met ici
+                const standardVals = Array.from(form.querySelectorAll(`input[name="${name}"][type="checkbox"]`))
+                  .map(cb => cb.value).filter(v => v !== 'other');
+                const otherText = saved.find(s => !standardVals.includes(s));
+                if (otherText) {
+                  field.checked = true;
+                  target.disabled = false;
+                  target.value = otherText;
+                }
+              }
+            }
+          } else {
+            field.checked = saved.includes(value);
+          }
+        }
+        return;
+      }
+
+      // radios
+      if (type === 'radio') {
+        if (saved == null) return;
+        if (typeof saved === 'object' && saved.choice) {
+          // Cas Q13 avec détail
+          field.checked = (saved.choice === value);
+          if (saved.choice === 'ft-gt1') {
+            const tgt = document.querySelector('#q13-ft-gt1');
+            if (tgt) { tgt.disabled = false; tgt.value = saved.detail || ''; }
+          }
+        } else if (value === 'other') {
+          // radio "other"
+          const txt = readOtherIfAny(field);
+          field.checked = (saved === 'other' || (txt && txt === saved));
+          // si 'saved' est du texte, on le remet
+          if (field.checked) {
+            const targetSel = field.getAttribute('data-other-input');
+            const target = targetSel ? document.querySelector(targetSel) : null;
+            if (target) { target.disabled = false; target.value = typeof saved === 'string' ? saved : ''; }
+          }
+        } else {
+          field.checked = (saved === value);
+        }
+        return;
+      }
+
+      // select
+      if (field.tagName === 'SELECT') {
+        if (saved != null) field.value = saved;
+        return;
+      }
+
+      // number / text (pour income etc.)
+      if (type === 'number' || type === 'text') {
+        if (saved != null && typeof saved === 'string') field.value = saved;
+        return;
+      }
+    });
+  });
+}
+
+/* Affiche les réponses sur l'écran Fit (résumé simple) */
+function renderFitAnswers() {
+  const host = document.getElementById('fit-answers-body');
+  if (!host) return;
+
+  const saved = answers && Object.keys(answers).length ? answers : JSON.parse(localStorage.getItem(ANSWERS_KEY) || '{}');
+  host.innerHTML = '';
+
+  if (!saved || !Object.keys(saved).length) {
+    host.innerHTML = '<div style="color:var(--muted);">No answers yet.</div>';
+    return;
+  }
+
+  // libellés lisibles
+  const labels = {
+    q1: 'Main credit card usage',
+    q2: 'Monthly card payment habit',
+    q3: 'Late payment history (card)',
+    q4: 'Total minimum monthly payment (all cards)',
+    q5: 'Other current loans',
+    q6: 'Total monthly debt repayment',
+    q7: 'Monthly income (THB)',
+    q8: 'Total credit limit',
+    q9: 'Post-expense cash position',
+    q10:'Main debt challenge',
+    q11:'Regular income deposit',
+    q12:'Credit bureau late in last 3 years',
+    q13:'Employment type (and tenure)',
+    q14:'Informal (non-institutional) debt',
+    q15:'Most important consolidation factor',
+    q16:'Preferred collateral',
+  };
+
+  // transforme en liste <dl>
+  const dl = document.createElement('dl');
+  dl.style.display = 'grid';
+  dl.style.gridTemplateColumns = '1fr 2fr';
+  dl.style.columnGap = '16px';
+  dl.style.rowGap = '8px';
+  dl.style.margin = 0;
+
+  Object.entries(saved).forEach(([k, v]) => {
+    const dt = document.createElement('dt');
+    dt.textContent = labels[k] || k.toUpperCase();
+    dt.style.fontWeight = '600';
+
+    const dd = document.createElement('dd');
+    let valText = '';
+
+    if (Array.isArray(v)) {
+      valText = v.join(', ');
+    } else if (typeof v === 'object' && v !== null) {
+      // cas Q13: { choice, detail }
+      if (v.choice) {
+        valText = v.detail ? `${v.choice} — ${v.detail}` : v.choice;
+      } else {
+        valText = JSON.stringify(v);
+      }
+    } else {
+      valText = String(v ?? '');
+    }
+
+    dd.textContent = valText || '—';
+    dl.appendChild(dt); dl.appendChild(dd);
+  });
+
+  host.appendChild(dl);
+}
+// Collecte les réponses à chaque changement dans les formulaires
+
 /* ===== Theme handling ===== */
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 const savedTheme = localStorage.getItem('pp-theme'); // 'light' | 'dark' | null
@@ -260,8 +515,14 @@ el('btn-select-prospect')?.addEventListener('click', () => go('objective'));
 /* ===== Back button ===== */
 el('btn-back-dashboard')?.addEventListener('click', () => go('dashboard'));
 
-/* ===== Fit button ===== */
-el('btn-fit')?.addEventListener('click', () => go('fit'));
+/* ===== Fit button (collect + save + go) ===== */
+el('btn-fit')?.addEventListener('click', () => {
+  collectAnswers();     // 1) collecte dans `answers`
+  persistAnswers();     // 2) persiste dans localStorage
+  go('fit');            // 3) navigue
+  renderFitAnswers();   // 4) affiche le résumé
+});
+
 
 /* ===== Generic "Other:" inputs enable/disable =====
    Active tous les inputs texte pointés par data-other-input
@@ -287,18 +548,28 @@ el('btn-next')?.addEventListener('click', () => {
 });
 
 el('btn-reset')?.addEventListener('click', () => {
-  // Reset basique pour les groupes présents dans ta page 3 actuelle
+  // Reset des contrôles
   document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
   document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
-  // Réinitialiser les champs "Other" et les désactiver
+
+  // Réinitialiser et désactiver tous les champs "Other"
   document.querySelectorAll('input[data-other-input]').forEach(ctrl => {
     const targetSel = ctrl.getAttribute('data-other-input');
     const target = targetSel ? document.querySelector(targetSel) : null;
     if (target) { target.value = ''; target.disabled = true; }
   });
+
   // Réinitialiser les selects
   document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+
+  // Vider le stockage des réponses
+  clearAnswers();
+
+  // Effacer l’aperçu Fit si présent
+  const host = document.getElementById('fit-answers-body');
+  if (host) host.innerHTML = '<div style="color:var(--muted);">No answers yet.</div>';
 });
+
 
 /* ===== Modal logic ===== */
 const offerModal = el('offer-modal');
@@ -577,3 +848,29 @@ updateAllSectionProgress();
   window.addEventListener('hashchange', stopListening);
   window.addEventListener('beforeunload', stopListening);
 })();
+
+// Recharge les réponses si l’utilisateur revient sur la page
+window.addEventListener('DOMContentLoaded', () => {
+  if (Object.keys(answers).length) {
+    loadAnswersIntoForms();
+  }
+
+  // Si l’écran visible au chargement est "fit", on affiche le résumé
+  if (document.getElementById('screen-fit')?.classList.contains('active')) {
+    renderFitAnswers();
+  }
+});
+
+// Quand on navigue vers Fit via go(), on peut re-afficher
+const _go = go;
+go = function(which) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  if (which === 'login' && screenLogin) screenLogin.classList.add('active');
+  if (which === 'dashboard' && screenDashboard) screenDashboard.classList.add('active');
+  if (which === 'objective' && screenObjective) screenObjective.classList.add('active');
+  if (which === 'fit' && screenFit) {
+    screenFit.classList.add('active');
+    renderFitAnswers();
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};

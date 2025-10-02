@@ -144,16 +144,16 @@
 <form id="form-lifestyle" novalidate>
 <!-- Q1 – multi-select (checkboxes) -->
 <div class="qcard">
-  <div class="qtitle">Q1. โดยส่วนใหญ่คุณใช้บัตรเครดิตเพื่ออะไร? <span style="font-weight:500">(เลือกได้มากกว่าหนึ่งข้อถ้ามี)</span></div>
-  <div class="qhelper">(คำถามนี้จะช่วยให้ฉันเข้าใจไลฟ์สไตล์และความต้องการการใช้จ่ายของคุณ เพื่อหาวิธีแก้ปัญหาที่เหมาะสมร่วมกัน)</div>
+  <div class="qtitle">Q1. What do you mainly use your credit card for? <span style="font-weight:500">(You can select more than one option if applicable)</span></div>
+  <div class="qhelper">(This question will help me understand your lifestyle and spending needs, in order to find suitable solutions together)</div>
   <div class="radio-group" role="group" aria-label="Card usage" id="q1-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="checkbox" name="q1" value="daily"> ค่าใช้จ่ายประจำวัน (อาหาร, น้ำมัน, ค่าน้ำค่าไฟ)</label>
-    <label class="radio"><input type="checkbox" name="q1" value="installments"> การซื้อแบบผ่อนชำระ (เครื่องใช้ไฟฟ้า, เฟอร์นิเจอร์ ฯลฯ)</label>
-    <label class="radio"><input type="checkbox" name="q1" value="travel"> การเดินทาง/การขนส่ง</label>
-    <label class="radio"><input type="checkbox" name="q1" value="shopping"> ช้อปปิ้ง/ไลฟ์สไตล์</label>
+    <label class="radio"><input type="checkbox" name="q1" value="daily expenses (food, fuel, utilities)"> Daily expenses (food, fuel, utilities)</label>
+    <label class="radio"><input type="checkbox" name="q1" value="installments purchases (electronics, furniture, etc.)"> Installment purchases (electronics, furniture, etc.)</label>
+    <label class="radio"><input type="checkbox" name="q1" value="travel / transportation"> Travel / Transportation</label>
+    <label class="radio"><input type="checkbox" name="q1" value="shopping / lifestyle"> Shopping / Lifestyle</label>
     <label class="radio">
-      <input type="checkbox" name="q1" value="other" data-other-input="#q1-other"> อื่น ๆ:
-      <input type="text" id="q1-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="checkbox" name="q1" value="other" data-other-input="#q1-other"> Other:
+      <input type="text" id="q1-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -161,46 +161,46 @@
 
 <!-- Q2 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q2. เวลาชำระบัตรเครดิตในแต่ละเดือน คุณมักจะชำระอย่างไร?</div>
-  <div class="qhelper">(ฉันอยากรู้ว่าการชำระเป็นเรื่องที่คุณจัดการได้ง่ายหรือเป็นภาระ เพื่อจะแนะนำสิ่งที่เหมาะสม)</div>
+  <div class="qtitle">Q2. When paying your credit card bill, how do you usually do it?</div>
+  <div class="qhelper">(I want to know if paying your card is manageable or a burden, so I can recommend what suits you best)</div>
   <div class="radio-group" role="radiogroup" aria-label="Payment habit" id="q2-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q2" value="full"> ชำระเต็มจำนวนทุกเดือน</label>
-    <label class="radio"><input type="radio" name="q2" value="mix"> บางเดือนชำระเต็ม บางเดือนชำระขั้นต่ำ</label>
-    <label class="radio"><input type="radio" name="q2" value="minimum"> ส่วนใหญ่ชำระขั้นต่ำ</label>
-    <label class="radio"><input type="radio" name="q2" value="overdue"> มักชำระล่าช้า</label>
+    <label class="radio"><input type="radio" name="q2" value="full payment every month"> Full payment every month</label>
+    <label class="radio"><input type="radio" name="q2" value="sometimes full payment, sometimes minimum payment"> Sometimes full payment, sometimes minimum payment</label>
+    <label class="radio"><input type="radio" name="q2" value="mostly minimum payment"> Mostly minimum payment</label>
+    <label class="radio"><input type="radio" name="q2" value="frequently overdue"> Frequently overdue</label>
   </div>
 </div>
 <br>
 
 <!-- Q3 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q3. คุณเคยชำระบัตรเครดิตล่าช้าหรือไม่?</div>
-  <div class="qhelper">(หลายคนก็เจอเหตุการณ์นี้บ้าง ฉันแค่อยากเข้าใจว่ามันเกิดขึ้นบ่อยกับคุณหรือไม่)</div>
+  <div class="qtitle">Q3. Have you ever made a late credit card payment?</div>
+  <div class="qhelper">(Many people experience this occasionally — I just want to know how often it happens for you)</div>
   <div class="radio-group" role="radiogroup" aria-label="Late payment frequency" id="q3-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q3" value="never"> ไม่เคย</label>
-    <label class="radio"><input type="radio" name="q3" value="occasionally"> เป็นบางครั้ง</label>
-    <label class="radio"><input type="radio" name="q3" value="frequent"> บ่อยครั้ง (3 เดือนขึ้นไปต่อปี)</label>
+    <label class="radio"><input type="radio" name="q3" value="never"> Never</label>
+    <label class="radio"><input type="radio" name="q3" value="occasionally"> Occasionally</label>
+    <label class="radio"><input type="radio" name="q3" value="frequently (3+ times per year)"> Frequently (3+ times per year)</label>
   </div>
 </div>
 <br>
 
 <!-- Q4 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q4. จำนวนเงินขั้นต่ำรวมต่อเดือนของบัตรเครดิตทั้งหมดของคุณประมาณเท่าไร?</div>
-  <div class="qhelper">(คำตอบนี้ช่วยให้ฉันเห็นว่าภาระการชำระรายเดือนกดดันคุณแค่ไหน)</div>
-  <label for="payment">โปรดเลือกช่วงการชำระ:</label>
+  <div class="qtitle">Q4. Approximately how much is your total minimum monthly payment across all credit cards?</div>
+  <div class="qhelper">(This answer helps me see how much your monthly repayment burden is)</div>
+  <label for="payment">Please select a payment range:</label>
     <select name="payment" id="payment" style="max-width:200px;">
-    <option value="0">น้อยกว่า 10,000 บาท</option>
-    <option value="10001-20000">10,000 - 20,000 บาท</option>
-    <option value="20001-30000">20,000 - 30,000 บาท</option>
-    <option value="30001-40000">30,000 - 40,000 บาท</option>
-    <option value="40001-50000">40,000 - 50,000 บาท</option>
-    <option value="50001-60000">50,000 - 60,000 บาท</option>
-    <option value="60001-70000">60,000 - 70,000 บาท</option>
-    <option value="70001-80000">70,000 - 80,000 บาท</option>
-    <option value="80001-90000">80,000 - 90,000 บาท</option>
-    <option value="90001-100000">90,000 - 100,000 บาท</option>
-    <option value="100001+">มากกว่า 100,000 บาท</option>
+    <option value="0">Less than 10,000 THB</option>
+    <option value="10001-20000">10,000 - 20,000 THB</option>
+    <option value="20001-30000">20,000 - 30,000 THB</option>
+    <option value="30001-40000">30,000 - 40,000 THB</option>
+    <option value="40001-50000">40,000 - 50,000 THB</option>
+    <option value="50001-60000">50,000 - 60,000 THB</option>
+    <option value="60001-70000">60,000 - 70,000 THB</option>
+    <option value="70001-80000">70,000 - 80,000 THB</option>
+    <option value="80001-90000">80,000 - 90,000 THB</option>
+    <option value="90001-100000">90,000 - 100,000 THB</option>
+    <option value="100001+">More than 100,000 THB</option>
   </select>
 </div>
 <br>
@@ -222,17 +222,17 @@
 
 <!-- Q5 – multi-select (checkboxes) -->
 <div class="qcard">
-  <div class="qtitle">Q5. นอกจากบัตรเครดิตแล้ว ตอนนี้คุณมีเงินกู้อื่น ๆ หรือไม่? <span style="font-weight:500">(เลือกได้มากกว่าหนึ่งข้อถ้ามี)</span></div>
-  <div class="qhelper">(เพื่อให้ฉันเห็นภาพรวมของภาระหนี้ทั้งหมด ช่วยบอกได้ไหมว่าตอนนี้คุณมีเงินกู้อื่น ๆ อยู่หรือไม่?)</div>
+  <div class="qtitle">Q5. Apart from credit cards, do you currently have any other loans? <span style="font-weight:500">(You can select more than one option if applicable)</span></div>
+  <div class="qhelper">(This helps me see the full picture of your debt commitments — could you tell me what loans you currently have?)</div>
   <div class="radio-group" role="group" aria-label="Other loans" id="q5-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="checkbox" name="q5" value="personal"> สินเชื่อส่วนบุคคล</label>
-    <label class="radio"><input type="checkbox" name="q5" value="mortgage"> สินเชื่อบ้าน / สินเชื่อที่อยู่อาศัย</label>
-    <label class="radio"><input type="checkbox" name="q5" value="car"> สินเชื่อรถยนต์ / รถแลกเงิน</label>
-    <label class="radio"><input type="checkbox" name="q5" value="cooperative"> สินเชื่อสหกรณ์ / สวัสดิการบริษัท</label>
-    <label class="radio"><input type="checkbox" name="q5" value="none"> ไม่มี</label>
+    <label class="radio"><input type="checkbox" name="q5" value="personal loan"> Personal loan</label>
+    <label class="radio"><input type="checkbox" name="q5" value="mortgage / home loan"> Mortgage / Home loan</label>
+    <label class="radio"><input type="checkbox" name="q5" value="car loan / car-for-cash"> Car loan / Car-for-cash</label>
+    <label class="radio"><input type="checkbox" name="q5" value="cooperative / company welfare loan"> Cooperative / Company welfare loan</label>
+    <label class="radio"><input type="checkbox" name="q5" value="none"> None</label>
     <label class="radio">
-      <input type="checkbox" name="q5" value="other" data-other-input="#q5-other"> อื่น ๆ:
-      <input type="text" id="q5-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="checkbox" name="q5" value="other" data-other-input="#q5-other"> Other:
+      <input type="text" id="q5-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -240,80 +240,80 @@
 
 <!-- Q6 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q6. จำนวนเงินที่ต้องชำระหนี้รวมต่อเดือนของคุณประมาณเท่าไร?</div>
-  <div class="qhelper">(คำตอบนี้จะช่วยให้ฉันคำนวณอัตราส่วนการผ่อนชำระ เพื่อหาวงเงินที่เหมาะสมกับคุณ)</div>
-  <label for="repayment">โปรดเลือกช่วงการผ่อนชำระ:</label>
+  <div class="qtitle">Q6. Approximately how much is your total monthly debt repayment?</div>
+  <div class="qhelper">(This will help me calculate your debt service ratio, so I can suggest a suitable loan amount)</div>
+  <label for="repayment">Please select a repayment range:</label>
     <select name="repayment" id="repayment" style="max-width:200px;">
-    <option value="0">น้อยกว่า 10,000 บาท</option>
-    <option value="10001-20000">10,000 - 20,000 บาท</option>
-    <option value="20001-30000">20,000 - 30,000 บาท</option>
-    <option value="30001-40000">30,000 - 40,000 บาท</option>
-    <option value="40001-50000">40,000 - 50,000 บาท</option>
-    <option value="50001-60000">50,000 - 60,000 บาท</option>
-    <option value="60001-70000">60,000 - 70,000 บาท</option>
-    <option value="70001-80000">70,000 - 80,000 บาท</option>
-    <option value="80001-90000">80,000 - 90,000 บาท</option>
-    <option value="90001-100000">90,000 - 100,000 บาท</option>
-    <option value="100001+">มากกว่า 100,000 บาท</option>
+    <option value="0">Less than 10,000 THB</option>
+    <option value="10001-20000">10,000 - 20,000 THB</option>
+    <option value="20001-30000">20,000 - 30,000 THB</option>
+    <option value="30001-40000">30,000 - 40,000 THB</option>
+    <option value="40001-50000">40,000 - 50,000 THB</option>
+    <option value="50001-60000">50,000 - 60,000 THB</option>
+    <option value="60001-70000">60,000 - 70,000 THB</option>
+    <option value="70001-80000">70,000 - 80,000 THB</option>
+    <option value="80001-90000">80,000 - 90,000 THB</option>
+    <option value="90001-100000">90,000 - 100,000 THB</option>
+    <option value="100001+">More than 100,000 THB</option>
   </select>
 </div>
 <br>
 
 <!-- Q7 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q7. รายได้ต่อเดือนปัจจุบันของคุณอยู่ในช่วงใด?</div>
-  <div class="qhelper">(คำถามนี้สำคัญเพื่อให้แน่ใจว่าวงเงินกู้จะสอดคล้องกับรายได้และความมั่นคงของคุณ)</div>
-  รายได้ต่อเดือน:
-  <input type="number" id="income" name="income" placeholder="กรอกจำนวนเงินเป็นบาท" style="max-width:200px; padding:6px; font-size:13px;" />
+  <div class="qtitle">Q7. What is your current monthly income range?</div>
+  <div class="qhelper">(This is important to ensure the loan amount matches your income and stability)</div>
+  Monthly income:
+  <input type="number" id="income" name="income" placeholder="Enter amount in THB" style="max-width:200px; padding:6px; font-size:13px;" />
 </div>
 <br>
 
 <!-- Q8 – single choice -->
 <div class="qcard">
   <div class="qtitle">
-    Q8. วงเงินเครดิตรวมของคุณประมาณเท่าไร?
+    Q8. What is your approximate total credit limit?
   </div>
   <div class="qhelper">
-    (ข้อมูลนี้ช่วยให้ฉันเข้าใจขนาดของภาระหนี้บัตรเครดิตทั้งหมด เพื่อให้คำแนะนำที่เหมาะสมกับคุณ)
+    (This helps me understand the size of your overall credit card exposure to give the right advice)
   </div>
-  <label for="limit">โปรดเลือกช่วงวงเงิน:</label>
+  <label for="limit">Please select a credit limit range:</label>
     <select name="limit" id="limit" style="max-width:200px;">
-    <option value="0">น้อยกว่า 50,000 บาท</option>
-    <option value="50001-100000">50,000 - 100,000 บาท</option>
-    <option value="100001-150000">100,000 - 150,000 บาท</option>
-    <option value="150001-200000">150,000 - 200,000 บาท</option>
-    <option value="200001-250000">200,000 - 250,000 บาท</option>
-    <option value="250001-300000">250,000 - 300,000 บาท</option>
-    <option value="300001-500000">300,000 - 500,000 บาท</option>
-    <option value="500001+">มากกว่า 500,000 บาท</option>
+    <option value="0">Less than 50,000 THB</option>
+    <option value="50001-100000">50,000 - 100,000 THB</option>
+    <option value="100001-150000">100,000 - 150,000 THB</option>
+    <option value="150001-200000">150,000 - 200,000 THB</option>
+    <option value="200001-250000">200,000 - 250,000 THB</option>
+    <option value="250001-300000">250,000 - 300,000 THB</option>
+    <option value="300001-500000">300,000 - 500,000 THB</option>
+    <option value="500001+">More than 500,000 THB</option>
   </select>
 </div>
 <br>
 
 <!-- Q9 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q9. หลังจากจ่ายค่าใช้จ่ายประจำ (ค่าที่พัก, ค่าสาธารณูปโภค, ค่าใช้จ่ายครอบครัว) สถานะการเงินของคุณเป็นอย่างไร?</div>
-  <div class="qhelper">(ไม่ใช่การตัดสินใจใด ๆ เพียงแต่ช่วยให้ฉันเห็นว่าคุณเหลือเงินต่อเดือนมากน้อยเพียงใด)</div>
+  <div class="qtitle">Q9. After paying regular expenses (housing, utilities, family costs), what is your financial situation?</div>
+  <div class="qhelper">(This is not a judgment — it just helps me understand how much you have left each month)</div>
   <div class="radio-group" role="radiogroup" aria-label="Post-expense situation" id="q9-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q9" value="savings"> ยังมีเงินเหลือออมเป็นประจำ</label>
-    <label class="radio"><input type="radio" name="q9" value="manageable"> พอจัดการได้ แต่ไม่มีเงินออม</label>
-    <label class="radio"><input type="radio" name="q9" value="rotate"> ขาดสภาพคล่อง ต้องหมุนบัตรเครดิต</label>
-    <label class="radio"><input type="radio" name="q9" value="negative"> กระแสเงินสดติดลบ / ต้องกู้เพิ่ม</label>
+    <label class="radio"><input type="radio" name="q9" value="still able to save regularly"> Still able to save regularly</label>
+    <label class="radio"><input type="radio" name="q9" value="manageable, but no savings"> Manageable, but no savings</label>
+    <label class="radio"><input type="radio" name="q9" value="cash flow shortage, rely on credit cards"> Cash flow shortage, rely on credit cards</label>
+    <label class="radio"><input type="radio" name="q9" value="negative cash flow / need to borrow more"> Negative cash flow / need to borrow more</label>
   </div>
 </div>
 <br>
 
 <!-- Q10 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q10. ความท้าทายหลักในการจัดการหนี้ของคุณตอนนี้คืออะไร?</div>
-  <div class="qhelper">(หากคุณบอกปัญหาหลัก ฉันจะสามารถแนะนำวิธีการรวมหนี้ที่ช่วยบรรเทาคุณได้ดีที่สุด)</div>
+  <div class="qtitle">Q10. What is your main challenge in managing your debt right now?</div>
+  <div class="qhelper">(If you tell me your main issue, I can recommend the debt consolidation solution that helps you most)</div>
   <div class="radio-group" role="radiogroup" aria-label="Main challenge" id="q10-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q10" value="interest"> ดอกเบี้ยสูง</label>
-    <label class="radio"><input type="radio" name="q10" value="repayment"> ยอดผ่อนชำระต่อเดือนสูง</label>
-    <label class="radio"><input type="radio" name="q10" value="too-many"> เจ้าหนี้หลายรายเกินไป</label>
+    <label class="radio"><input type="radio" name="q10" value="high interest rates"> High interest rates</label>
+    <label class="radio"><input type="radio" name="q10" value="high monthly repayments"> High monthly repayments</label>
+    <label class="radio"><input type="radio" name="q10" value="too many creditors"> Too many creditors</label>
     <label class="radio">
-      <input type="radio" name="q10" value="other" data-other-input="#q10-other"> อื่น ๆ:
-      <input type="text" id="q10-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q10" value="other" data-other-input="#q10-other"> Other:
+      <input type="text" id="q10-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -335,40 +335,40 @@
 
 <!-- Q11 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q11. ตอนนี้คุณมีรายได้ประจำที่โอนเข้าบัญชีทุกเดือนหรือไม่?</div>
-  <div class="qhelper">(ฉันถามเพื่อให้แน่ใจว่าการสมัครของคุณจะดำเนินไปอย่างราบรื่น เพราะธนาคารต้องการเห็นรายได้ที่มั่นคง)</div>
+  <div class="qtitle">Q11. Do you currently have a regular monthly income deposited into your account?</div>
+  <div class="qhelper">(I ask this to make sure your application goes smoothly, as banks want to see stable income)</div>
   <div class="radio-group" role="radiogroup" aria-label="Income type" id="q11-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q11" value="salary"> ใช่ รายได้ประจำพร้อมสลิปเงินเดือน</label>
-    <label class="radio"><input type="radio" name="q11" value="freelancer"> ฟรีแลนซ์ / รายได้ไม่สม่ำเสมอ</label>
-    <label class="radio"><input type="radio" name="q11" value="side"> รายได้หลักจากธุรกิจเสริม</label>
+    <label class="radio"><input type="radio" name="q11" value="regular salary with payslips"> Yes, regular salary with payslips</label>
+    <label class="radio"><input type="radio" name="q11" value="freelancer / irregular income"> Freelancer / irregular income</label>
+    <label class="radio"><input type="radio" name="q11" value="main income from side business"> Main income from side business</label>
   </div>
 </div>
 <br>
 
 <!-- Q12 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q12. ในช่วง 3 ปีที่ผ่านมา คุณเคยมีประวัติการชำระล่าช้ากับเครดิตบูโรหรือไม่?</div>
-  <div class="qhelper">(ไม่ต้องกังวลนะครับ/ค่ะ ฉันถามเพื่อดูว่ามันอาจส่งผลต่อโอกาสอนุมัติสินเชื่อหรือไม่)</div>
+  <div class="qtitle">Q12. In the past 3 years, have you had any late payment history with the credit bureau?</div>
+  <div class="qhelper">(Don’t worry — I ask just to see if it might affect your loan approval chances)</div>
   <div class="radio-group" role="radiogroup" aria-label="Credit bureau overdue" id="q12-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q12" value="never"> ไม่เคย</label>
-    <label class="radio"><input type="radio" name="q12" value="1-2"> เคย 1–2 ครั้ง แต่เคลียร์เรียบร้อยแล้ว</label>
-    <label class="radio"><input type="radio" name="q12" value="outstanding"> เคย และยังคงค้างอยู่</label>
+    <label class="radio"><input type="radio" name="q12" value="never"> Never</label>
+    <label class="radio"><input type="radio" name="q12" value="1-2 times, but cleared"> 1–2 times, but cleared</label>
+    <label class="radio"><input type="radio" name="q12" value="yes, and still outstanding"> Yes, and still outstanding</label>
   </div>
 </div>
 <br>
 
 <!-- Q13 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q13. ประเภทการจ้างงานปัจจุบันของคุณคืออะไร?</div>
-  <div class="qhelper">(ข้อมูลนี้ช่วยให้ฉันเข้าใจถึงความมั่นคงในการทำงาน และนำเสนอข้อมูลของคุณได้ดียิ่งขึ้น)</div>
+  <div class="qtitle">Q13. What is your current type of employment?</div>
+  <div class="qhelper">(This helps me understand job stability and present your case better)</div>
   <div class="radio-group" role="radiogroup" aria-label="Employment type" id="q13-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q13" value="ft-gt1" data-other-input="#q13-ft-gt1"> พนักงานประจำ (ทำงานต่อเนื่องมากกว่า 1 ปี)</label>
-    โปรดระบุระยะเวลาที่ทำงานกับนายจ้างปัจจุบัน: <input type="text" id="q13-ft-gt1" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
-    <label class="radio"><input type="radio" name="q13" value="ft-lt1"> พนักงานประจำ (ทำงานต่อเนื่องน้อยกว่า 1 ปี)</label>
-    <label class="radio"><input type="radio" name="q13" value="owner"> เจ้าของกิจการ / ผู้ประกอบอาชีพอิสระ</label>
+    <label class="radio"><input type="radio" name="q13" value="full-time employee (working continuously more than 1 year)" data-other-input="#q13-ft-gt1"> Full-time employee (working continuously more than 1 year)</label>
+    Please specify how long you’ve been with your current employer: <input type="text" id="q13-ft-gt1" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+    <label class="radio"><input type="radio" name="q13" value="full-time employee (working continuously less than 1 year)"> Full-time employee (working continuously less than 1 year)</label>
+    <label class="radio"><input type="radio" name="q13" value="business owner / self-employed"> Business owner / Self-employed</label>
     <label class="radio">
-      <input type="radio" name="q13" value="other" data-other-input="#q13-other"> อื่น ๆ:
-      <input type="text" id="q13-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q13" value="other" data-other-input="#q13-other"> Other:
+      <input type="text" id="q13-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -376,12 +376,12 @@
 
 <!-- Q14 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q14. คุณมีหนี้นอกระบบ (นอกสถาบันการเงิน) หรือไม่?</div>
-  <div class="qhelper">(ฉันถามเพื่อจะได้วางแผนที่เหมาะสมและเป็นจริงที่สุด คำตอบของคุณจะถูกเก็บเป็นความลับ)</div>
+  <div class="qtitle">Q14. Do you have any informal (non-institutional) debt?</div>
+  <div class="qhelper">(I ask this so we can create the most realistic plan possible. Your answer will remain confidential)</div>
   <div class="radio-group" role="radiogroup" aria-label="Informal loans" id="q14-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q14" value="no"> ไม่มี</label>
-    <label class="radio"><input type="radio" name="q14" value="small"> มี แต่จำนวนเล็กน้อย</label>
-    <label class="radio"><input type="radio" name="q14" value="significant"> มี และจำนวนมาก</label>
+    <label class="radio"><input type="radio" name="q14" value="no"> No</label>
+    <label class="radio"><input type="radio" name="q14" value="yes, but a small amount"> Yes, but a small amount</label>
+    <label class="radio"><input type="radio" name="q14" value="yes, a significant amount"> Yes, a significant amount</label>
   </div>
 </div>
 <br>
@@ -402,17 +402,17 @@
 
 <!-- Q15 – single choice + other -->
 <div class="qcard">
-  <div class="qtitle">Q15. เมื่อพิจารณาข้อเสนอการรวมหนี้ ปัจจัยใดสำคัญที่สุดสำหรับคุณ?</div>
-  <div class="qhelper">(แต่ละคนให้ความสำคัญต่างกัน — ฉันอยากรู้ว่าสิ่งใดสำคัญที่สุดสำหรับคุณ เพื่อออกแบบข้อเสนอที่ตรงกับความต้องการจริง ๆ)</div>
+  <div class="qtitle">Q15. When considering a debt consolidation offer, what factor is most important to you?</div>
+  <div class="qhelper">(Everyone values different things — I want to know what matters most to you so I can design a proposal that truly fits your needs)</div>
   <div class="radio-group" role="radiogroup" aria-label="Priority aspect" id="q15-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q15" value="max-amount"> วงเงินกู้สูงสุด (จำนวนที่อนุมัติสูงที่สุดเท่าที่เป็นไปได้)</label>
-    <label class="radio"><input type="radio" name="q15" value="short-tenor"> ระยะเวลาสั้นที่สุด (ปิดหนี้ไว แต่ค่างวดสูงขึ้น)</label>
-    <label class="radio"><input type="radio" name="q15" value="lowest-installment"> ค่างวดรายเดือนต่ำที่สุด (ระยะเวลานานขึ้น กระแสเงินสดคล่องตัวกว่า)</label>
-    <label class="radio"><input type="radio" name="q15" value="lowest-rate"> ดอกเบี้ยต่ำที่สุด (ลดต้นทุนการกู้โดยรวม)</label>
-    <label class="radio"><input type="radio" name="q15" value="balance"> สมดุลระหว่างวงเงิน ระยะเวลา และดอกเบี้ย</label>
+    <label class="radio"><input type="radio" name="q15" value="maximum loan amount (highest approval possible)"> Maximum loan amount (highest approval possible)</label>
+    <label class="radio"><input type="radio" name="q15" value="shortest term (close debt faster but higher installments)"> Shortest term (close debt faster but higher installments)</label>
+    <label class="radio"><input type="radio" name="q15" value="lowest monthly installment (longer term, more cash flow flexibility)"> Lowest monthly installment (longer term, more cash flow flexibility)</label>
+    <label class="radio"><input type="radio" name="q15" value="lowest interest rate (reduce borrowing cost overall)"> Lowest interest rate (reduce borrowing cost overall)</label>
+    <label class="radio"><input type="radio" name="q15" value="balance between loan amount, term, and interest"> Balance between loan amount, term, and interest</label>
     <label class="radio">
-      <input type="radio" name="q15" value="other" data-other-input="#q15-other"> อื่น ๆ:
-      <input type="text" id="q15-other" placeholder="โปรดระบุ" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
+      <input type="radio" name="q15" value="other" data-other-input="#q15-other"> Other:
+      <input type="text" id="q15-other" placeholder="Please specify" style="margin-left:6px; padding:4px; font-size:13px;" disabled>
     </label>
   </div>
 </div>
@@ -420,11 +420,11 @@
 
 <!-- Q16 – single choice -->
 <div class="qcard">
-  <div class="qtitle">Q16. คุณต้องการใช้หลักประกันประเภทใดสำหรับเงินกู้?</div>
-  <div class="qhelper">(ประเภทหลักประกันที่ต่างกันอาจมีผลต่อโอกาสการอนุมัติและอัตราดอกเบี้ย — ฉันอยากเข้าใจว่าสิ่งใดที่คุณสบายใจที่สุด)</div>
+  <div class="qtitle">Q16. What type of collateral would you prefer to use for the loan?</div>
+  <div class="qhelper">(The type of collateral can affect approval chances and interest rate — I want to understand what you are most comfortable with)</div>
   <div class="radio-group" role="radiogroup" aria-label="Collateral preference" id="q16-group" style="display:flex; flex-direction:column; gap:8px;">
-    <label class="radio"><input type="radio" name="q16" value="car"> รถยนต์</label>
-    <label class="radio"><input type="radio" name="q16" value="property"> อสังหาริมทรัพย์</label>
+    <label class="radio"><input type="radio" name="q16" value="car"> Car</label>
+    <label class="radio"><input type="radio" name="q16" value="property"> Property</label>
   </div>
 </div>
 <br>
@@ -481,6 +481,14 @@
 </div>
 
     <br>
+    <!-- Answers summary (auto-filled by JS) -->
+<div id="fit-answers" class="section">
+  <h3>Customer Answers</h3>
+  <div id="fit-answers-body" style="min-height:20px;">
+    <div style="color:var(--muted);">No answers yet.</div>
+  </div>
+</div>
+    <br>  
 
     <!-- 2. Customer Core Persona -->
 
