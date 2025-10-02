@@ -10,6 +10,73 @@ const screenFit = el('screen-fit');
 /* ===== Answers storage ===== */
 const ANSWERS_KEY = 'pp-answers-v1';
 
+/* ===== Gemini summarization (prototype) ===== */
+// ⚠️ Pour du prototype UNIQUEMENT côté navigateur.
+// En prod, utilise un proxy serveur (voir plus bas).
+const GEMINI_API_KEY = 'AIzaSyCRTkDKpyfPPLZKq3iQSNx1xC1QR0mS2zs'; // ← remplace pour tester
+const GEMINI_MODEL = 'gemini-2.5-flash'; // modèle rapide / bon pour résumé
+
+function buildSummaryPrompt(answersObj) {
+  // Transforme tes réponses en texte « matière première » pour l’IA
+  const lines = [];
+  const labels = {
+    q1:'Card usage', q2:'Payment habit', q3:'Late/Overdue (card)', q4:'Total min pay (cards)',
+    q5:'Other loans', q6:'Monthly debt pay', q7:'Income (THB)', q8:'Total credit limit',
+    q9:'Post-expense situation', q10:'Main challenge', q11:'Regular income deposit',
+    q12:'Bureau late (3y)', q13:'Employment type/tenure', q14:'Informal debt',
+    q15:'Priority factor', q16:'Preferred collateral'
+  };
+
+  for (const [k,v] of Object.entries(answersObj)) {
+    let val = '';
+    if (Array.isArray(v)) val = v.join(', ');
+    else if (v && typeof v === 'object' && v.choice) val = v.detail ? `${v.choice} — ${v.detail}` : v.choice;
+    else val = String(v ?? '');
+    lines.push(`- ${labels[k] || k}: ${val}`);
+  }
+
+  return [
+    'You are a loan officer assistant. Summarize the client answers into a concise, helpful brief.',
+    'Goals:',
+    '1) 3–6 bullet points (clear, non-redundant)',
+    '2) One-sentence recommendation (debt consolidation fit)',
+    '3) Optional cautions/next steps',
+    '',
+    'Answers:',
+    ...lines
+  ].join('\n');
+}
+
+async function summarizeWithGemini(answersObj) {
+  const body = {
+    contents: [{
+      role: 'user',
+      parts: [{ text: buildSummaryPrompt(answersObj) }]
+    }]
+  };
+
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`,
+    { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(body) }
+  );
+
+  if (!res.ok) {
+    const errTxt = await res.text().catch(()=>`${res.status} ${res.statusText}`);
+    throw new Error(`Gemini API error: ${res.status} ${res.statusText}\n${errTxt}`);
+  }
+
+  const data = await res.json();
+  // Format de réponse: data.candidates[0].content.parts[].text
+  const text = data?.candidates?.[0]?.content?.parts?.map(p=>p.text).join('\n').trim();
+  return text || '(no summary)';
+}
+
+function renderGeminiSummary(text) {
+  const host = document.getElementById('fit-gemini-body');
+  if (host) host.textContent = text;
+}
+
+
 // Charge les réponses sauvegardées (si existantes)
 let answers = {};
 try {
@@ -261,6 +328,7 @@ function renderFitAnswers() {
   host.appendChild(dl);
 }
 // Collecte les réponses à chaque changement dans les formulaires
+
 
 /* ===== Theme handling ===== */
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -874,3 +942,28 @@ go = function(which) {
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+/* ===== Bouton Summarize (Fit) ===== */
+el('btn-summarize')?.addEventListener('click', async () => {
+  // 1) s’assurer d’avoir les dernières réponses
+  collectAnswers();
+  persistAnswers();
+
+  const host = document.getElementById('fit-gemini-body');
+  if (host) host.textContent = 'Summarizing…';
+
+  try {
+    const saved = answers && Object.keys(answers).length ? answers
+                  : JSON.parse(localStorage.getItem('pp-answers-v1') || '{}');
+
+    if (!saved || !Object.keys(saved).length) {
+      renderGeminiSummary('No answers to summarize yet.');
+      return;
+    }
+
+    const summary = await summarizeWithGemini(saved);
+    renderGeminiSummary(summary);
+  } catch (e) {
+    renderGeminiSummary(`⚠️ ${e.message}`);
+  }
+});
